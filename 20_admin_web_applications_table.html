@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Applications - PropTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#1B4FD8', accent: '#10B981', background: '#F8FAFC', surface: '#FFFFFF', dark: '#0F172A', muted: '#64748B', danger: '#EF4444', warning: '#F59E0B' }, fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+    </script>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-8">
+    <div class="max-w-[1440px] w-full min-h-[900px] bg-background rounded-3xl shadow-2xl flex overflow-hidden border border-gray-200">
+        <!-- Sidebar context -->
+        <div class="w-64 bg-dark text-white flex flex-col shrink-0">
+             <div class="p-6 flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg></div>
+                <span class="text-xl font-bold tracking-tight">PropTech</span>
+            </div>
+            <nav class="flex-1 px-4 space-y-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-primary text-white rounded-xl font-medium transition-colors justify-between">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        Applications
+                    </div>
+                    <span class="w-5 h-5 bg-white text-primary text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col min-w-0 bg-background relative">
+            <header class="h-20 bg-surface border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
+                <h1 class="text-2xl font-bold text-dark">Applications Pipeline</h1>
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <svg class="w-5 h-5 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" class="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm w-64" placeholder="Search applicant...">
+                    </div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-8 overflow-x-auto">
+                <!-- Kanban Board -->
+                <div class="flex gap-6 h-full items-start">
+                    
+                    <!-- Pending Column -->
+                    <div class="w-80 shrink-0 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="font-bold text-dark flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-warning"></span>
+                                Pending Review
+                            </h2>
+                            <span class="bg-gray-200 text-dark text-xs font-bold px-2 py-0.5 rounded-full">3</span>
+                        </div>
+                        <div class="space-y-4 flex-1 overflow-y-auto pr-2 pb-8">
+                            <!-- Card -->
+                            <div class="bg-surface rounded-xl p-4 shadow-sm border border-gray-200 cursor-grab hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="px-2 py-0.5 bg-gray-100 text-dark text-[10px] font-bold rounded uppercase">Unit 2A</span>
+                                    <span class="text-xs text-muted">2h ago</span>
+                                </div>
+                                <h3 class="font-bold text-dark">Kemi Olayinka</h3>
+                                <p class="text-xs text-muted mb-3">Income: ₦12M/yr • Score: <span class="text-accent font-bold">Excellent</span></p>
+                                <div class="flex gap-2">
+                                    <button class="flex-1 bg-primary text-white text-xs font-bold py-2 rounded shadow-sm hover:bg-primary/90">Review</button>
+                                </div>
+                            </div>
+
+                            <!-- Card -->
+                            <div class="bg-surface rounded-xl p-4 shadow-sm border border-gray-200 cursor-grab hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="px-2 py-0.5 bg-gray-100 text-dark text-[10px] font-bold rounded uppercase">Unit 1B</span>
+                                    <span class="text-xs text-muted">1d ago</span>
+                                </div>
+                                <h3 class="font-bold text-dark">Chinedu Eze</h3>
+                                <p class="text-xs text-muted mb-3">Income: ₦8M/yr • Score: <span class="text-warning font-bold">Fair</span></p>
+                                <div class="flex gap-2">
+                                    <button class="flex-1 bg-primary text-white text-xs font-bold py-2 rounded shadow-sm hover:bg-primary/90">Review</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interviewing Column -->
+                    <div class="w-80 shrink-0 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="font-bold text-dark flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-primary"></span>
+                                Interview / Doc Check
+                            </h2>
+                            <span class="bg-gray-200 text-dark text-xs font-bold px-2 py-0.5 rounded-full">1</span>
+                        </div>
+                        <div class="space-y-4 flex-1 overflow-y-auto pr-2 pb-8">
+                            <!-- Card -->
+                            <div class="bg-surface rounded-xl p-4 shadow-sm border border-gray-200 cursor-grab hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="px-2 py-0.5 bg-gray-100 text-dark text-[10px] font-bold rounded uppercase">Unit 4C</span>
+                                    <span class="text-xs text-muted">3d ago</span>
+                                </div>
+                                <h3 class="font-bold text-dark">Aisha Mohammed</h3>
+                                <p class="text-xs text-muted mb-3">Waiting on Guarantor form</p>
+                                <div class="flex gap-2">
+                                    <button class="flex-1 border border-gray-200 text-dark text-xs font-bold py-2 rounded shadow-sm hover:bg-gray-50">Follow Up</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Approved Column -->
+                    <div class="w-80 shrink-0 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="font-bold text-dark flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-accent"></span>
+                                Approved
+                            </h2>
+                            <span class="bg-gray-200 text-dark text-xs font-bold px-2 py-0.5 rounded-full">2</span>
+                        </div>
+                        <div class="space-y-4 flex-1 overflow-y-auto pr-2 pb-8">
+                            <!-- Card -->
+                            <div class="bg-surface rounded-xl p-4 shadow-sm border border-accent/30 bg-accent/5 cursor-grab hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="px-2 py-0.5 bg-white border border-gray-200 text-dark text-[10px] font-bold rounded uppercase">Unit 5A</span>
+                                    <span class="text-xs text-accent font-bold">Approved</span>
+                                </div>
+                                <h3 class="font-bold text-dark">Segun Adebayo</h3>
+                                <p class="text-xs text-muted mb-3">Pending lease generation</p>
+                                <div class="flex gap-2">
+                                    <button class="flex-1 bg-accent text-white text-xs font-bold py-2 rounded shadow-sm hover:bg-accent/90">Create Lease</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rejected Column -->
+                    <div class="w-80 shrink-0 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="font-bold text-dark flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-danger"></span>
+                                Rejected
+                            </h2>
+                            <span class="bg-gray-200 text-dark text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+                        </div>
+                        <div class="space-y-4 flex-1 overflow-y-auto pr-2 pb-8 border-2 border-dashed border-gray-200 rounded-xl flex items-center justify-center p-4 text-center">
+                            <span class="text-sm text-muted font-medium">No rejected applications this month.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

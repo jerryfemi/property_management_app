@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - PropTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#1B4FD8', accent: '#10B981', background: '#F8FAFC', surface: '#FFFFFF', dark: '#0F172A', muted: '#64748B', danger: '#EF4444', warning: '#F59E0B' }, fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+    </script>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="max-w-[390px] w-full h-[844px] bg-surface relative shadow-2xl overflow-hidden flex flex-col">
+        <div class="px-6 pt-12 pb-6 flex items-center gap-4">
+            <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors">
+                <svg class="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <h1 class="text-2xl font-bold text-dark">Create Account</h1>
+        </div>
+        
+        <div class="flex-1 px-6 overflow-y-auto pb-24">
+            <form class="space-y-5">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="text-sm font-medium text-dark">First Name</label>
+                        <input type="text" class="w-full px-4 py-3.5 bg-background border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-dark placeholder-muted" placeholder="John">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-sm font-medium text-dark">Last Name</label>
+                        <input type="text" class="w-full px-4 py-3.5 bg-background border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-dark placeholder-muted" placeholder="Doe">
+                    </div>
+                </div>
+                
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-dark">Email Address</label>
+                    <input type="email" class="w-full px-4 py-3.5 bg-background border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-dark placeholder-muted" placeholder="john@example.com">
+                </div>
+                
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-dark">Phone Number</label>
+                    <input type="tel" class="w-full px-4 py-3.5 bg-background border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-dark placeholder-muted" placeholder="+234 800 000 0000">
+                </div>
+                
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-dark">Password</label>
+                    <div class="relative">
+                        <input type="password" class="w-full px-4 py-3.5 bg-background border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-dark placeholder-muted" placeholder="••••••••">
+                        <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-muted hover:text-dark">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <label class="flex items-start gap-3">
+                        <input type="checkbox" class="mt-1 w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary">
+                        <span class="text-sm text-muted leading-relaxed">By creating an account, you agree to our <a href="#" class="text-primary font-medium hover:underline">Terms of Service</a> and <a href="#" class="text-primary font-medium hover:underline">Privacy Policy</a>.</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 right-0 p-6 bg-surface border-t border-gray-100">
+            <button class="w-full bg-primary text-white font-semibold py-4 rounded-2xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25">
+                Create Account
+            </button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Detail - PropTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#1B4FD8', accent: '#10B981', background: '#F8FAFC', surface: '#FFFFFF', dark: '#0F172A', muted: '#64748B', danger: '#EF4444', warning: '#F59E0B' }, fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); 
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="max-w-[390px] w-full h-[844px] bg-background relative shadow-2xl overflow-y-auto">
+        <!-- Header Image & Actions -->
+        <div class="relative h-[320px]">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lekki Gardens" class="w-full h-full object-cover">
+            <div class="absolute top-12 left-0 right-0 px-6 flex justify-between items-center">
+                <button class="w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full text-dark hover:bg-white transition-colors shadow-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <div class="flex gap-3">
+                    <button class="w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full text-dark hover:bg-white transition-colors shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                    </button>
+                    <button class="w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full text-dark hover:bg-white hover:text-danger transition-colors shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Pagination Dots -->
+            <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-white"></div>
+                <div class="w-2 h-2 rounded-full bg-white/50"></div>
+                <div class="w-2 h-2 rounded-full bg-white/50"></div>
+                <div class="w-2 h-2 rounded-full bg-white/50"></div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="bg-surface rounded-t-[32px] -mt-8 relative z-10 px-6 pt-8 pb-32">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2.5 py-1 bg-primary/10 text-primary text-xs font-bold rounded-lg uppercase tracking-wide">Apartment Complex</span>
+                        <span class="flex items-center gap-1 text-sm font-semibold text-dark"><svg class="w-4 h-4 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.8 (124 reviews)</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-dark leading-tight">Lekki Gardens Estate</h1>
+                    <p class="text-muted text-sm flex items-center gap-1 mt-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                        Block 14, Lekki Phase 1, Lagos
+                    </p>
+                </div>
+            </div>
+
+            <!-- Property Amenities -->
+            <div class="py-6 border-y border-gray-100 my-6">
+                <h3 class="text-sm font-bold text-dark mb-4">Property Amenities</h3>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-primary"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg></div>
+                        <span class="text-xs font-medium text-dark text-center">Pool</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-primary"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+                        <span class="text-xs font-medium text-dark text-center">24/7 Power</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-primary"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg></div>
+                        <span class="text-xs font-medium text-dark text-center">Security</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-primary"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
+                        <span class="text-xs font-medium text-dark text-center">Gym</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-8">
+                <h3 class="text-sm font-bold text-dark mb-2">Description</h3>
+                <p class="text-sm text-muted leading-relaxed">Experience premium living at Lekki Gardens Estate. Located in the heart of Phase 1, this modern complex offers serene environments, top-notch security, and world-class facilities perfect for professionals and families. <button class="text-primary font-medium hover:underline">Read more</button></p>
+            </div>
+
+            <!-- Unit Types -->
+            <div>
+                <h3 class="text-sm font-bold text-dark mb-4">Available Unit Types</h3>
+                <div class="space-y-4">
+                    <!-- Unit Card -->
+                    <div class="p-4 border border-primary bg-primary/5 rounded-2xl cursor-pointer hover:bg-primary/10 transition-colors">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-dark">1 Bedroom Apartment</h4>
+                            <span class="px-2.5 py-1 bg-surface text-dark border border-gray-200 text-xs font-bold rounded-lg shadow-sm">8 Available</span>
+                        </div>
+                        <div class="flex gap-4 text-xs text-muted mb-3 font-medium">
+                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg> 450 sqft</span>
+                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> 1 Bath</span>
+                        </div>
+                        <div class="text-primary font-bold text-lg">₦2.5M <span class="text-muted text-xs font-normal">/year</span></div>
+                    </div>
+
+                    <!-- Unit Card -->
+                    <div class="p-4 border border-gray-100 bg-surface rounded-2xl cursor-pointer hover:border-gray-300 transition-colors">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-dark">2 Bedroom Penthouse</h4>
+                            <span class="px-2.5 py-1 bg-gray-100 text-dark text-xs font-bold rounded-lg">2 Available</span>
+                        </div>
+                        <div class="flex gap-4 text-xs text-muted mb-3 font-medium">
+                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg> 850 sqft</span>
+                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> 2.5 Bath</span>
+                        </div>
+                        <div class="text-dark font-bold text-lg">₦4.2M <span class="text-muted text-xs font-normal">/year</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Bottom Bar -->
+        <div class="absolute bottom-0 left-0 right-0 p-6 bg-surface border-t border-gray-100 flex items-center justify-between z-20">
+            <div>
+                <p class="text-xs font-medium text-muted">1 Bed Apartment</p>
+                <div class="text-primary font-bold text-xl">₦2.5M <span class="text-sm font-normal text-muted">/yr</span></div>
+            </div>
+            <button class="bg-primary text-white font-semibold py-3.5 px-8 rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25">
+                View Units
+            </button>
+        </div>
+    </div>
+</body>
+</html>
