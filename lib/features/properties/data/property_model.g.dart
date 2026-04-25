@@ -6,8 +6,8 @@ part of 'property_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PropertyModelImpl _$$PropertyModelImplFromJson(Map<String, dynamic> json) =>
-    _$PropertyModelImpl(
+_PropertyModel _$PropertyModelFromJson(Map<String, dynamic> json) =>
+    _PropertyModel(
       id: json['id'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
@@ -29,7 +29,7 @@ _$PropertyModelImpl _$$PropertyModelImplFromJson(Map<String, dynamic> json) =>
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$PropertyModelImplToJson(_$PropertyModelImpl instance) =>
+Map<String, dynamic> _$PropertyModelToJson(_PropertyModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

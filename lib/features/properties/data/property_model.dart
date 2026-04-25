@@ -5,7 +5,7 @@ part 'property_model.freezed.dart';
 part 'property_model.g.dart';
 
 @freezed
-class PropertyModel with _$PropertyModel {
+abstract class PropertyModel with _$PropertyModel {
   const factory PropertyModel({
     required String id,
     required String title,

@@ -20,7 +20,7 @@ enum UnitStatus {
 }
 
 @freezed
-class UnitModel with _$UnitModel {
+abstract class UnitModel with _$UnitModel {
   const factory UnitModel({
     required String id,
     required String propertyId,

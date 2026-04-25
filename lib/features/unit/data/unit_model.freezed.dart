@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,422 +9,308 @@ part of 'unit_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
-UnitModel _$UnitModelFromJson(Map<String, dynamic> json) {
-  return _UnitModel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$UnitModel {
-  String get id => throw _privateConstructorUsedError;
-  String get propertyId => throw _privateConstructorUsedError;
-  String get unitName => throw _privateConstructorUsedError;
-  int get bedrooms => throw _privateConstructorUsedError;
-  int get bathrooms => throw _privateConstructorUsedError;
-  double get baseRent => throw _privateConstructorUsedError;
-  List<String> get amenities => throw _privateConstructorUsedError;
-  UnitStatus get unitStatus => throw _privateConstructorUsedError;
-  String? get currentTenantId => throw _privateConstructorUsedError;
-  String? get floorPlanUrl => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+
+ String get id; String get propertyId; String get unitName; int get bedrooms; int get bathrooms; double get baseRent; List<String> get amenities; UnitStatus get unitStatus; String? get currentTenantId; String? get floorPlanUrl; DateTime get createdAt; DateTime get updatedAt;
+/// Create a copy of UnitModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UnitModelCopyWith<UnitModel> get copyWith => _$UnitModelCopyWithImpl<UnitModel>(this as UnitModel, _$identity);
 
   /// Serializes this UnitModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of UnitModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $UnitModelCopyWith<UnitModel> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UnitModel&&(identical(other.id, id) || other.id == id)&&(identical(other.propertyId, propertyId) || other.propertyId == propertyId)&&(identical(other.unitName, unitName) || other.unitName == unitName)&&(identical(other.bedrooms, bedrooms) || other.bedrooms == bedrooms)&&(identical(other.bathrooms, bathrooms) || other.bathrooms == bathrooms)&&(identical(other.baseRent, baseRent) || other.baseRent == baseRent)&&const DeepCollectionEquality().equals(other.amenities, amenities)&&(identical(other.unitStatus, unitStatus) || other.unitStatus == unitStatus)&&(identical(other.currentTenantId, currentTenantId) || other.currentTenantId == currentTenantId)&&(identical(other.floorPlanUrl, floorPlanUrl) || other.floorPlanUrl == floorPlanUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,propertyId,unitName,bedrooms,bathrooms,baseRent,const DeepCollectionEquality().hash(amenities),unitStatus,currentTenantId,floorPlanUrl,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'UnitModel(id: $id, propertyId: $propertyId, unitName: $unitName, bedrooms: $bedrooms, bathrooms: $bathrooms, baseRent: $baseRent, amenities: $amenities, unitStatus: $unitStatus, currentTenantId: $currentTenantId, floorPlanUrl: $floorPlanUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $UnitModelCopyWith<$Res> {
-  factory $UnitModelCopyWith(UnitModel value, $Res Function(UnitModel) then) =
-      _$UnitModelCopyWithImpl<$Res, UnitModel>;
-  @useResult
-  $Res call({
-    String id,
-    String propertyId,
-    String unitName,
-    int bedrooms,
-    int bathrooms,
-    double baseRent,
-    List<String> amenities,
-    UnitStatus unitStatus,
-    String? currentTenantId,
-    String? floorPlanUrl,
-    DateTime createdAt,
-    DateTime updatedAt,
-  });
-}
+abstract mixin class $UnitModelCopyWith<$Res>  {
+  factory $UnitModelCopyWith(UnitModel value, $Res Function(UnitModel) _then) = _$UnitModelCopyWithImpl;
+@useResult
+$Res call({
+ String id, String propertyId, String unitName, int bedrooms, int bathrooms, double baseRent, List<String> amenities, UnitStatus unitStatus, String? currentTenantId, String? floorPlanUrl, DateTime createdAt, DateTime updatedAt
+});
 
+
+
+
+}
 /// @nodoc
-class _$UnitModelCopyWithImpl<$Res, $Val extends UnitModel>
+class _$UnitModelCopyWithImpl<$Res>
     implements $UnitModelCopyWith<$Res> {
-  _$UnitModelCopyWithImpl(this._value, this._then);
+  _$UnitModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final UnitModel _self;
+  final $Res Function(UnitModel) _then;
 
-  /// Create a copy of UnitModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? propertyId = null,
-    Object? unitName = null,
-    Object? bedrooms = null,
-    Object? bathrooms = null,
-    Object? baseRent = null,
-    Object? amenities = null,
-    Object? unitStatus = null,
-    Object? currentTenantId = freezed,
-    Object? floorPlanUrl = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            propertyId: null == propertyId
-                ? _value.propertyId
-                : propertyId // ignore: cast_nullable_to_non_nullable
-                      as String,
-            unitName: null == unitName
-                ? _value.unitName
-                : unitName // ignore: cast_nullable_to_non_nullable
-                      as String,
-            bedrooms: null == bedrooms
-                ? _value.bedrooms
-                : bedrooms // ignore: cast_nullable_to_non_nullable
-                      as int,
-            bathrooms: null == bathrooms
-                ? _value.bathrooms
-                : bathrooms // ignore: cast_nullable_to_non_nullable
-                      as int,
-            baseRent: null == baseRent
-                ? _value.baseRent
-                : baseRent // ignore: cast_nullable_to_non_nullable
-                      as double,
-            amenities: null == amenities
-                ? _value.amenities
-                : amenities // ignore: cast_nullable_to_non_nullable
-                      as List<String>,
-            unitStatus: null == unitStatus
-                ? _value.unitStatus
-                : unitStatus // ignore: cast_nullable_to_non_nullable
-                      as UnitStatus,
-            currentTenantId: freezed == currentTenantId
-                ? _value.currentTenantId
-                : currentTenantId // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            floorPlanUrl: freezed == floorPlanUrl
-                ? _value.floorPlanUrl
-                : floorPlanUrl // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            createdAt: null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime,
-            updatedAt: null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of UnitModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? propertyId = null,Object? unitName = null,Object? bedrooms = null,Object? bathrooms = null,Object? baseRent = null,Object? amenities = null,Object? unitStatus = null,Object? currentTenantId = freezed,Object? floorPlanUrl = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,propertyId: null == propertyId ? _self.propertyId : propertyId // ignore: cast_nullable_to_non_nullable
+as String,unitName: null == unitName ? _self.unitName : unitName // ignore: cast_nullable_to_non_nullable
+as String,bedrooms: null == bedrooms ? _self.bedrooms : bedrooms // ignore: cast_nullable_to_non_nullable
+as int,bathrooms: null == bathrooms ? _self.bathrooms : bathrooms // ignore: cast_nullable_to_non_nullable
+as int,baseRent: null == baseRent ? _self.baseRent : baseRent // ignore: cast_nullable_to_non_nullable
+as double,amenities: null == amenities ? _self.amenities : amenities // ignore: cast_nullable_to_non_nullable
+as List<String>,unitStatus: null == unitStatus ? _self.unitStatus : unitStatus // ignore: cast_nullable_to_non_nullable
+as UnitStatus,currentTenantId: freezed == currentTenantId ? _self.currentTenantId : currentTenantId // ignore: cast_nullable_to_non_nullable
+as String?,floorPlanUrl: freezed == floorPlanUrl ? _self.floorPlanUrl : floorPlanUrl // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
+  ));
 }
 
-/// @nodoc
-abstract class _$$UnitModelImplCopyWith<$Res>
-    implements $UnitModelCopyWith<$Res> {
-  factory _$$UnitModelImplCopyWith(
-    _$UnitModelImpl value,
-    $Res Function(_$UnitModelImpl) then,
-  ) = __$$UnitModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    String id,
-    String propertyId,
-    String unitName,
-    int bedrooms,
-    int bathrooms,
-    double baseRent,
-    List<String> amenities,
-    UnitStatus unitStatus,
-    String? currentTenantId,
-    String? floorPlanUrl,
-    DateTime createdAt,
-    DateTime updatedAt,
-  });
 }
 
-/// @nodoc
-class __$$UnitModelImplCopyWithImpl<$Res>
-    extends _$UnitModelCopyWithImpl<$Res, _$UnitModelImpl>
-    implements _$$UnitModelImplCopyWith<$Res> {
-  __$$UnitModelImplCopyWithImpl(
-    _$UnitModelImpl _value,
-    $Res Function(_$UnitModelImpl) _then,
-  ) : super(_value, _then);
 
-  /// Create a copy of UnitModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? propertyId = null,
-    Object? unitName = null,
-    Object? bedrooms = null,
-    Object? bathrooms = null,
-    Object? baseRent = null,
-    Object? amenities = null,
-    Object? unitStatus = null,
-    Object? currentTenantId = freezed,
-    Object? floorPlanUrl = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(
-      _$UnitModelImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        propertyId: null == propertyId
-            ? _value.propertyId
-            : propertyId // ignore: cast_nullable_to_non_nullable
-                  as String,
-        unitName: null == unitName
-            ? _value.unitName
-            : unitName // ignore: cast_nullable_to_non_nullable
-                  as String,
-        bedrooms: null == bedrooms
-            ? _value.bedrooms
-            : bedrooms // ignore: cast_nullable_to_non_nullable
-                  as int,
-        bathrooms: null == bathrooms
-            ? _value.bathrooms
-            : bathrooms // ignore: cast_nullable_to_non_nullable
-                  as int,
-        baseRent: null == baseRent
-            ? _value.baseRent
-            : baseRent // ignore: cast_nullable_to_non_nullable
-                  as double,
-        amenities: null == amenities
-            ? _value._amenities
-            : amenities // ignore: cast_nullable_to_non_nullable
-                  as List<String>,
-        unitStatus: null == unitStatus
-            ? _value.unitStatus
-            : unitStatus // ignore: cast_nullable_to_non_nullable
-                  as UnitStatus,
-        currentTenantId: freezed == currentTenantId
-            ? _value.currentTenantId
-            : currentTenantId // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        floorPlanUrl: freezed == floorPlanUrl
-            ? _value.floorPlanUrl
-            : floorPlanUrl // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        createdAt: null == createdAt
-            ? _value.createdAt
-            : createdAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-        updatedAt: null == updatedAt
-            ? _value.updatedAt
-            : updatedAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-      ),
-    );
-  }
+/// Adds pattern-matching-related methods to [UnitModel].
+extension UnitModelPatterns on UnitModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _UnitModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _UnitModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _UnitModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _UnitModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _UnitModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _UnitModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String propertyId,  String unitName,  int bedrooms,  int bathrooms,  double baseRent,  List<String> amenities,  UnitStatus unitStatus,  String? currentTenantId,  String? floorPlanUrl,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _UnitModel() when $default != null:
+return $default(_that.id,_that.propertyId,_that.unitName,_that.bedrooms,_that.bathrooms,_that.baseRent,_that.amenities,_that.unitStatus,_that.currentTenantId,_that.floorPlanUrl,_that.createdAt,_that.updatedAt);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String propertyId,  String unitName,  int bedrooms,  int bathrooms,  double baseRent,  List<String> amenities,  UnitStatus unitStatus,  String? currentTenantId,  String? floorPlanUrl,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+switch (_that) {
+case _UnitModel():
+return $default(_that.id,_that.propertyId,_that.unitName,_that.bedrooms,_that.bathrooms,_that.baseRent,_that.amenities,_that.unitStatus,_that.currentTenantId,_that.floorPlanUrl,_that.createdAt,_that.updatedAt);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String propertyId,  String unitName,  int bedrooms,  int bathrooms,  double baseRent,  List<String> amenities,  UnitStatus unitStatus,  String? currentTenantId,  String? floorPlanUrl,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+switch (_that) {
+case _UnitModel() when $default != null:
+return $default(_that.id,_that.propertyId,_that.unitName,_that.bedrooms,_that.bathrooms,_that.baseRent,_that.amenities,_that.unitStatus,_that.currentTenantId,_that.floorPlanUrl,_that.createdAt,_that.updatedAt);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$UnitModelImpl implements _UnitModel {
-  const _$UnitModelImpl({
-    required this.id,
-    required this.propertyId,
-    required this.unitName,
-    required this.bedrooms,
-    required this.bathrooms,
-    required this.baseRent,
-    required final List<String> amenities,
-    required this.unitStatus,
-    this.currentTenantId,
-    this.floorPlanUrl,
-    required this.createdAt,
-    required this.updatedAt,
-  }) : _amenities = amenities;
 
-  factory _$UnitModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UnitModelImplFromJson(json);
+class _UnitModel implements UnitModel {
+  const _UnitModel({required this.id, required this.propertyId, required this.unitName, required this.bedrooms, required this.bathrooms, required this.baseRent, required final  List<String> amenities, required this.unitStatus, this.currentTenantId, this.floorPlanUrl, required this.createdAt, required this.updatedAt}): _amenities = amenities;
+  factory _UnitModel.fromJson(Map<String, dynamic> json) => _$UnitModelFromJson(json);
 
-  @override
-  final String id;
-  @override
-  final String propertyId;
-  @override
-  final String unitName;
-  @override
-  final int bedrooms;
-  @override
-  final int bathrooms;
-  @override
-  final double baseRent;
-  final List<String> _amenities;
-  @override
-  List<String> get amenities {
-    if (_amenities is EqualUnmodifiableListView) return _amenities;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_amenities);
-  }
-
-  @override
-  final UnitStatus unitStatus;
-  @override
-  final String? currentTenantId;
-  @override
-  final String? floorPlanUrl;
-  @override
-  final DateTime createdAt;
-  @override
-  final DateTime updatedAt;
-
-  @override
-  String toString() {
-    return 'UnitModel(id: $id, propertyId: $propertyId, unitName: $unitName, bedrooms: $bedrooms, bathrooms: $bathrooms, baseRent: $baseRent, amenities: $amenities, unitStatus: $unitStatus, currentTenantId: $currentTenantId, floorPlanUrl: $floorPlanUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UnitModelImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.propertyId, propertyId) ||
-                other.propertyId == propertyId) &&
-            (identical(other.unitName, unitName) ||
-                other.unitName == unitName) &&
-            (identical(other.bedrooms, bedrooms) ||
-                other.bedrooms == bedrooms) &&
-            (identical(other.bathrooms, bathrooms) ||
-                other.bathrooms == bathrooms) &&
-            (identical(other.baseRent, baseRent) ||
-                other.baseRent == baseRent) &&
-            const DeepCollectionEquality().equals(
-              other._amenities,
-              _amenities,
-            ) &&
-            (identical(other.unitStatus, unitStatus) ||
-                other.unitStatus == unitStatus) &&
-            (identical(other.currentTenantId, currentTenantId) ||
-                other.currentTenantId == currentTenantId) &&
-            (identical(other.floorPlanUrl, floorPlanUrl) ||
-                other.floorPlanUrl == floorPlanUrl) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    propertyId,
-    unitName,
-    bedrooms,
-    bathrooms,
-    baseRent,
-    const DeepCollectionEquality().hash(_amenities),
-    unitStatus,
-    currentTenantId,
-    floorPlanUrl,
-    createdAt,
-    updatedAt,
-  );
-
-  /// Create a copy of UnitModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UnitModelImplCopyWith<_$UnitModelImpl> get copyWith =>
-      __$$UnitModelImplCopyWithImpl<_$UnitModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UnitModelImplToJson(this);
-  }
+@override final  String id;
+@override final  String propertyId;
+@override final  String unitName;
+@override final  int bedrooms;
+@override final  int bathrooms;
+@override final  double baseRent;
+ final  List<String> _amenities;
+@override List<String> get amenities {
+  if (_amenities is EqualUnmodifiableListView) return _amenities;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_amenities);
 }
 
-abstract class _UnitModel implements UnitModel {
-  const factory _UnitModel({
-    required final String id,
-    required final String propertyId,
-    required final String unitName,
-    required final int bedrooms,
-    required final int bathrooms,
-    required final double baseRent,
-    required final List<String> amenities,
-    required final UnitStatus unitStatus,
-    final String? currentTenantId,
-    final String? floorPlanUrl,
-    required final DateTime createdAt,
-    required final DateTime updatedAt,
-  }) = _$UnitModelImpl;
+@override final  UnitStatus unitStatus;
+@override final  String? currentTenantId;
+@override final  String? floorPlanUrl;
+@override final  DateTime createdAt;
+@override final  DateTime updatedAt;
 
-  factory _UnitModel.fromJson(Map<String, dynamic> json) =
-      _$UnitModelImpl.fromJson;
+/// Create a copy of UnitModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UnitModelCopyWith<_UnitModel> get copyWith => __$UnitModelCopyWithImpl<_UnitModel>(this, _$identity);
 
-  @override
-  String get id;
-  @override
-  String get propertyId;
-  @override
-  String get unitName;
-  @override
-  int get bedrooms;
-  @override
-  int get bathrooms;
-  @override
-  double get baseRent;
-  @override
-  List<String> get amenities;
-  @override
-  UnitStatus get unitStatus;
-  @override
-  String? get currentTenantId;
-  @override
-  String? get floorPlanUrl;
-  @override
-  DateTime get createdAt;
-  @override
-  DateTime get updatedAt;
-
-  /// Create a copy of UnitModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UnitModelImplCopyWith<_$UnitModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+Map<String, dynamic> toJson() {
+  return _$UnitModelToJson(this, );
 }
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UnitModel&&(identical(other.id, id) || other.id == id)&&(identical(other.propertyId, propertyId) || other.propertyId == propertyId)&&(identical(other.unitName, unitName) || other.unitName == unitName)&&(identical(other.bedrooms, bedrooms) || other.bedrooms == bedrooms)&&(identical(other.bathrooms, bathrooms) || other.bathrooms == bathrooms)&&(identical(other.baseRent, baseRent) || other.baseRent == baseRent)&&const DeepCollectionEquality().equals(other._amenities, _amenities)&&(identical(other.unitStatus, unitStatus) || other.unitStatus == unitStatus)&&(identical(other.currentTenantId, currentTenantId) || other.currentTenantId == currentTenantId)&&(identical(other.floorPlanUrl, floorPlanUrl) || other.floorPlanUrl == floorPlanUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,propertyId,unitName,bedrooms,bathrooms,baseRent,const DeepCollectionEquality().hash(_amenities),unitStatus,currentTenantId,floorPlanUrl,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'UnitModel(id: $id, propertyId: $propertyId, unitName: $unitName, bedrooms: $bedrooms, bathrooms: $bathrooms, baseRent: $baseRent, amenities: $amenities, unitStatus: $unitStatus, currentTenantId: $currentTenantId, floorPlanUrl: $floorPlanUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$UnitModelCopyWith<$Res> implements $UnitModelCopyWith<$Res> {
+  factory _$UnitModelCopyWith(_UnitModel value, $Res Function(_UnitModel) _then) = __$UnitModelCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, String propertyId, String unitName, int bedrooms, int bathrooms, double baseRent, List<String> amenities, UnitStatus unitStatus, String? currentTenantId, String? floorPlanUrl, DateTime createdAt, DateTime updatedAt
+});
+
+
+
+
+}
+/// @nodoc
+class __$UnitModelCopyWithImpl<$Res>
+    implements _$UnitModelCopyWith<$Res> {
+  __$UnitModelCopyWithImpl(this._self, this._then);
+
+  final _UnitModel _self;
+  final $Res Function(_UnitModel) _then;
+
+/// Create a copy of UnitModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? propertyId = null,Object? unitName = null,Object? bedrooms = null,Object? bathrooms = null,Object? baseRent = null,Object? amenities = null,Object? unitStatus = null,Object? currentTenantId = freezed,Object? floorPlanUrl = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
+  return _then(_UnitModel(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,propertyId: null == propertyId ? _self.propertyId : propertyId // ignore: cast_nullable_to_non_nullable
+as String,unitName: null == unitName ? _self.unitName : unitName // ignore: cast_nullable_to_non_nullable
+as String,bedrooms: null == bedrooms ? _self.bedrooms : bedrooms // ignore: cast_nullable_to_non_nullable
+as int,bathrooms: null == bathrooms ? _self.bathrooms : bathrooms // ignore: cast_nullable_to_non_nullable
+as int,baseRent: null == baseRent ? _self.baseRent : baseRent // ignore: cast_nullable_to_non_nullable
+as double,amenities: null == amenities ? _self._amenities : amenities // ignore: cast_nullable_to_non_nullable
+as List<String>,unitStatus: null == unitStatus ? _self.unitStatus : unitStatus // ignore: cast_nullable_to_non_nullable
+as UnitStatus,currentTenantId: freezed == currentTenantId ? _self.currentTenantId : currentTenantId // ignore: cast_nullable_to_non_nullable
+as String?,floorPlanUrl: freezed == floorPlanUrl ? _self.floorPlanUrl : floorPlanUrl // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
+  ));
+}
+
+
+}
+
+// dart format on

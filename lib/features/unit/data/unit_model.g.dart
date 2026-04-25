@@ -6,25 +6,24 @@ part of 'unit_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UnitModelImpl _$$UnitModelImplFromJson(Map<String, dynamic> json) =>
-    _$UnitModelImpl(
-      id: json['id'] as String,
-      propertyId: json['propertyId'] as String,
-      unitName: json['unitName'] as String,
-      bedrooms: (json['bedrooms'] as num).toInt(),
-      bathrooms: (json['bathrooms'] as num).toInt(),
-      baseRent: (json['baseRent'] as num).toDouble(),
-      amenities: (json['amenities'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      unitStatus: $enumDecode(_$UnitStatusEnumMap, json['unitStatus']),
-      currentTenantId: json['currentTenantId'] as String?,
-      floorPlanUrl: json['floorPlanUrl'] as String?,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
-    );
+_UnitModel _$UnitModelFromJson(Map<String, dynamic> json) => _UnitModel(
+  id: json['id'] as String,
+  propertyId: json['propertyId'] as String,
+  unitName: json['unitName'] as String,
+  bedrooms: (json['bedrooms'] as num).toInt(),
+  bathrooms: (json['bathrooms'] as num).toInt(),
+  baseRent: (json['baseRent'] as num).toDouble(),
+  amenities: (json['amenities'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList(),
+  unitStatus: $enumDecode(_$UnitStatusEnumMap, json['unitStatus']),
+  currentTenantId: json['currentTenantId'] as String?,
+  floorPlanUrl: json['floorPlanUrl'] as String?,
+  createdAt: DateTime.parse(json['createdAt'] as String),
+  updatedAt: DateTime.parse(json['updatedAt'] as String),
+);
 
-Map<String, dynamic> _$$UnitModelImplToJson(_$UnitModelImpl instance) =>
+Map<String, dynamic> _$UnitModelToJson(_UnitModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'propertyId': instance.propertyId,
