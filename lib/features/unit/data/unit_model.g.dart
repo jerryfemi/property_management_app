@@ -9,7 +9,7 @@ part of 'unit_model.dart';
 _UnitModel _$UnitModelFromJson(Map<String, dynamic> json) => _UnitModel(
   id: json['id'] as String,
   propertyId: json['propertyId'] as String,
-  unitName: json['unitName'] as String,
+  unitNumber: json['unitNumber'] as String,
   bedrooms: (json['bedrooms'] as num).toInt(),
   bathrooms: (json['bathrooms'] as num).toInt(),
   baseRent: (json['baseRent'] as num).toDouble(),
@@ -27,7 +27,7 @@ Map<String, dynamic> _$UnitModelToJson(_UnitModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'propertyId': instance.propertyId,
-      'unitName': instance.unitName,
+      'unitNumber': instance.unitNumber,
       'bedrooms': instance.bedrooms,
       'bathrooms': instance.bathrooms,
       'baseRent': instance.baseRent,
@@ -40,7 +40,7 @@ Map<String, dynamic> _$UnitModelToJson(_UnitModel instance) =>
     };
 
 const _$UnitStatusEnumMap = {
-  UnitStatus.vacant: 'vacant',
+  UnitStatus.available: 'available',
   UnitStatus.reserved: 'reserved',
   UnitStatus.occupied: 'occupied',
   UnitStatus.maintenance: 'maintenance',

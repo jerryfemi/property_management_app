@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PropertyModel {
 
- String get id; String get title; String get description; String get address; String get city; String get state; String get propertyType; List<String> get amenities; List<String> get imageUrls; bool get isFurnished; bool get isPublished; int get totalUnits;// maintained by cloud function
+ String get id; String get title; String get description; String get address; String get city; String get state; PropertyType get propertyType; RentPeriod get rentPeriod; List<String> get amenities; List<String> get imageUrls; bool get isFurnished; bool get isPublished; int get totalUnits;// maintained by cloud function
  int get availableUnit;// maintained by cloud function
  DateTime get createdAt; DateTime get updatedAt;
 /// Create a copy of PropertyModel
@@ -30,16 +30,16 @@ $PropertyModelCopyWith<PropertyModel> get copyWith => _$PropertyModelCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PropertyModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.address, address) || other.address == address)&&(identical(other.city, city) || other.city == city)&&(identical(other.state, state) || other.state == state)&&(identical(other.propertyType, propertyType) || other.propertyType == propertyType)&&const DeepCollectionEquality().equals(other.amenities, amenities)&&const DeepCollectionEquality().equals(other.imageUrls, imageUrls)&&(identical(other.isFurnished, isFurnished) || other.isFurnished == isFurnished)&&(identical(other.isPublished, isPublished) || other.isPublished == isPublished)&&(identical(other.totalUnits, totalUnits) || other.totalUnits == totalUnits)&&(identical(other.availableUnit, availableUnit) || other.availableUnit == availableUnit)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PropertyModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.address, address) || other.address == address)&&(identical(other.city, city) || other.city == city)&&(identical(other.state, state) || other.state == state)&&(identical(other.propertyType, propertyType) || other.propertyType == propertyType)&&(identical(other.rentPeriod, rentPeriod) || other.rentPeriod == rentPeriod)&&const DeepCollectionEquality().equals(other.amenities, amenities)&&const DeepCollectionEquality().equals(other.imageUrls, imageUrls)&&(identical(other.isFurnished, isFurnished) || other.isFurnished == isFurnished)&&(identical(other.isPublished, isPublished) || other.isPublished == isPublished)&&(identical(other.totalUnits, totalUnits) || other.totalUnits == totalUnits)&&(identical(other.availableUnit, availableUnit) || other.availableUnit == availableUnit)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,description,address,city,state,propertyType,const DeepCollectionEquality().hash(amenities),const DeepCollectionEquality().hash(imageUrls),isFurnished,isPublished,totalUnits,availableUnit,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,title,description,address,city,state,propertyType,rentPeriod,const DeepCollectionEquality().hash(amenities),const DeepCollectionEquality().hash(imageUrls),isFurnished,isPublished,totalUnits,availableUnit,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'PropertyModel(id: $id, title: $title, description: $description, address: $address, city: $city, state: $state, propertyType: $propertyType, amenities: $amenities, imageUrls: $imageUrls, isFurnished: $isFurnished, isPublished: $isPublished, totalUnits: $totalUnits, availableUnit: $availableUnit, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'PropertyModel(id: $id, title: $title, description: $description, address: $address, city: $city, state: $state, propertyType: $propertyType, rentPeriod: $rentPeriod, amenities: $amenities, imageUrls: $imageUrls, isFurnished: $isFurnished, isPublished: $isPublished, totalUnits: $totalUnits, availableUnit: $availableUnit, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -50,7 +50,7 @@ abstract mixin class $PropertyModelCopyWith<$Res>  {
   factory $PropertyModelCopyWith(PropertyModel value, $Res Function(PropertyModel) _then) = _$PropertyModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, String description, String address, String city, String state, String propertyType, List<String> amenities, List<String> imageUrls, bool isFurnished, bool isPublished, int totalUnits, int availableUnit, DateTime createdAt, DateTime updatedAt
+ String id, String title, String description, String address, String city, String state, PropertyType propertyType, RentPeriod rentPeriod, List<String> amenities, List<String> imageUrls, bool isFurnished, bool isPublished, int totalUnits, int availableUnit, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -67,7 +67,7 @@ class _$PropertyModelCopyWithImpl<$Res>
 
 /// Create a copy of PropertyModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? description = null,Object? address = null,Object? city = null,Object? state = null,Object? propertyType = null,Object? amenities = null,Object? imageUrls = null,Object? isFurnished = null,Object? isPublished = null,Object? totalUnits = null,Object? availableUnit = null,Object? createdAt = null,Object? updatedAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? description = null,Object? address = null,Object? city = null,Object? state = null,Object? propertyType = null,Object? rentPeriod = null,Object? amenities = null,Object? imageUrls = null,Object? isFurnished = null,Object? isPublished = null,Object? totalUnits = null,Object? availableUnit = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,8 @@ as String,address: null == address ? _self.address : address // ignore: cast_nul
 as String,city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
 as String,state: null == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
 as String,propertyType: null == propertyType ? _self.propertyType : propertyType // ignore: cast_nullable_to_non_nullable
-as String,amenities: null == amenities ? _self.amenities : amenities // ignore: cast_nullable_to_non_nullable
+as PropertyType,rentPeriod: null == rentPeriod ? _self.rentPeriod : rentPeriod // ignore: cast_nullable_to_non_nullable
+as RentPeriod,amenities: null == amenities ? _self.amenities : amenities // ignore: cast_nullable_to_non_nullable
 as List<String>,imageUrls: null == imageUrls ? _self.imageUrls : imageUrls // ignore: cast_nullable_to_non_nullable
 as List<String>,isFurnished: null == isFurnished ? _self.isFurnished : isFurnished // ignore: cast_nullable_to_non_nullable
 as bool,isPublished: null == isPublished ? _self.isPublished : isPublished // ignore: cast_nullable_to_non_nullable
@@ -169,10 +170,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String description,  String address,  String city,  String state,  String propertyType,  List<String> amenities,  List<String> imageUrls,  bool isFurnished,  bool isPublished,  int totalUnits,  int availableUnit,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String description,  String address,  String city,  String state,  PropertyType propertyType,  RentPeriod rentPeriod,  List<String> amenities,  List<String> imageUrls,  bool isFurnished,  bool isPublished,  int totalUnits,  int availableUnit,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PropertyModel() when $default != null:
-return $default(_that.id,_that.title,_that.description,_that.address,_that.city,_that.state,_that.propertyType,_that.amenities,_that.imageUrls,_that.isFurnished,_that.isPublished,_that.totalUnits,_that.availableUnit,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.title,_that.description,_that.address,_that.city,_that.state,_that.propertyType,_that.rentPeriod,_that.amenities,_that.imageUrls,_that.isFurnished,_that.isPublished,_that.totalUnits,_that.availableUnit,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -190,10 +191,10 @@ return $default(_that.id,_that.title,_that.description,_that.address,_that.city,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String description,  String address,  String city,  String state,  String propertyType,  List<String> amenities,  List<String> imageUrls,  bool isFurnished,  bool isPublished,  int totalUnits,  int availableUnit,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String description,  String address,  String city,  String state,  PropertyType propertyType,  RentPeriod rentPeriod,  List<String> amenities,  List<String> imageUrls,  bool isFurnished,  bool isPublished,  int totalUnits,  int availableUnit,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _PropertyModel():
-return $default(_that.id,_that.title,_that.description,_that.address,_that.city,_that.state,_that.propertyType,_that.amenities,_that.imageUrls,_that.isFurnished,_that.isPublished,_that.totalUnits,_that.availableUnit,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.title,_that.description,_that.address,_that.city,_that.state,_that.propertyType,_that.rentPeriod,_that.amenities,_that.imageUrls,_that.isFurnished,_that.isPublished,_that.totalUnits,_that.availableUnit,_that.createdAt,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -210,10 +211,10 @@ return $default(_that.id,_that.title,_that.description,_that.address,_that.city,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String description,  String address,  String city,  String state,  String propertyType,  List<String> amenities,  List<String> imageUrls,  bool isFurnished,  bool isPublished,  int totalUnits,  int availableUnit,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String description,  String address,  String city,  String state,  PropertyType propertyType,  RentPeriod rentPeriod,  List<String> amenities,  List<String> imageUrls,  bool isFurnished,  bool isPublished,  int totalUnits,  int availableUnit,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _PropertyModel() when $default != null:
-return $default(_that.id,_that.title,_that.description,_that.address,_that.city,_that.state,_that.propertyType,_that.amenities,_that.imageUrls,_that.isFurnished,_that.isPublished,_that.totalUnits,_that.availableUnit,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.title,_that.description,_that.address,_that.city,_that.state,_that.propertyType,_that.rentPeriod,_that.amenities,_that.imageUrls,_that.isFurnished,_that.isPublished,_that.totalUnits,_that.availableUnit,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -225,7 +226,7 @@ return $default(_that.id,_that.title,_that.description,_that.address,_that.city,
 @JsonSerializable()
 
 class _PropertyModel implements PropertyModel {
-  const _PropertyModel({required this.id, required this.title, required this.description, required this.address, required this.city, required this.state, required this.propertyType, required final  List<String> amenities, required final  List<String> imageUrls, required this.isFurnished, required this.isPublished, required this.totalUnits, required this.availableUnit, required this.createdAt, required this.updatedAt}): _amenities = amenities,_imageUrls = imageUrls;
+  const _PropertyModel({required this.id, required this.title, required this.description, required this.address, required this.city, required this.state, required this.propertyType, required this.rentPeriod, required final  List<String> amenities, required final  List<String> imageUrls, required this.isFurnished, required this.isPublished, required this.totalUnits, required this.availableUnit, required this.createdAt, required this.updatedAt}): _amenities = amenities,_imageUrls = imageUrls;
   factory _PropertyModel.fromJson(Map<String, dynamic> json) => _$PropertyModelFromJson(json);
 
 @override final  String id;
@@ -234,7 +235,8 @@ class _PropertyModel implements PropertyModel {
 @override final  String address;
 @override final  String city;
 @override final  String state;
-@override final  String propertyType;
+@override final  PropertyType propertyType;
+@override final  RentPeriod rentPeriod;
  final  List<String> _amenities;
 @override List<String> get amenities {
   if (_amenities is EqualUnmodifiableListView) return _amenities;
@@ -271,16 +273,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PropertyModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.address, address) || other.address == address)&&(identical(other.city, city) || other.city == city)&&(identical(other.state, state) || other.state == state)&&(identical(other.propertyType, propertyType) || other.propertyType == propertyType)&&const DeepCollectionEquality().equals(other._amenities, _amenities)&&const DeepCollectionEquality().equals(other._imageUrls, _imageUrls)&&(identical(other.isFurnished, isFurnished) || other.isFurnished == isFurnished)&&(identical(other.isPublished, isPublished) || other.isPublished == isPublished)&&(identical(other.totalUnits, totalUnits) || other.totalUnits == totalUnits)&&(identical(other.availableUnit, availableUnit) || other.availableUnit == availableUnit)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PropertyModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.address, address) || other.address == address)&&(identical(other.city, city) || other.city == city)&&(identical(other.state, state) || other.state == state)&&(identical(other.propertyType, propertyType) || other.propertyType == propertyType)&&(identical(other.rentPeriod, rentPeriod) || other.rentPeriod == rentPeriod)&&const DeepCollectionEquality().equals(other._amenities, _amenities)&&const DeepCollectionEquality().equals(other._imageUrls, _imageUrls)&&(identical(other.isFurnished, isFurnished) || other.isFurnished == isFurnished)&&(identical(other.isPublished, isPublished) || other.isPublished == isPublished)&&(identical(other.totalUnits, totalUnits) || other.totalUnits == totalUnits)&&(identical(other.availableUnit, availableUnit) || other.availableUnit == availableUnit)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,description,address,city,state,propertyType,const DeepCollectionEquality().hash(_amenities),const DeepCollectionEquality().hash(_imageUrls),isFurnished,isPublished,totalUnits,availableUnit,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,title,description,address,city,state,propertyType,rentPeriod,const DeepCollectionEquality().hash(_amenities),const DeepCollectionEquality().hash(_imageUrls),isFurnished,isPublished,totalUnits,availableUnit,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'PropertyModel(id: $id, title: $title, description: $description, address: $address, city: $city, state: $state, propertyType: $propertyType, amenities: $amenities, imageUrls: $imageUrls, isFurnished: $isFurnished, isPublished: $isPublished, totalUnits: $totalUnits, availableUnit: $availableUnit, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'PropertyModel(id: $id, title: $title, description: $description, address: $address, city: $city, state: $state, propertyType: $propertyType, rentPeriod: $rentPeriod, amenities: $amenities, imageUrls: $imageUrls, isFurnished: $isFurnished, isPublished: $isPublished, totalUnits: $totalUnits, availableUnit: $availableUnit, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -291,7 +293,7 @@ abstract mixin class _$PropertyModelCopyWith<$Res> implements $PropertyModelCopy
   factory _$PropertyModelCopyWith(_PropertyModel value, $Res Function(_PropertyModel) _then) = __$PropertyModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String title, String description, String address, String city, String state, String propertyType, List<String> amenities, List<String> imageUrls, bool isFurnished, bool isPublished, int totalUnits, int availableUnit, DateTime createdAt, DateTime updatedAt
+ String id, String title, String description, String address, String city, String state, PropertyType propertyType, RentPeriod rentPeriod, List<String> amenities, List<String> imageUrls, bool isFurnished, bool isPublished, int totalUnits, int availableUnit, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -308,7 +310,7 @@ class __$PropertyModelCopyWithImpl<$Res>
 
 /// Create a copy of PropertyModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? description = null,Object? address = null,Object? city = null,Object? state = null,Object? propertyType = null,Object? amenities = null,Object? imageUrls = null,Object? isFurnished = null,Object? isPublished = null,Object? totalUnits = null,Object? availableUnit = null,Object? createdAt = null,Object? updatedAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? description = null,Object? address = null,Object? city = null,Object? state = null,Object? propertyType = null,Object? rentPeriod = null,Object? amenities = null,Object? imageUrls = null,Object? isFurnished = null,Object? isPublished = null,Object? totalUnits = null,Object? availableUnit = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_PropertyModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -317,7 +319,8 @@ as String,address: null == address ? _self.address : address // ignore: cast_nul
 as String,city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
 as String,state: null == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
 as String,propertyType: null == propertyType ? _self.propertyType : propertyType // ignore: cast_nullable_to_non_nullable
-as String,amenities: null == amenities ? _self._amenities : amenities // ignore: cast_nullable_to_non_nullable
+as PropertyType,rentPeriod: null == rentPeriod ? _self.rentPeriod : rentPeriod // ignore: cast_nullable_to_non_nullable
+as RentPeriod,amenities: null == amenities ? _self._amenities : amenities // ignore: cast_nullable_to_non_nullable
 as List<String>,imageUrls: null == imageUrls ? _self._imageUrls : imageUrls // ignore: cast_nullable_to_non_nullable
 as List<String>,isFurnished: null == isFurnished ? _self.isFurnished : isFurnished // ignore: cast_nullable_to_non_nullable
 as bool,isPublished: null == isPublished ? _self.isPublished : isPublished // ignore: cast_nullable_to_non_nullable

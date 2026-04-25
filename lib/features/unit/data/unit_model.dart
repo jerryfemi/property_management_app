@@ -5,18 +5,18 @@ part 'unit_model.freezed.dart';
 part 'unit_model.g.dart';
 
 enum UnitStatus {
-  vacant,
+  available,
   reserved,
   occupied,
   maintenance;
 
   static UnitStatus fromString(String value) => values.firstWhere(
     (e) => e.name == value,
-    orElse: () => UnitStatus.vacant,
+    orElse: () => UnitStatus.available,
   );
 
   String get label => name[0].toUpperCase() + name.substring(1);
-  bool get isVacant => this == UnitStatus.vacant;
+  bool get isVacant => this == UnitStatus.available;
 }
 
 @freezed
@@ -24,7 +24,7 @@ abstract class UnitModel with _$UnitModel {
   const factory UnitModel({
     required String id,
     required String propertyId,
-    required String unitName,
+    required String unitNumber,
     required int bedrooms,
     required int bathrooms,
     required double baseRent,
@@ -41,7 +41,7 @@ abstract class UnitModel with _$UnitModel {
     return UnitModel(
       id: doc.id,
       propertyId: data['property_id'] as String,
-      unitName: data['unit_name'] as String,
+      unitNumber: data['unit_number'] as String,
       bedrooms: (data['bedrooms'] as num).toInt(),
       bathrooms: (data['bathrooms'] as num).toInt(),
       baseRent: (data['base_rent'] as num).toDouble(),

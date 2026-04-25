@@ -4,6 +4,31 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'property_model.freezed.dart';
 part 'property_model.g.dart';
 
+enum PropertyType {
+  apartment,
+  selfCon,
+  commercial,
+  house,
+  shortLet;
+
+  static PropertyType fromString(String value) => values.firstWhere(
+    (e) => e.name == value,
+    orElse: () => PropertyType.apartment,
+  );
+}
+
+enum RentPeriod {
+  yearly,
+  monthly,
+  weekly,
+  nightly;
+
+  static RentPeriod fromString(String value) => values.firstWhere(
+    (e) => e.name == value,
+    orElse: () => RentPeriod.yearly,
+  );
+}
+
 @freezed
 abstract class PropertyModel with _$PropertyModel {
   const factory PropertyModel({
@@ -13,7 +38,8 @@ abstract class PropertyModel with _$PropertyModel {
     required String address,
     required String city,
     required String state,
-    required String propertyType,
+    required PropertyType propertyType,
+    required RentPeriod rentPeriod,
     required List<String> amenities,
     required List<String> imageUrls,
     required bool isFurnished,
@@ -35,7 +61,12 @@ abstract class PropertyModel with _$PropertyModel {
       address: data['address'] as String,
       city: data['city'] as String,
       state: data['state'] as String,
-      propertyType: data['property_type'] as String,
+      propertyType: PropertyType.fromString(
+        (data['property_type'] as String) ,
+      ),
+      rentPeriod: RentPeriod.fromString(
+        data['rent_period'] as String,
+      ),
       amenities: List<String>.from(data['amenities'] ?? const []),
       imageUrls: List<String>.from(data['image_urls'] ?? const []),
       isFurnished: data['is_furnished'] as bool? ?? false,

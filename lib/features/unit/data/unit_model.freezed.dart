@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UnitModel {
 
- String get id; String get propertyId; String get unitName; int get bedrooms; int get bathrooms; double get baseRent; List<String> get amenities; UnitStatus get unitStatus; String? get currentTenantId; String? get floorPlanUrl; DateTime get createdAt; DateTime get updatedAt;
+ String get id; String get propertyId; String get unitNumber; int get bedrooms; int get bathrooms; double get baseRent; List<String> get amenities; UnitStatus get unitStatus; String? get currentTenantId; String? get floorPlanUrl; DateTime get createdAt; DateTime get updatedAt;
 /// Create a copy of UnitModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UnitModelCopyWith<UnitModel> get copyWith => _$UnitModelCopyWithImpl<UnitModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UnitModel&&(identical(other.id, id) || other.id == id)&&(identical(other.propertyId, propertyId) || other.propertyId == propertyId)&&(identical(other.unitName, unitName) || other.unitName == unitName)&&(identical(other.bedrooms, bedrooms) || other.bedrooms == bedrooms)&&(identical(other.bathrooms, bathrooms) || other.bathrooms == bathrooms)&&(identical(other.baseRent, baseRent) || other.baseRent == baseRent)&&const DeepCollectionEquality().equals(other.amenities, amenities)&&(identical(other.unitStatus, unitStatus) || other.unitStatus == unitStatus)&&(identical(other.currentTenantId, currentTenantId) || other.currentTenantId == currentTenantId)&&(identical(other.floorPlanUrl, floorPlanUrl) || other.floorPlanUrl == floorPlanUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UnitModel&&(identical(other.id, id) || other.id == id)&&(identical(other.propertyId, propertyId) || other.propertyId == propertyId)&&(identical(other.unitNumber, unitNumber) || other.unitNumber == unitNumber)&&(identical(other.bedrooms, bedrooms) || other.bedrooms == bedrooms)&&(identical(other.bathrooms, bathrooms) || other.bathrooms == bathrooms)&&(identical(other.baseRent, baseRent) || other.baseRent == baseRent)&&const DeepCollectionEquality().equals(other.amenities, amenities)&&(identical(other.unitStatus, unitStatus) || other.unitStatus == unitStatus)&&(identical(other.currentTenantId, currentTenantId) || other.currentTenantId == currentTenantId)&&(identical(other.floorPlanUrl, floorPlanUrl) || other.floorPlanUrl == floorPlanUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,propertyId,unitName,bedrooms,bathrooms,baseRent,const DeepCollectionEquality().hash(amenities),unitStatus,currentTenantId,floorPlanUrl,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,propertyId,unitNumber,bedrooms,bathrooms,baseRent,const DeepCollectionEquality().hash(amenities),unitStatus,currentTenantId,floorPlanUrl,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'UnitModel(id: $id, propertyId: $propertyId, unitName: $unitName, bedrooms: $bedrooms, bathrooms: $bathrooms, baseRent: $baseRent, amenities: $amenities, unitStatus: $unitStatus, currentTenantId: $currentTenantId, floorPlanUrl: $floorPlanUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'UnitModel(id: $id, propertyId: $propertyId, unitNumber: $unitNumber, bedrooms: $bedrooms, bathrooms: $bathrooms, baseRent: $baseRent, amenities: $amenities, unitStatus: $unitStatus, currentTenantId: $currentTenantId, floorPlanUrl: $floorPlanUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $UnitModelCopyWith<$Res>  {
   factory $UnitModelCopyWith(UnitModel value, $Res Function(UnitModel) _then) = _$UnitModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String propertyId, String unitName, int bedrooms, int bathrooms, double baseRent, List<String> amenities, UnitStatus unitStatus, String? currentTenantId, String? floorPlanUrl, DateTime createdAt, DateTime updatedAt
+ String id, String propertyId, String unitNumber, int bedrooms, int bathrooms, double baseRent, List<String> amenities, UnitStatus unitStatus, String? currentTenantId, String? floorPlanUrl, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -65,11 +65,11 @@ class _$UnitModelCopyWithImpl<$Res>
 
 /// Create a copy of UnitModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? propertyId = null,Object? unitName = null,Object? bedrooms = null,Object? bathrooms = null,Object? baseRent = null,Object? amenities = null,Object? unitStatus = null,Object? currentTenantId = freezed,Object? floorPlanUrl = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? propertyId = null,Object? unitNumber = null,Object? bedrooms = null,Object? bathrooms = null,Object? baseRent = null,Object? amenities = null,Object? unitStatus = null,Object? currentTenantId = freezed,Object? floorPlanUrl = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,propertyId: null == propertyId ? _self.propertyId : propertyId // ignore: cast_nullable_to_non_nullable
-as String,unitName: null == unitName ? _self.unitName : unitName // ignore: cast_nullable_to_non_nullable
+as String,unitNumber: null == unitNumber ? _self.unitNumber : unitNumber // ignore: cast_nullable_to_non_nullable
 as String,bedrooms: null == bedrooms ? _self.bedrooms : bedrooms // ignore: cast_nullable_to_non_nullable
 as int,bathrooms: null == bathrooms ? _self.bathrooms : bathrooms // ignore: cast_nullable_to_non_nullable
 as int,baseRent: null == baseRent ? _self.baseRent : baseRent // ignore: cast_nullable_to_non_nullable
@@ -164,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String propertyId,  String unitName,  int bedrooms,  int bathrooms,  double baseRent,  List<String> amenities,  UnitStatus unitStatus,  String? currentTenantId,  String? floorPlanUrl,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String propertyId,  String unitNumber,  int bedrooms,  int bathrooms,  double baseRent,  List<String> amenities,  UnitStatus unitStatus,  String? currentTenantId,  String? floorPlanUrl,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UnitModel() when $default != null:
-return $default(_that.id,_that.propertyId,_that.unitName,_that.bedrooms,_that.bathrooms,_that.baseRent,_that.amenities,_that.unitStatus,_that.currentTenantId,_that.floorPlanUrl,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.propertyId,_that.unitNumber,_that.bedrooms,_that.bathrooms,_that.baseRent,_that.amenities,_that.unitStatus,_that.currentTenantId,_that.floorPlanUrl,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -185,10 +185,10 @@ return $default(_that.id,_that.propertyId,_that.unitName,_that.bedrooms,_that.ba
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String propertyId,  String unitName,  int bedrooms,  int bathrooms,  double baseRent,  List<String> amenities,  UnitStatus unitStatus,  String? currentTenantId,  String? floorPlanUrl,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String propertyId,  String unitNumber,  int bedrooms,  int bathrooms,  double baseRent,  List<String> amenities,  UnitStatus unitStatus,  String? currentTenantId,  String? floorPlanUrl,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _UnitModel():
-return $default(_that.id,_that.propertyId,_that.unitName,_that.bedrooms,_that.bathrooms,_that.baseRent,_that.amenities,_that.unitStatus,_that.currentTenantId,_that.floorPlanUrl,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.propertyId,_that.unitNumber,_that.bedrooms,_that.bathrooms,_that.baseRent,_that.amenities,_that.unitStatus,_that.currentTenantId,_that.floorPlanUrl,_that.createdAt,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -205,10 +205,10 @@ return $default(_that.id,_that.propertyId,_that.unitName,_that.bedrooms,_that.ba
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String propertyId,  String unitName,  int bedrooms,  int bathrooms,  double baseRent,  List<String> amenities,  UnitStatus unitStatus,  String? currentTenantId,  String? floorPlanUrl,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String propertyId,  String unitNumber,  int bedrooms,  int bathrooms,  double baseRent,  List<String> amenities,  UnitStatus unitStatus,  String? currentTenantId,  String? floorPlanUrl,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _UnitModel() when $default != null:
-return $default(_that.id,_that.propertyId,_that.unitName,_that.bedrooms,_that.bathrooms,_that.baseRent,_that.amenities,_that.unitStatus,_that.currentTenantId,_that.floorPlanUrl,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.propertyId,_that.unitNumber,_that.bedrooms,_that.bathrooms,_that.baseRent,_that.amenities,_that.unitStatus,_that.currentTenantId,_that.floorPlanUrl,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -220,12 +220,12 @@ return $default(_that.id,_that.propertyId,_that.unitName,_that.bedrooms,_that.ba
 @JsonSerializable()
 
 class _UnitModel implements UnitModel {
-  const _UnitModel({required this.id, required this.propertyId, required this.unitName, required this.bedrooms, required this.bathrooms, required this.baseRent, required final  List<String> amenities, required this.unitStatus, this.currentTenantId, this.floorPlanUrl, required this.createdAt, required this.updatedAt}): _amenities = amenities;
+  const _UnitModel({required this.id, required this.propertyId, required this.unitNumber, required this.bedrooms, required this.bathrooms, required this.baseRent, required final  List<String> amenities, required this.unitStatus, this.currentTenantId, this.floorPlanUrl, required this.createdAt, required this.updatedAt}): _amenities = amenities;
   factory _UnitModel.fromJson(Map<String, dynamic> json) => _$UnitModelFromJson(json);
 
 @override final  String id;
 @override final  String propertyId;
-@override final  String unitName;
+@override final  String unitNumber;
 @override final  int bedrooms;
 @override final  int bathrooms;
 @override final  double baseRent;
@@ -255,16 +255,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UnitModel&&(identical(other.id, id) || other.id == id)&&(identical(other.propertyId, propertyId) || other.propertyId == propertyId)&&(identical(other.unitName, unitName) || other.unitName == unitName)&&(identical(other.bedrooms, bedrooms) || other.bedrooms == bedrooms)&&(identical(other.bathrooms, bathrooms) || other.bathrooms == bathrooms)&&(identical(other.baseRent, baseRent) || other.baseRent == baseRent)&&const DeepCollectionEquality().equals(other._amenities, _amenities)&&(identical(other.unitStatus, unitStatus) || other.unitStatus == unitStatus)&&(identical(other.currentTenantId, currentTenantId) || other.currentTenantId == currentTenantId)&&(identical(other.floorPlanUrl, floorPlanUrl) || other.floorPlanUrl == floorPlanUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UnitModel&&(identical(other.id, id) || other.id == id)&&(identical(other.propertyId, propertyId) || other.propertyId == propertyId)&&(identical(other.unitNumber, unitNumber) || other.unitNumber == unitNumber)&&(identical(other.bedrooms, bedrooms) || other.bedrooms == bedrooms)&&(identical(other.bathrooms, bathrooms) || other.bathrooms == bathrooms)&&(identical(other.baseRent, baseRent) || other.baseRent == baseRent)&&const DeepCollectionEquality().equals(other._amenities, _amenities)&&(identical(other.unitStatus, unitStatus) || other.unitStatus == unitStatus)&&(identical(other.currentTenantId, currentTenantId) || other.currentTenantId == currentTenantId)&&(identical(other.floorPlanUrl, floorPlanUrl) || other.floorPlanUrl == floorPlanUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,propertyId,unitName,bedrooms,bathrooms,baseRent,const DeepCollectionEquality().hash(_amenities),unitStatus,currentTenantId,floorPlanUrl,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,propertyId,unitNumber,bedrooms,bathrooms,baseRent,const DeepCollectionEquality().hash(_amenities),unitStatus,currentTenantId,floorPlanUrl,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'UnitModel(id: $id, propertyId: $propertyId, unitName: $unitName, bedrooms: $bedrooms, bathrooms: $bathrooms, baseRent: $baseRent, amenities: $amenities, unitStatus: $unitStatus, currentTenantId: $currentTenantId, floorPlanUrl: $floorPlanUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'UnitModel(id: $id, propertyId: $propertyId, unitNumber: $unitNumber, bedrooms: $bedrooms, bathrooms: $bathrooms, baseRent: $baseRent, amenities: $amenities, unitStatus: $unitStatus, currentTenantId: $currentTenantId, floorPlanUrl: $floorPlanUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -275,7 +275,7 @@ abstract mixin class _$UnitModelCopyWith<$Res> implements $UnitModelCopyWith<$Re
   factory _$UnitModelCopyWith(_UnitModel value, $Res Function(_UnitModel) _then) = __$UnitModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String propertyId, String unitName, int bedrooms, int bathrooms, double baseRent, List<String> amenities, UnitStatus unitStatus, String? currentTenantId, String? floorPlanUrl, DateTime createdAt, DateTime updatedAt
+ String id, String propertyId, String unitNumber, int bedrooms, int bathrooms, double baseRent, List<String> amenities, UnitStatus unitStatus, String? currentTenantId, String? floorPlanUrl, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -292,11 +292,11 @@ class __$UnitModelCopyWithImpl<$Res>
 
 /// Create a copy of UnitModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? propertyId = null,Object? unitName = null,Object? bedrooms = null,Object? bathrooms = null,Object? baseRent = null,Object? amenities = null,Object? unitStatus = null,Object? currentTenantId = freezed,Object? floorPlanUrl = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? propertyId = null,Object? unitNumber = null,Object? bedrooms = null,Object? bathrooms = null,Object? baseRent = null,Object? amenities = null,Object? unitStatus = null,Object? currentTenantId = freezed,Object? floorPlanUrl = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_UnitModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,propertyId: null == propertyId ? _self.propertyId : propertyId // ignore: cast_nullable_to_non_nullable
-as String,unitName: null == unitName ? _self.unitName : unitName // ignore: cast_nullable_to_non_nullable
+as String,unitNumber: null == unitNumber ? _self.unitNumber : unitNumber // ignore: cast_nullable_to_non_nullable
 as String,bedrooms: null == bedrooms ? _self.bedrooms : bedrooms // ignore: cast_nullable_to_non_nullable
 as int,bathrooms: null == bathrooms ? _self.bathrooms : bathrooms // ignore: cast_nullable_to_non_nullable
 as int,baseRent: null == baseRent ? _self.baseRent : baseRent // ignore: cast_nullable_to_non_nullable

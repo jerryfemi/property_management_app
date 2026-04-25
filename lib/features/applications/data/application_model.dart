@@ -45,7 +45,7 @@ abstract class ApplicationModel with _$ApplicationModel {
 
     return ApplicationModel(
       id: doc.id,
-      applicantId: data['apllicant_id'] as String,
+      applicantId: data['applicant_id'] as String,
       unitId: data['unit_id'] as String,
       propertyId: data['property_id'] as String,
       applicationStatus: ApplicationStatus.fromString(
@@ -60,7 +60,7 @@ abstract class ApplicationModel with _$ApplicationModel {
       monthlyIncome: (data['monthly_income'] as num).toDouble(),
       occupants: (data['occupants'] as num).toInt(),
       hasPets: data['has_pets'] as bool? ?? false,
-      landlordNote: data['landlord_notes'] as String?,
+      landlordNote: data['landlord_note'] as String?,
       rejectionReason: data['rejection_reason'] as String?,
       createdAt: (data['created_at'] as Timestamp).toDate(),
       updatedAt: (data['updated_at'] as Timestamp).toDate(),
@@ -70,3 +70,4 @@ abstract class ApplicationModel with _$ApplicationModel {
   factory ApplicationModel.fromJson(Map<String, dynamic> json) =>
       _$ApplicationModelFromJson(json);
 }
+
