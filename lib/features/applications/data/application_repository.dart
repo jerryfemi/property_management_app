@@ -57,8 +57,8 @@ class ApplicationRepository {
     required double monthlyIncome,
     required int occupants,
     required bool hasPets,
-    String? idDocumentUrls,
-    String? incomeProofUrls,
+    String? idDocumentUrl,
+    String? incomeProofUrl,
     String? message,
   }) async {
     final ref = await _collection.add({
@@ -73,8 +73,8 @@ class ApplicationRepository {
       'monthly_income': monthlyIncome,
       'occupants': occupants,
       'has_pets': hasPets,
-      'id_document_url': idDocumentUrls,
-      'income_proof_url': incomeProofUrls,
+      'id_document_url': idDocumentUrl,
+      'income_proof_url': incomeProofUrl,
       'landlord_note': null,
       'rejection_reason': null,
       'message': message,
@@ -92,7 +92,8 @@ class ApplicationRepository {
     String? rejectionReason,
   }) => _collection.doc(id).update({
     'application_status': status.name,
-    'landlor_note': ?landlordNote,
-    'rejection_reason': ?rejectionReason,
+    if (landlordNote != null) 'landlord_note': landlordNote,
+    if (rejectionReason != null) 'rejection_reason': rejectionReason,
+    'updated_at': FieldValue.serverTimestamp(),
   });
 }

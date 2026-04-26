@@ -54,8 +54,8 @@ class PropertyRepository {
       'amenities': amenities,
       'is_furnished': isFurnished,
       'is_published': false,
-      'total_unit': 0,
-      'available_unit': 0,
+      'total_units': 0,
+      'available_units': 0,
       'created_at': FieldValue.serverTimestamp(),
       'updated_at': FieldValue.serverTimestamp(),
     });

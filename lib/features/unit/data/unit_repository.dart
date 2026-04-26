@@ -39,7 +39,7 @@ class UnitRepository {
 
   Future<void> updateStatus(String unitId, UnitStatus status) =>
       _collection.doc(unitId).update({
-        'unit_status': status,
+        'unit_status': status.name,
         'updated_at': FieldValue.serverTimestamp(),
       });
 

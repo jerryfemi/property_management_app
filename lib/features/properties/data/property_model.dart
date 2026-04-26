@@ -72,7 +72,7 @@ abstract class PropertyModel with _$PropertyModel {
       isFurnished: data['is_furnished'] as bool? ?? false,
       isPublished: data['is_published'] as bool? ?? false,
       totalUnits: (data['total_units'] as num?)?.toInt() ?? 0,
-      availableUnit: (data['available_unit'] as num?)?.toInt() ?? 0,
+      availableUnit: (data['available_units'] as num?)?.toInt() ?? 0,
       createdAt: (data['created_at'] as Timestamp).toDate(),
       updatedAt: (data['updated_at'] as Timestamp).toDate(),
     );
