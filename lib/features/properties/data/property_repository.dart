@@ -40,7 +40,6 @@ class PropertyRepository {
     required PropertyType propertyType,
     required RentPeriod rentPeriod,
     required List<String> amenities,
-    required List<String> imageUrls,
     required bool isFurnished,
   }) async {
     final ref = await _collection.add({
@@ -49,8 +48,9 @@ class PropertyRepository {
       'address': address,
       'city': city,
       'state': state,
-      'property_type': propertyType,
-      'rent_period': rentPeriod,
+      'property_type': propertyType.name,
+      'rent_period': rentPeriod.name,
+      'image_urls': [],
       'amenities': amenities,
       'is_furnished': isFurnished,
       'is_published': false,
@@ -66,6 +66,13 @@ class PropertyRepository {
   Future<void> setPublished(String id, bool value) =>
       _collection.doc(id).update({
         'is_published': value,
+        'updated_at': FieldValue.serverTimestamp(),
+      });
+
+  // add image url
+  Future<void> addImage(String id, List<String> urls) =>
+      _collection.doc(id).update({
+        'image_urls': FieldValue.arrayUnion(urls),
         'updated_at': FieldValue.serverTimestamp(),
       });
 }
