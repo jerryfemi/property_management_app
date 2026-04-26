@@ -8,14 +8,14 @@ class UnitRepository {
   CollectionReference<Map<String, dynamic>> get _collection =>
       _db.collection('units');
 
-  // get all units for property(admin)
+  // get all units for a property(admin view to see all statuses)
   Stream<List<UnitModel>> unitsForProperty(String propertyId) => _collection
       .where('property_id', isEqualTo: propertyId)
       .orderBy('unit_number')
       .snapshots()
       .map((snapshot) => snapshot.docs.map(UnitModel.fromFirestore).toList());
 
-  // get all available units for property
+  // get all available units for property (for market place, guest view)
   Stream<List<UnitModel>> availableUnitsForProperty(String propertyId) =>
       _collection
           .where('property_id', isEqualTo: propertyId)
@@ -25,7 +25,7 @@ class UnitRepository {
             (snapshots) => snapshots.docs.map(UnitModel.fromFirestore).toList(),
           );
 
-  // get a single unit (property_details screen)
+  // get a single unit (unit details screen)
   Stream<UnitModel?> watchUnit(String unitId) => _collection
       .doc(unitId)
       .snapshots()
