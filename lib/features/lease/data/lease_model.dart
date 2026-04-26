@@ -67,26 +67,26 @@ abstract class LeaseModel with _$LeaseModel {
   bool get isExpiringSoon => daysRemaining <= 30 && daysRemaining > 0;
 
   factory LeaseModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
-    final d = doc.data()!;
+    final data = doc.data()!;
     return LeaseModel(
       id: doc.id,
-      tenantId: d['tenant_id'] as String,
-      unitId: d['unit_id'] as String,
-      propertyId: d['property_id'] as String,
-      createdByAdminId: d['created_by_admin_id'] as String,
-      rentPeriod: RentPeriod.fromString(d['rent_period'] as String),
-      status: LeaseStatus.fromString(d['status'] as String),
-      monthlyRent: (d['monthly_rent'] as num).toDouble(),
-      securityDeposit: (d['security_deposit'] as num).toDouble(),
-      agreementFee: (d['agreement_fee'] as num?)?.toDouble(),
-      agencyFee: (d['agency_fee'] as num?)?.toDouble(),
-      serviceCharge: (d['service_charge'] as num?)?.toDouble(),
-      paymentDueDay: (d['payment_due_day'] as num?)?.toInt(),
-      startDate: (d['start_date'] as Timestamp).toDate(),
-      endDate: (d['end_date'] as Timestamp).toDate(),
-      contractUrl: d['contract_url'] as String?,
-      createdAt: (d['created_at'] as Timestamp).toDate(),
-      updatedAt: (d['updated_at'] as Timestamp).toDate(),
+      tenantId: data['tenant_id'] as String,
+      unitId: data['unit_id'] as String,
+      propertyId: data['property_id'] as String,
+      createdByAdminId: data['created_by_admin_id'] as String,
+      rentPeriod: RentPeriod.fromString(data['rent_period'] as String),
+      status: LeaseStatus.fromString(data['status'] as String),
+      monthlyRent: (data['monthly_rent'] as num).toDouble(),
+      securityDeposit: (data['security_deposit'] as num).toDouble(),
+      agreementFee: (data['agreement_fee'] as num?)?.toDouble(),
+      agencyFee: (data['agency_fee'] as num?)?.toDouble(),
+      serviceCharge: (data['service_charge'] as num?)?.toDouble(),
+      paymentDueDay: (data['payment_due_day'] as num?)?.toInt(),
+      startDate: (data['start_date'] as Timestamp).toDate(),
+      endDate: (data['end_date'] as Timestamp).toDate(),
+      contractUrl: data['contract_url'] as String?,
+      createdAt: (data['created_at'] as Timestamp).toDate(),
+      updatedAt: (data['updated_at'] as Timestamp).toDate(),
     );
   }
 
