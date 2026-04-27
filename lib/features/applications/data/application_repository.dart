@@ -9,7 +9,7 @@ class ApplicationRepository {
       _db.collection('applications');
 
   // guest track their own applications
-  Stream<List<ApplicationModel>> watchUserApplications(String uid) =>
+  Stream<List<ApplicationModel>> watchMyApplication(String uid) =>
       _collection
           .where('applicant_id', isEqualTo: uid)
           .orderBy('created_at', descending: true)
