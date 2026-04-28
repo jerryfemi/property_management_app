@@ -9,7 +9,7 @@ class PaymentsRepository {
       _db.collection('payments');
 
   // tenant watches all thier own payments
-  Stream<List<PaymentModel>> watchMyApplications(String tenantId) => _collection
+  Stream<List<PaymentModel>> watchForTenant(String tenantId) => _collection
       .where('tenant_id', isEqualTo: tenantId)
       .orderBy('created_at', descending: true)
       .snapshots()
