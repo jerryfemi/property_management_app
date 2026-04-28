@@ -49,6 +49,11 @@ final approvedApplicationsProvider =
 
 // multi step application form
 
+final applicationFormProvider =
+    AsyncNotifierProvider<ApplicationFormNotifier, void>(
+      ApplicationFormNotifier.new,
+    );
+
 class ApplicationFormNotifier extends AsyncNotifier<void> {
   @override
   Future<void> build() async {}
@@ -98,6 +103,14 @@ class ApplicationFormNotifier extends AsyncNotifier<void> {
   }
 }
 
+final applicationReviewNotifierProvider = StateNotifierProvider.autoDispose
+    .family<ApplicationReviewNotifier, AsyncValue<ApplicationModel?>, String>(
+      (ref, applicationId) => ApplicationReviewNotifier(
+        repo: ref.watch(applicatioRepositoryProvider),
+        applicationId: applicationId,
+      ),
+    );
+
 class ApplicationReviewNotifier
     extends StateNotifier<AsyncValue<ApplicationModel?>> {
   final ApplicationRepository _repo;
@@ -131,7 +144,7 @@ class ApplicationReviewNotifier
       // re fetch to confirm firestore write if reflected in state
       state = await AsyncValue.guard(() => _repo.fetch(_applicationId));
     } catch (e, st) {
-      AsyncError(e, st);
+     state =  AsyncError(e, st);
     }
   }
 
@@ -140,7 +153,7 @@ class ApplicationReviewNotifier
     state = AsyncLoading();
 
     try {
-      _repo.updateStatus(
+     await  _repo.updateStatus(
         _applicationId,
         ApplicationStatus.rejected,
         rejectionReason: reason,
@@ -148,7 +161,7 @@ class ApplicationReviewNotifier
 
       state = await AsyncValue.guard(() => _repo.fetch(_applicationId));
     } catch (e, st) {
-      AsyncError(e, st);
+      state = AsyncError(e, st);
     }
   }
 }

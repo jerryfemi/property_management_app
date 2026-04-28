@@ -33,13 +33,14 @@ final unreadNotificationsProvider = Provider.autoDispose((ref) {
   return ref
       .watch(notificationsProvider)
       .whenData(
-        (notifications) =>
-            notifications.where((notification) => notification.isRead).toList(),
+        (notifications) => notifications
+            .where((notification) => !notification.isRead)
+            .toList(),
       );
 });
 
 // notifier provider
-final notificationactionsProvider =
+final notificationActionsProvider =
     StateNotifierProvider.autoDispose<
       NotificationsActionNotifier,
       AsyncValue<void>
@@ -54,7 +55,7 @@ class NotificationsActionNotifier extends StateNotifier<AsyncValue<void>> {
   NotificationsActionNotifier(this._repo, this._uid)
     : super(const AsyncData(null));
   final NotificationRepository _repo;
- final String? _uid;
+  final String? _uid;
 
   Future<void> markRead(String notificationId) async {
     state = const AsyncLoading();
@@ -63,7 +64,7 @@ class NotificationsActionNotifier extends StateNotifier<AsyncValue<void>> {
       await _repo.markAsRead(notificationId);
       state = const AsyncData(null);
     } catch (e, st) {
-      AsyncError(e, st);
+      state = AsyncError(e, st);
     }
   }
 
@@ -75,7 +76,7 @@ class NotificationsActionNotifier extends StateNotifier<AsyncValue<void>> {
       await _repo.markAllRead(_uid);
       state = const AsyncData(null);
     } catch (e, st) {
-      AsyncError(e, st);
+      state = AsyncError(e, st);
     }
   }
 
@@ -86,7 +87,7 @@ class NotificationsActionNotifier extends StateNotifier<AsyncValue<void>> {
       await _repo.delete(notificationId);
       state = const AsyncData(null);
     } catch (e, st) {
-      AsyncError(e, st);
+      state = AsyncError(e, st);
     }
   }
 }

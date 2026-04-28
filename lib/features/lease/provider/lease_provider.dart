@@ -40,7 +40,12 @@ final expiringLeaseProvider =
           );
     });
 
-class LeaseCreationNotifier extends AsyncNotifier {
+final leaseCreationNotifierProvider =
+    AsyncNotifierProvider.autoDispose<LeaseCreationNotifier, void>(
+      LeaseCreationNotifier.new,
+    );
+
+class LeaseCreationNotifier extends AsyncNotifier<void> {
   @override
   FutureOr<void> build() {}
 
@@ -66,7 +71,7 @@ class LeaseCreationNotifier extends AsyncNotifier {
       state = AsyncError('Not Aunthenticated', StackTrace.current);
       return;
     }
-// update the
+    // update the
     state = await AsyncValue.guard(
       () => ref
           .read(leaseRepoProvider)
