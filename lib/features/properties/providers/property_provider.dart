@@ -16,7 +16,7 @@ final marketPlaceProvider = StreamProvider.autoDispose<List<PropertyModel>>((
 });
 
 // allPropertiesProvider
-final allPropertiesProvider = StreamProvider<List<PropertyModel>>((ref) {
+final allPropertiesProvider = StreamProvider.autoDispose<List<PropertyModel>>((ref) {
   return ref.watch(propertyRepositoryProvider).watchAll();
 });
 

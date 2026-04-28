@@ -7,7 +7,7 @@ import 'package:pro_app/features/unit/data/unit_model.dart';
 import 'package:pro_app/features/unit/data/unit_repository.dart';
 
 // unit repo provider  --DI
-final unitRepositoryProvider = Provider((ref) {
+final unitRepositoryProvider = Provider<UnitRepository>((ref) {
   return UnitRepository(FirebaseFirestore.instance);
 });
 
