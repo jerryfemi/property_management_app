@@ -66,7 +66,7 @@ class LeaseCreationNotifier extends AsyncNotifier {
       state = AsyncError('Not Aunthenticated', StackTrace.current);
       return;
     }
-// update the state
+// update the
     state = await AsyncValue.guard(
       () => ref
           .read(leaseRepoProvider)
