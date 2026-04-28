@@ -29,10 +29,28 @@ class AppTheme {
         foregroundColor: AppColorsLight.dark,
         elevation: 0,
       ),
+      navigationBarTheme: NavigationBarThemeData(
+        indicatorColor: AppColorsLight.primaryLight,
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          return TextStyle(
+            color: states.contains(WidgetState.selected)
+                ? AppColorsLight.primary
+                : AppColorsLight.muted,
+          );
+        }),
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          return IconThemeData(
+            color: states.contains(WidgetState.selected)
+                ? AppColorsLight.primary
+                : AppColorsLight.muted,
+          );
+        }),
+      ),
       dividerColor: AppColorsLight.border,
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColorsLight.surface,
+        hintStyle: const TextStyle(color: AppColorsLight.muted),
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColorsLight.border),
           borderRadius: BorderRadius.circular(12),
@@ -75,10 +93,28 @@ class AppTheme {
         foregroundColor: AppColorsDark.dark,
         elevation: 0,
       ),
+      navigationBarTheme: NavigationBarThemeData(
+        indicatorColor: AppColorsDark.primaryLight,
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          return TextStyle(
+            color: states.contains(WidgetState.selected)
+                ? AppColorsDark.primary
+                : AppColorsDark.muted,
+          );
+        }),
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          return IconThemeData(
+            color: states.contains(WidgetState.selected)
+                ? AppColorsDark.primary
+                : AppColorsDark.muted,
+          );
+        }),
+      ),
       dividerColor: AppColorsDark.border,
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColorsDark.surface,
+        hintStyle: const TextStyle(color: AppColorsDark.muted),
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColorsDark.border),
           borderRadius: BorderRadius.circular(12),

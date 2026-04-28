@@ -25,6 +25,10 @@ import 'package:pro_app/features/staff/ui/tasks_screen.dart';
 import 'package:pro_app/features/staff/ui/ticket_detail_screen.dart';
 import 'package:pro_app/features/tenant/ui/tenant_home_screen.dart';
 import 'package:pro_app/features/units/ui/unit_detail_screen.dart';
+import 'package:pro_app/navigation/admin_shell.dart';
+import 'package:pro_app/navigation/guest_shell.dart';
+import 'package:pro_app/navigation/staff_shell.dart';
+import 'package:pro_app/navigation/tenant_shell.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final notifier = ref.watch(routerNotifierProvider.notifier);
@@ -37,7 +41,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       // shell route for Guest
       StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) => Container(),
+        builder: (context, state, shell) => GuestShell(shell: shell,),
         branches: [
           // explore tab
           StatefulShellBranch(
@@ -108,7 +112,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       // shell route for tenant
       StatefulShellRoute.indexedStack(
-        // builder: (context, state, shell) => TenantShell(shell: shell),
+        builder: (context, state, shell) => TenantShell(shell: shell),
         branches: [
           // Tab 0 — Home
           StatefulShellBranch(
@@ -166,7 +170,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       // shell routr for staff
       StatefulShellRoute.indexedStack(
-        // builder: (context, state, shell) => StaffShell(shell: shell),
+        builder: (context, state, shell) => StaffShell(shell: shell),
         branches: [
           // Tab 0 — Tasks (assigned tickets)
           StatefulShellBranch(
@@ -199,7 +203,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       // shell route for admin
       StatefulShellRoute.indexedStack(
-        // builder: (context, state, shell) => AdminShell(shell: shell),
+        builder: (context, state, shell) => AdminShell(shell: shell),
         branches: [
           // Tab 0 — Dashboard
           StatefulShellBranch(
