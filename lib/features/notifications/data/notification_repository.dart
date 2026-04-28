@@ -23,7 +23,7 @@ class NotificationRepository {
       _collection.doc(notificationId).update({'is_read': true});
 
   // mark all unread notification for user
-  Future<void> mmarkAllRead(String userId) async {
+  Future<void> markAllRead(String userId) async {
     // get all unread notifications
     final unread = await _collection
         .where('user_id', isEqualTo: userId)
