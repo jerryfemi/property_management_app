@@ -17,6 +17,7 @@ class AppTheme {
 
     return ThemeData(
       useMaterial3: true,
+      fontFamily: 'Inter',
       colorScheme: colorScheme,
       extensions: const <ThemeExtension<dynamic>>[AppExtraColors.light],
       scaffoldBackgroundColor: AppColorsLight.background,
@@ -81,6 +82,7 @@ class AppTheme {
 
     return ThemeData(
       useMaterial3: true,
+      fontFamily: 'Inter',
       colorScheme: colorScheme,
       extensions: const <ThemeExtension<dynamic>>[AppExtraColors.dark],
       scaffoldBackgroundColor: AppColorsDark.background,

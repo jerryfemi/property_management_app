@@ -15,6 +15,7 @@ import 'package:pro_app/features/auth/ui/login_screen.dart';
 import 'package:pro_app/features/auth/ui/profile_screen.dart';
 import 'package:pro_app/features/auth/ui/saved_screen.dart';
 import 'package:pro_app/features/auth/ui/signup_screen.dart';
+import 'package:pro_app/features/auth/ui/complete_profile_screen.dart';
 import 'package:pro_app/features/maintenance/ui/maintenance_screen.dart';
 import 'package:pro_app/features/maintenance/ui/new_ticket_screen.dart';
 import 'package:pro_app/features/notifications/ui/notification_screen.dart';
@@ -37,7 +38,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       // auth
       GoRoute(path: '/auth', builder: (context, state) => Container()),
       GoRoute(path: '/auth/login', builder: (context, state) => LoginScreen()),
-      GoRoute(path: 'auth/signup', builder: (context, state) => SignupScreen()),
+      GoRoute(path: '/auth/signup', builder: (context, state) => SignupScreen()),
+      GoRoute(
+        path: '/complete-profile',
+        builder: (context, state) => const CompleteProfileScreen(),
+      ),
 
       // shell route for Guest
       StatefulShellRoute.indexedStack(
@@ -52,9 +57,9 @@ final routerProvider = Provider<GoRouter>((ref) {
                 // routes under the explore screen
                 routes: [
                   GoRoute(
-                    path: '/property/:propertyId',
+                    path: 'property/:propertyId',
                     builder: (context, state) => PropertyDetailScreen(
-                      propertyId: state.pathParameters['propertId']!,
+                      propertyId: state.pathParameters['propertyId']!,
                     ),
                     routes: [
                       GoRoute(
@@ -266,17 +271,22 @@ final routerProvider = Provider<GoRouter>((ref) {
       final role = notifier.role;
       final location = state.matchedLocation;
       final isOnAuth = location.startsWith('/auth');
+      final isOnCompleteProfile = location == '/complete-profile';
 
       // not logged in -> got to auth
       if (role == null) return isOnAuth ? null : '/auth';
 
+      if (notifier.needsProfile && !isOnCompleteProfile && !isOnAuth) {
+        return '/complete-profile';
+      }
+
       // logged in but on auth screen => redirect to home
-      if (isOnAuth) {
+      if (isOnAuth || isOnCompleteProfile) {
         return switch (role) {
           UserRole.guest => '/guest/explore',
-          UserRole.tenant => 'tenant/home',
-          UserRole.staff => 'staff/tasks',
-          UserRole.admin => 'admin/dasboard',
+          UserRole.tenant => '/tenant/home',
+          UserRole.staff => '/staff/tasks',
+          UserRole.admin => '/admin/dashboard',
         };
       }
 
@@ -314,12 +324,20 @@ final routerNotifierProvider = NotifierProvider<RouterNotifier, void>(
 
 class RouterNotifier extends Notifier<void> implements ChangeNotifier {
   UserRole? _role;
+  bool _needsProfile = false;
+
   UserRole? get role => _role;
+  bool get needsProfile => _needsProfile;
 
   @override
   void build() {
     ref.listen<AsyncValue<UserRole>>(userRoleProvider, (_, next) {
       _role = next.value;
+      notifyListeners();
+    });
+
+    ref.listen<bool>(needsProfileCompletionProvider, (_, next) {
+      _needsProfile = next;
       notifyListeners();
     });
   }

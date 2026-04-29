@@ -17,7 +17,7 @@ class AdminShell extends ConsumerWidget {
     return Scaffold(
       body: shell,
       bottomNavigationBar: Platform.isIOS
-          ? _buildCupertinoBar()
+          ? _buildCupertinoBar(unreadCount)
           : _buildMaterialBar(unreadCount),
     );
   }
@@ -60,13 +60,15 @@ class AdminShell extends ConsumerWidget {
     );
   }
 
-  Widget _buildCupertinoBar() {
+  Widget _buildCupertinoBar(int unreadCount) {
+        final alertsLabel = unreadCount > 0 ? 'Alerts ($unreadCount)' : 'Alerts';
+
     return CNTabBar(
-      items: const [
+      items:  [
         CNTabBarItem(label: 'Dashboard', icon: CNSymbol('square.grid.2x2')),
         CNTabBarItem(label: 'Properties', icon: CNSymbol('building.2')),
         CNTabBarItem(label: 'Applications', icon: CNSymbol('doc.text')),
-        CNTabBarItem(label: 'Alerts', icon: CNSymbol('bell')),
+        CNTabBarItem(label: alertsLabel, icon: CNSymbol('bell')),
       ],
       currentIndex: shell.currentIndex,
       onTap: (index) =>
