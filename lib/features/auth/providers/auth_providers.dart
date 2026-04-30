@@ -21,9 +21,9 @@ final authStateProvider = StreamProvider.autoDispose<User?>((ref) {
 });
 
 // userRoleProvider -- role from token claims(go_router uses this to pick nav branch)
-final userRoleProvider = FutureProvider.autoDispose<UserRole>((ref) async {
+final userRoleProvider = FutureProvider.autoDispose<UserRole?>((ref) async {
   final user = ref.watch(authStateProvider).value;
-  if (user == null) return UserRole.guest;
+  if (user == null) return null;
   final token = await user.getIdTokenResult(true);
 
   final role = token.claims?['role'] as String? ?? 'guest';

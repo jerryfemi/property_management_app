@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:cupertino_native/cupertino_native.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,9 +11,11 @@ class GuestShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final useCupertino = !kIsWeb && Platform.isIOS;
+
     return Scaffold(
       body: shell,
-      bottomNavigationBar: Platform.isIOS
+      bottomNavigationBar: useCupertino
           ? _buildCupertinoBar()
           : _buildMaterialBar(),
     );

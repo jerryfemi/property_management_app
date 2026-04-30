@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:cupertino_native/cupertino_native.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -12,10 +13,11 @@ class TenantShell extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final unreadCount = ref.watch(unreadCountProvider);
+    final useCupertino = !kIsWeb && Platform.isIOS;
 
     return Scaffold(
       body: shell,
-      bottomNavigationBar: Platform.isIOS
+      bottomNavigationBar: useCupertino
           ? _buildCupertinoBar(unreadCount)
           : _buildMaterialBar(unreadCount),
     );

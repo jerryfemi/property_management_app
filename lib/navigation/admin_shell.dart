@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:cupertino_native/cupertino_native.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,10 +14,11 @@ class AdminShell extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final unreadCount = ref.watch(unreadCountProvider);
+    final useCupertino = !kIsWeb && Platform.isIOS;
 
     return Scaffold(
       body: shell,
-      bottomNavigationBar: Platform.isIOS
+      bottomNavigationBar: useCupertino
           ? _buildCupertinoBar(unreadCount)
           : _buildMaterialBar(unreadCount),
     );
@@ -61,10 +63,10 @@ class AdminShell extends ConsumerWidget {
   }
 
   Widget _buildCupertinoBar(int unreadCount) {
-        final alertsLabel = unreadCount > 0 ? 'Alerts ($unreadCount)' : 'Alerts';
+    final alertsLabel = unreadCount > 0 ? 'Alerts ($unreadCount)' : 'Alerts';
 
     return CNTabBar(
-      items:  [
+      items: [
         CNTabBarItem(label: 'Dashboard', icon: CNSymbol('square.grid.2x2')),
         CNTabBarItem(label: 'Properties', icon: CNSymbol('building.2')),
         CNTabBarItem(label: 'Applications', icon: CNSymbol('doc.text')),

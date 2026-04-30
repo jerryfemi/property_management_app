@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 
 class OnboardingPage3 extends StatelessWidget {

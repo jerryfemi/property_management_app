@@ -11,6 +11,8 @@ import 'package:pro_app/features/applications/ui/application_form_screen.dart';
 import 'package:pro_app/features/applications/ui/my_applications_screen.dart';
 import 'package:pro_app/features/auth/data/user_model.dart';
 import 'package:pro_app/features/auth/providers/auth_providers.dart';
+import 'package:pro_app/features/auth/ui/auth_landing_screen.dart';
+import 'package:pro_app/features/auth/ui/onboarding_screen.dart';
 import 'package:pro_app/features/auth/ui/login_screen.dart';
 import 'package:pro_app/features/auth/ui/profile_screen.dart';
 import 'package:pro_app/features/auth/ui/saved_screen.dart';
@@ -30,13 +32,21 @@ import 'package:pro_app/navigation/admin_shell.dart';
 import 'package:pro_app/navigation/guest_shell.dart';
 import 'package:pro_app/navigation/staff_shell.dart';
 import 'package:pro_app/navigation/tenant_shell.dart';
+import 'package:pro_app/core/router/onboarding_provider.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final notifier = ref.watch(routerNotifierProvider.notifier);
   return GoRouter(
     routes: [
       // auth
-      GoRoute(path: '/auth', builder: (context, state) => Container()),
+      GoRoute(
+        path: '/onboarding',
+        builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: '/auth',
+        builder: (context, state) => const AuthLandingScreen(),
+      ),
       GoRoute(path: '/auth/login', builder: (context, state) => LoginScreen()),
       GoRoute(path: '/auth/signup', builder: (context, state) => SignupScreen()),
       GoRoute(
@@ -265,16 +275,25 @@ final routerProvider = Provider<GoRouter>((ref) {
     ],
 
     refreshListenable: notifier,
-    initialLocation: '/auth',
+    initialLocation: '/onboarding',
     debugLogDiagnostics: kDebugMode,
     redirect: (context, state) {
       final role = notifier.role;
       final location = state.matchedLocation;
       final isOnAuth = location.startsWith('/auth');
       final isOnCompleteProfile = location == '/complete-profile';
+      final isOnOnboarding = location == '/onboarding';
 
       // not logged in -> got to auth
-      if (role == null) return isOnAuth ? null : '/auth';
+      if (role == null) {
+        if (notifier.onboardingComplete == false && !isOnOnboarding) {
+          return '/onboarding';
+        }
+        if (notifier.onboardingComplete == true && isOnOnboarding) {
+          return '/auth';
+        }
+        return isOnAuth || isOnOnboarding ? null : '/auth';
+      }
 
       if (notifier.needsProfile && !isOnCompleteProfile && !isOnAuth) {
         return '/complete-profile';
@@ -325,19 +344,26 @@ final routerNotifierProvider = NotifierProvider<RouterNotifier, void>(
 class RouterNotifier extends Notifier<void> implements ChangeNotifier {
   UserRole? _role;
   bool _needsProfile = false;
+  bool? _onboardingComplete;
 
   UserRole? get role => _role;
   bool get needsProfile => _needsProfile;
+  bool? get onboardingComplete => _onboardingComplete;
 
   @override
   void build() {
-    ref.listen<AsyncValue<UserRole>>(userRoleProvider, (_, next) {
+    ref.listen<AsyncValue<UserRole?>>(userRoleProvider, (_, next) {
       _role = next.value;
       notifyListeners();
     });
 
     ref.listen<bool>(needsProfileCompletionProvider, (_, next) {
       _needsProfile = next;
+      notifyListeners();
+    });
+
+    ref.listen<AsyncValue<bool>>(onboardingControllerProvider, (_, next) {
+      _onboardingComplete = next.value;
       notifyListeners();
     });
   }

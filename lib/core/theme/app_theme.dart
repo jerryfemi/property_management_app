@@ -69,6 +69,12 @@ class AppTheme {
     );
   }
 
+
+
+
+
+
+// dark theme
   static ThemeData dark() {
     const colorScheme = ColorScheme.dark(
       primary: AppColorsDark.primary,
@@ -77,7 +83,7 @@ class AppTheme {
       error: AppColorsDark.danger,
       onPrimary: AppColorsDark.surface,
       onSecondary: AppColorsDark.surface,
-      onSurface: AppColorsDark.dark,
+      onSurface: Colors.white,
       onError: AppColorsDark.surface,
     );
 
