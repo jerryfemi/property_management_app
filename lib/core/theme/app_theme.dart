@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
@@ -30,6 +31,13 @@ class AppTheme {
         backgroundColor: AppColorsLight.surface,
         foregroundColor: AppColorsLight.dark,
         elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
+          systemNavigationBarColor: AppColorsLight.background,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: AppColorsLight.primaryLight,
@@ -101,6 +109,13 @@ class AppTheme {
         backgroundColor: AppColorsDark.surface,
         foregroundColor: AppColorsDark.dark,
         elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+          systemNavigationBarColor: AppColorsDark.background,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: AppColorsDark.primaryLight,

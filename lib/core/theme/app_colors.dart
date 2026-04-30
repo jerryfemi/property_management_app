@@ -39,9 +39,9 @@ class AppColorsDark {
 	static const warningLight = Color(0xFF78350F);
 
 	// Neutrals
-	static const background = Color(0xFF0B1220); // app background
-	static const surface = Color(0xFF111827); // cards, modals
+	static const background = Color(0xFF09090B); // app background
+	static const surface = Color(0xFF171717); // cards, modals
 	static const dark = Color(0xFFE5E7EB); // primary text
 	static const muted = Color(0xFF94A3B8); // secondary text
-	static const border = Color(0xFF1F2937); // dividers, outlines
+	static const border = Color(0xFF262626); // dividers, outlines
 }

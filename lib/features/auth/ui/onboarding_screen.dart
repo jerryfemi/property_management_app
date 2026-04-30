@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pro_app/core/router/onboarding_provider.dart';
@@ -57,8 +58,17 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final isLast = currentPage == _pages.length - 1;
     final accentColor = _pageAccentColors[currentPage];
 
-    return Scaffold(
-      body: Stack(
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+        systemNavigationBarColor: Theme.of(context).scaffoldBackgroundColor,
+        systemNavigationBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+      ),
+      child: Scaffold(
+        body: Stack(
         children: [
           PageView.builder(
             controller: _controller,
@@ -104,17 +114,19 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 GestureDetector(
                   onTap: isLast ? _finish : _next,
                   child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeInOut,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOutCubic,
                     height: 56,
                     width: isLast ? 150 : 56,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSurface,
+                      color: isLast
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurface,
                       borderRadius: BorderRadius.circular(isLast ? 16 : 28),
                     ),
                     child: Center(
                       child: AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 100),
                         child: isLast
                             ? const Text(
                                 'Get Started',
@@ -125,10 +137,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                                   fontSize: 16,
                                 ),
                               )
-                            : const Icon(
+                            : Icon(
                                 Icons.chevron_right,
-                                key: ValueKey('chevron'),
-                                color: Colors.white,
+                                key: const ValueKey('chevron'),
+                                color: Theme.of(context).colorScheme.surface,
                                 size: 28,
                               ),
                       ),
@@ -138,7 +150,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               ],
             ),
           ),
-        ],
+          ],
+        ),
       ),
     );
   }

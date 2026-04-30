@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 
 class OnboardingPage3 extends StatelessWidget {
@@ -31,9 +33,9 @@ class OnboardingPage3 extends StatelessWidget {
                   ],
                 ),
                 child: Icon(
-                  Icons.description_outlined,
-                  color: Theme.of(context).colorScheme.secondary,
+                  CupertinoIcons.chart_bar_alt_fill,
                   size: 70,
+                  color: context.appColors.warning,
                 ),
               ),
 
