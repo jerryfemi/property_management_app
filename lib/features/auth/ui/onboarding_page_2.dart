@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
@@ -34,7 +35,7 @@ class OnboardingPage2 extends StatelessWidget {
                     ],
                   ),
                   child: Icon(
-                    Icons.description_outlined,
+                    CupertinoIcons.doc_text,
                     color: Theme.of(context).colorScheme.secondary,
                     size: 70,
                   ),

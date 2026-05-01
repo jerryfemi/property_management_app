@@ -32,7 +32,7 @@ class OnboardingPage3 extends StatelessWidget {
                   ],
                 ),
                 child: Icon(
-                  CupertinoIcons.chart_bar_alt_fill,
+                  CupertinoIcons.chart_bar,
                   size: 70,
                   color: context.appColors.warning,
                 ),
