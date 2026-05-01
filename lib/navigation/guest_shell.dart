@@ -1,6 +1,6 @@
 import 'dart:io' show Platform;
-
 import 'package:cupertino_native/cupertino_native.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -28,24 +28,24 @@ class GuestShell extends StatelessWidget {
           shell.goBranch(index, initialLocation: index == shell.currentIndex),
       destinations: const [
         NavigationDestination(
-          icon: Icon(Icons.house_outlined),
+          icon: Icon(CupertinoIcons.house),
           label: 'Explore',
-          selectedIcon: Icon(Icons.house),
+          selectedIcon: Icon(CupertinoIcons.house_fill),
         ),
         NavigationDestination(
-          icon: Icon(Icons.bookmark_outline),
+          icon: Icon(CupertinoIcons.bookmark),
           label: 'Saved',
-          selectedIcon: Icon(Icons.bookmark),
+          selectedIcon: Icon(CupertinoIcons.bookmark_fill),
         ),
         NavigationDestination(
-          icon: Icon(Icons.description_outlined),
+          icon: Icon(CupertinoIcons.doc_text),
           label: 'Applications',
-          selectedIcon: Icon(Icons.description),
+          selectedIcon: Icon(CupertinoIcons.doc_text_fill),
         ),
         NavigationDestination(
-          icon: Icon(Icons.person_outline),
+          icon: Icon(CupertinoIcons.person),
           label: 'Profile',
-          selectedIcon: Icon(Icons.person),
+          selectedIcon: Icon(CupertinoIcons.person_fill),
         ),
       ],
     );
