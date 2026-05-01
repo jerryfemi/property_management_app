@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
+import 'package:pro_app/core/widgets/app_error_sheet.dart';
 import 'package:pro_app/core/widgets/primary_button.dart';
+import 'package:pro_app/features/auth/data/auth_repository.dart';
 import 'package:pro_app/features/auth/providers/auth_providers.dart';
 
 class AuthLandingScreen extends ConsumerWidget {
@@ -11,6 +14,23 @@ class AuthLandingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Listen for Authentication Errors
+    ref.listen<AsyncValue<void>>(
+      authControllerProvider,
+      (previous, next) {
+        if (next is AsyncError) {
+          final error = next.error;
+          String message = 'An unexpected error occurred. Please try again.';
+
+          if (error is FirebaseAuthException) {
+            message = error.formattedMessage;
+          }
+
+          AppErrorSheet.show(context, message: message);
+        }
+      },
+    );
+
     final authState = ref.watch(authControllerProvider);
     final isLoading = authState.isLoading;
 
@@ -81,7 +101,7 @@ class AuthLandingScreen extends ConsumerWidget {
               ),
             ),
           ),
-
+          SizedBox(height: 24),
           // bottom section
           Container(
             width: double.infinity,
@@ -97,7 +117,11 @@ class AuthLandingScreen extends ConsumerWidget {
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: isLoading
+                        ? null
+                        : () {
+                            ref.read(authControllerProvider.notifier).signInWithGoogle();
+                          },
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
@@ -105,35 +129,44 @@ class AuthLandingScreen extends ConsumerWidget {
                       ),
                       side: BorderSide(color: context.appColors.border),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/google_logo.png',
-                          height: 20,
-                          width: 20,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Icon(Icons.g_mobiledata, size: 20),
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          'Continue With Google',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context).colorScheme.onSurface,
-                            fontWeight: FontWeight.w800,
+                    child: isLoading
+                        ? SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: CircularProgressIndicator(
+                              color: Theme.of(context).colorScheme.primary,
+                              strokeWidth: 2.5,
+                            ),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/google_logo.png',
+                                height: 20,
+                                width: 20,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Icon(Icons.g_mobiledata, size: 20),
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                'Continue With Google',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Theme.of(context).colorScheme.onSurface,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 PrimaryButton(
                   text: 'Sign up with Email',
                   onPressed: () => context.push('/auth/signup'),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -1,4 +1,5 @@
 import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -32,6 +33,11 @@ class AuthRepository {
   }
 
   Future<UserCredential?> signInWithGoogle() async {
+    if (kIsWeb) {
+      final googleProvider = GoogleAuthProvider();
+      return _auth.signInWithPopup(googleProvider);
+    }
+
     final googleUser = await _googleSignIn.signIn();
     if (googleUser == null) return null;
 
@@ -71,4 +77,33 @@ class AuthRepository {
   User? get currentUser => _auth.currentUser;
 
   Stream<User?> get authStateChanges => _auth.authStateChanges();
+}
+
+extension FirebaseAuthExceptionExtension on FirebaseAuthException {
+  String get formattedMessage {
+    switch (code) {
+      case 'invalid-email':
+        return 'Invalid email address.';
+      case 'user-disabled':
+        return 'This account has been disabled. Please contact support.';
+      case 'user-not-found':
+        return 'No account found for this email address.';
+      case 'wrong-password':
+        return 'Incorrect password. Please try again.';
+      case 'invalid-credential':
+        return 'The email or password you entered is incorrect.';
+      case 'email-already-in-use':
+        return 'An account already exists for that email address. Try logging in instead.';
+      case 'operation-not-allowed':
+        return 'This sign-in method is not enabled. Please contact support.';
+      case 'weak-password':
+        return 'Your password is too weak. Please use a stronger password.';
+      case 'network-request-failed':
+        return 'Network error. Please check your internet connection and try again.';
+      case 'too-many-requests':
+        return 'Too many unsuccessful attempts. Please try again later or reset your password.';
+      default:
+        return message ?? 'An unexpected authentication error occurred. Please try again.';
+    }
+  }
 }

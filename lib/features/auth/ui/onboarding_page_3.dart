@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 
 class OnboardingPage3 extends StatelessWidget {

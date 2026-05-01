@@ -1,18 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
+import 'package:pro_app/core/widgets/app_error_sheet.dart';
 import 'package:pro_app/core/widgets/primary_button.dart';
+import 'package:pro_app/features/auth/data/auth_repository.dart';
+import 'package:pro_app/features/auth/providers/auth_providers.dart';
 
-class SignupScreen extends StatefulWidget {
+class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  ConsumerState<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignupScreenState extends ConsumerState<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _obscurePassword = true;
   bool _agreeToTerms = false;
@@ -34,6 +39,25 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Listen for Authentication Errors
+    ref.listen<AsyncValue<void>>(
+      authControllerProvider,
+      (previous, next) {
+        if (next is AsyncError) {
+          final error = next.error;
+          String message = 'An unexpected error occurred. Please try again.';
+
+          if (error is FirebaseAuthException) {
+            message = error.formattedMessage;
+          }
+
+          AppErrorSheet.show(context, message: message);
+        }
+      },
+    );
+
+    final authState = ref.watch(authControllerProvider);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -47,85 +71,94 @@ class _SignupScreenState extends State<SignupScreen> {
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(24.0),
-                child: Form(
-                  key: _formKey,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: _LabeledTextField(
-                              controller: firstNameController,
-                              label: 'First Name',
-                              hint: 'John',
-                              validator: (value) => value == null || value.isEmpty ? 'Required' : null,
-                            ),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24.0),
+              child: Form(
+                key: _formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _LabeledTextField(
+                            controller: firstNameController,
+                            label: 'First Name',
+                            hint: 'John',
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Required'
+                                : null,
                           ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: _LabeledTextField(
-                              controller: lastNameController,
-                              label: 'Last Name',
-                              hint: 'Doe',
-                              validator: (value) => value == null || value.isEmpty ? 'Required' : null,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      _LabeledTextField(
-                        controller: emailController,
-                        label: 'Email Address',
-                        hint: 'john@example.com',
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) return 'Email required';
-                          if (!value.contains('@')) return 'Invalid email';
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      _LabeledTextField(
-                        controller: numberController,
-                        label: 'Phone Number',
-                        hint: '+234 800 000 0000',
-                        keyboardType: TextInputType.phone,
-                        validator: (value) => value == null || value.isEmpty ? 'Phone required' : null,
-                      ),
-                      const SizedBox(height: 20),
-                      _LabeledTextField(
-                        controller: passwordController,
-                        label: 'Password',
-                        hint: '••••••••',
-                        obscureText: _obscurePassword,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) return 'Password required';
-                          if (value.length < 6) return 'Too short (min 6)';
-                          return null;
-                        },
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscurePassword
-                                ? CupertinoIcons.eye
-                                : CupertinoIcons.eye_slash,
-                            color: context.appColors.muted,
-                            size: 20,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _obscurePassword = !_obscurePassword;
-                            });
-                          },
                         ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _LabeledTextField(
+                            controller: lastNameController,
+                            label: 'Last Name',
+                            hint: 'Doe',
+                            validator: (value) => value == null || value.isEmpty
+                                ? 'Required'
+                                : null,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    _LabeledTextField(
+                      controller: emailController,
+                      label: 'Email Address',
+                      hint: 'john@example.com',
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Email required';
+                        }
+                        if (!value.contains('@')) return 'Invalid email';
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    _LabeledTextField(
+                      controller: numberController,
+                      label: 'Phone Number',
+                      hint: '+234 800 000 0000',
+                      keyboardType: TextInputType.phone,
+                      validator: (value) => value == null || value.isEmpty
+                          ? 'Phone required'
+                          : null,
+                    ),
+                    const SizedBox(height: 20),
+                    _LabeledTextField(
+                      controller: passwordController,
+                      label: 'Password',
+                      hint: '••••••••',
+                      obscureText: _obscurePassword,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password required';
+                        }
+                        if (value.length < 6) return 'Too short (min 6)';
+                        return null;
+                      },
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword
+                              ? CupertinoIcons.eye
+                              : CupertinoIcons.eye_slash,
+                          color: context.appColors.muted,
+                          size: 20,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
                       ),
+                    ),
                     const SizedBox(height: 24),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,23 +230,29 @@ class _SignupScreenState extends State<SignupScreen> {
                     const SizedBox(height: 40),
                   ],
                 ),
-              ),),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
-              child: PrimaryButton(
-                text: 'Create Account',
-                onPressed: _agreeToTerms
-                    ? () {
-                        if (_formKey.currentState!.validate()) {
-                          // TODO: Add signup logic
-                        }
-                      }
-                    : null,
               ),
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+            child: PrimaryButton(
+              text: 'Create Account',
+              isLoading: authState.isLoading,
+              onPressed: _agreeToTerms
+                  ? () {
+                      if (_formKey.currentState!.validate()) {
+                        ref.read(authControllerProvider.notifier).signUpWithEmail(
+                              name: '${firstNameController.text.trim()} ${lastNameController.text.trim()}',
+                              phone: numberController.text.trim(),
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            );
+                      }
+                    }
+                  : null,
+            ),
+          ),
+        ],
       ),
     );
   }
