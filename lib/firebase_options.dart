@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCHFawEw1G6e1PH7Y2puwEHKw4OyoyTEXY',
-    appId: '1:824156037939:web:6e673a5e476e3617ae5446',
-    messagingSenderId: '824156037939',
-    projectId: 'proapp-8aa82',
-    authDomain: 'proapp-8aa82.firebaseapp.com',
-    storageBucket: 'proapp-8aa82.firebasestorage.app',
+    apiKey: 'AIzaSyDNa5s4z4uXdXUitzkZ40Ifi_yHe4sR9P0',
+    appId: '1:130839041947:web:c9a30a4b2434466995b33e',
+    messagingSenderId: '130839041947',
+    projectId: 'proapp-a7ad0',
+    authDomain: 'proapp-a7ad0.firebaseapp.com',
+    storageBucket: 'proapp-a7ad0.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD5rUx4ZN7-6Z8tN235eSjk4OvO9i6NX-Y',
-    appId: '1:824156037939:android:e9ccd64ed0539fa3ae5446',
-    messagingSenderId: '824156037939',
-    projectId: 'proapp-8aa82',
-    storageBucket: 'proapp-8aa82.firebasestorage.app',
+    apiKey: 'AIzaSyAMan7WU0wN--TD5RiBPICl3jIamxtWfsY',
+    appId: '1:130839041947:android:37a898417ac4b79b95b33e',
+    messagingSenderId: '130839041947',
+    projectId: 'proapp-a7ad0',
+    storageBucket: 'proapp-a7ad0.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDhG_vr-YOK8woeP1GPMkaOB7W72dZUWSs',
-    appId: '1:824156037939:ios:5043243a47e8aef1ae5446',
-    messagingSenderId: '824156037939',
-    projectId: 'proapp-8aa82',
-    storageBucket: 'proapp-8aa82.firebasestorage.app',
-    iosClientId: '824156037939-qi65pofsudnlhnumr95lcu325i969fmi.apps.googleusercontent.com',
+    apiKey: 'AIzaSyA8uoJaOJl0KOinoVPbYoBNAZKfXf2YMLo',
+    appId: '1:130839041947:ios:1825f5e0fea2ca8b95b33e',
+    messagingSenderId: '130839041947',
+    projectId: 'proapp-a7ad0',
+    storageBucket: 'proapp-a7ad0.firebasestorage.app',
+    iosClientId: '130839041947-ch8minu30vq9fshtgvj219a514olq2hs.apps.googleusercontent.com',
     iosBundleId: 'com.example.proApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCHFawEw1G6e1PH7Y2puwEHKw4OyoyTEXY',
-    appId: '1:824156037939:web:b6de7d419d3327beae5446',
-    messagingSenderId: '824156037939',
-    projectId: 'proapp-8aa82',
-    authDomain: 'proapp-8aa82.firebaseapp.com',
-    storageBucket: 'proapp-8aa82.firebasestorage.app',
+    apiKey: 'AIzaSyDNa5s4z4uXdXUitzkZ40Ifi_yHe4sR9P0',
+    appId: '1:130839041947:web:58536e10df5b76ae95b33e',
+    messagingSenderId: '130839041947',
+    projectId: 'proapp-a7ad0',
+    authDomain: 'proapp-a7ad0.firebaseapp.com',
+    storageBucket: 'proapp-a7ad0.firebasestorage.app',
   );
 }
