@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pro_app/core/theme/app_theme.dart';
+import 'package:pro_app/core/widgets/primary_button.dart';
 import 'package:pro_app/features/auth/providers/auth_providers.dart';
 
 class AuthLandingScreen extends ConsumerWidget {
@@ -12,70 +15,150 @@ class AuthLandingScreen extends ConsumerWidget {
     final isLoading = authState.isLoading;
 
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            const Spacer(),
-            const Icon(Icons.home, size: 72),
-            const SizedBox(height: 24),
-            const Text(
-              'Your Next Home Awaits',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 12),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32),
-              child: Text(
-                'Discover, rent, and manage your property all in one seamless experience.',
-                textAlign: TextAlign.center,
+      body: Column(
+        children: [
+          // upper part
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: AlignmentGeometry.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.3),
+                    context.appColors.background,
+                  ],
+                ),
               ),
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  OutlinedButton.icon(
-                    onPressed: isLoading
-                        ? null
-                        : () => ref
-                              .read(authControllerProvider.notifier)
-                              .signInWithGoogle(),
-                    icon: const Icon(Icons.g_mobiledata),
-                    label: const Text('Continue with Google'),
+                  // home icon
+                  Container(
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 20,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.2),
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Icon(
+                      CupertinoIcons.home,
+                      color: Colors.white,
+                      size: 48,
+                    ),
                   ),
-                  const SizedBox(height: 12),
-                  OutlinedButton.icon(
-                    onPressed: isLoading
-                        ? null
-                        : () => ref
-                              .read(authControllerProvider.notifier)
-                              .signInWithApple(),
-                    icon: const Icon(Icons.apple),
-                    label: const Text('Continue with Apple'),
+                  SizedBox(height: 24),
+                  Text(
+                    'Your Next Home\n Awaits',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
-                  const SizedBox(height: 12),
-                  FilledButton(
-                    onPressed: isLoading
-                        ? null
-                        : () => context.push('/auth/signup'),
-                    child: const Text('Sign up with Email'),
-                  ),
-                  const SizedBox(height: 16),
-                  TextButton(
-                    onPressed: isLoading
-                        ? null
-                        : () => context.push('/auth/login'),
-                    child: const Text('Already have an account? Log in'),
+
+                  SizedBox(height: 16),
+                  Text(
+                    'Discover, rent and manage your\n property all in one seamless\n experience.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: context.appColors.muted,
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 24),
-          ],
-        ),
+          ),
+
+          // bottom section
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(32, 32, 32, 48),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(40),
+              ),
+            ),
+            child: Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      side: BorderSide(
+                        color: context.appColors.muted.withValues(alpha: 0.2),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/google_logo.png',
+                          height: 20,
+                          width: 20,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(Icons.g_mobiledata, size: 20),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          'Continue With Google',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                PrimaryButton(
+                  text: 'Sign up with Email',
+                  onPressed: () => context.push('/auth/signup'),
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already have an account? ',
+                      style: TextStyle(color: context.appColors.muted),
+                    ),
+                    GestureDetector(
+                      onTap: () => context.push('/auth/login'),
+                      child: Text(
+                        'Log in',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
