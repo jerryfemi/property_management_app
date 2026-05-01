@@ -101,11 +101,9 @@ class AuthLandingScreen extends ConsumerWidget {
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      side: BorderSide(
-                        color: context.appColors.muted.withValues(alpha: 0.2),
-                      ),
+                      side: BorderSide(color: context.appColors.border),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

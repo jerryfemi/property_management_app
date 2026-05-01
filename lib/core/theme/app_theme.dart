@@ -59,7 +59,7 @@ class AppTheme {
       dividerColor: AppColorsLight.border,
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColorsLight.surface,
+        fillColor: AppColorsLight.muted.withValues(alpha: 0.05),
         hintStyle: const TextStyle(color: AppColorsLight.muted),
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColorsLight.border),
@@ -77,12 +77,7 @@ class AppTheme {
     );
   }
 
-
-
-
-
-
-// dark theme
+  // dark theme
   static ThemeData dark() {
     const colorScheme = ColorScheme.dark(
       primary: AppColorsDark.primary,
@@ -137,7 +132,7 @@ class AppTheme {
       dividerColor: AppColorsDark.border,
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColorsDark.surface,
+        fillColor: AppColorsDark.muted.withValues(alpha: 0.08),
         hintStyle: const TextStyle(color: AppColorsDark.muted),
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColorsDark.border),
