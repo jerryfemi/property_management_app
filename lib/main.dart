@@ -7,9 +7,14 @@ import 'package:pro_app/core/router/router.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 import 'package:pro_app/firebase_options.dart';
 
+import 'package:google_sign_in/google_sign_in.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (!kIsWeb) {
+    await GoogleSignIn.instance.initialize();
+  }
   runApp(
     ProviderScope(
       child: DevicePreview(

@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pro_app/features/notifications/providers/notifications_provider.dart';
+import 'package:pro_app/core/features/notifications/providers/notifications_provider.dart';
 
 class AdminShell extends ConsumerWidget {
   const AdminShell({super.key, required this.shell});

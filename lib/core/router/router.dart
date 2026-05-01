@@ -1,32 +1,32 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pro_app/features/admin/ui/application_review_screen.dart';
-import 'package:pro_app/features/admin/ui/applications_screen.dart';
-import 'package:pro_app/features/admin/ui/dashboard_screen.dart';
-import 'package:pro_app/features/admin/ui/lease_creation_screen.dart';
-import 'package:pro_app/features/admin/ui/properties_screen.dart';
-import 'package:pro_app/features/applications/ui/application_form_screen.dart';
-import 'package:pro_app/features/applications/ui/my_applications_screen.dart';
-import 'package:pro_app/features/auth/data/user_model.dart';
-import 'package:pro_app/features/auth/providers/auth_providers.dart';
-import 'package:pro_app/features/auth/ui/auth_landing_screen.dart';
-import 'package:pro_app/features/auth/ui/onboarding_screen.dart';
-import 'package:pro_app/features/auth/ui/login_screen.dart';
-import 'package:pro_app/features/auth/ui/profile_screen.dart';
-import 'package:pro_app/features/auth/ui/saved_screen.dart';
-import 'package:pro_app/features/auth/ui/signup_screen.dart';
-import 'package:pro_app/features/auth/ui/complete_profile_screen.dart';
-import 'package:pro_app/features/maintenance/ui/maintenance_screen.dart';
-import 'package:pro_app/features/maintenance/ui/new_ticket_screen.dart';
-import 'package:pro_app/features/notifications/ui/notification_screen.dart';
-import 'package:pro_app/features/payments/ui/payments_screen.dart';
-import 'package:pro_app/features/properties/ui/marketplace_screen.dart';
-import 'package:pro_app/features/properties/ui/property_detail_screen.dart';
-import 'package:pro_app/features/staff/ui/tasks_screen.dart';
-import 'package:pro_app/features/staff/ui/ticket_detail_screen.dart';
-import 'package:pro_app/features/tenant/ui/tenant_home_screen.dart';
-import 'package:pro_app/features/units/ui/unit_detail_screen.dart';
+import 'package:pro_app/core/features/admin/ui/application_review_screen.dart';
+import 'package:pro_app/core/features/admin/ui/applications_screen.dart';
+import 'package:pro_app/core/features/admin/ui/dashboard_screen.dart';
+import 'package:pro_app/core/features/admin/ui/lease_creation_screen.dart';
+import 'package:pro_app/core/features/admin/ui/properties_screen.dart';
+import 'package:pro_app/core/features/applications/ui/application_form_screen.dart';
+import 'package:pro_app/core/features/applications/ui/my_applications_screen.dart';
+import 'package:pro_app/core/features/auth/data/user_model.dart';
+import 'package:pro_app/core/features/auth/providers/auth_providers.dart';
+import 'package:pro_app/core/features/auth/ui/auth_landing_screen.dart';
+import 'package:pro_app/core/features/auth/ui/onboarding_screen.dart';
+import 'package:pro_app/core/features/auth/ui/login_screen.dart';
+import 'package:pro_app/core/features/auth/ui/profile_screen.dart';
+import 'package:pro_app/core/features/auth/ui/saved_screen.dart';
+import 'package:pro_app/core/features/auth/ui/signup_screen.dart';
+import 'package:pro_app/core/features/auth/ui/complete_profile_screen.dart';
+import 'package:pro_app/core/features/maintenance/ui/maintenance_screen.dart';
+import 'package:pro_app/core/features/maintenance/ui/new_ticket_screen.dart';
+import 'package:pro_app/core/features/notifications/ui/notification_screen.dart';
+import 'package:pro_app/core/features/payments/ui/payments_screen.dart';
+import 'package:pro_app/core/features/properties/ui/marketplace_screen.dart';
+import 'package:pro_app/core/features/properties/ui/property_detail_screen.dart';
+import 'package:pro_app/core/features/staff/ui/tasks_screen.dart';
+import 'package:pro_app/core/features/staff/ui/ticket_detail_screen.dart';
+import 'package:pro_app/core/features/tenant/ui/tenant_home_screen.dart';
+import 'package:pro_app/core/features/units/ui/unit_detail_screen.dart';
 import 'package:pro_app/navigation/admin_shell.dart';
 import 'package:pro_app/navigation/guest_shell.dart';
 import 'package:pro_app/navigation/staff_shell.dart';
@@ -351,6 +351,12 @@ class RouterNotifier extends Notifier<void> implements ChangeNotifier {
 
   @override
   void build() {
+    // Initial values
+    _role = ref.watch(userRoleProvider).value;
+    _needsProfile = ref.watch(needsProfileCompletionProvider);
+    _onboardingComplete = ref.watch(onboardingControllerProvider).value;
+
+    // Listen for changes to notify GoRouter
     ref.listen<AsyncValue<UserRole?>>(userRoleProvider, (_, next) {
       _role = next.value;
       notifyListeners();
