@@ -7,6 +7,7 @@ import 'package:pro_app/core/features/auth/data/user_model.dart';
 import 'package:pro_app/core/features/auth/providers/auth_providers.dart';
 import 'package:pro_app/core/theme/app_colors.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
+import 'package:pro_app/core/theme/theme_provider.dart';
 import 'package:pro_app/core/widgets/primary_button.dart';
 import 'package:pro_app/core/widgets/section_label.dart';
 
@@ -29,6 +30,7 @@ class ProfileScreen extends ConsumerWidget {
           }
 
           return CustomScrollView(
+            physics: BouncingScrollPhysics(parent: ClampingScrollPhysics()),
             slivers: [
               // App bar
               _AppBar(user: user, role: role),
@@ -103,6 +105,7 @@ class ProfileScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+              SliverFillRemaining(),
             ],
           );
         },
@@ -110,7 +113,6 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 }
-
 
 ////// WIDGETS/////////
 
@@ -128,6 +130,10 @@ class _AppBar extends StatelessWidget {
       pinned: true,
       backgroundColor: Theme.of(context).colorScheme.surface,
       surfaceTintColor: Colors.transparent,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(32)),
+      ),
+      clipBehavior: Clip.antiAlias,
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           user.name.isEmpty ? 'User' : user.name,
@@ -138,88 +144,93 @@ class _AppBar extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        background: Column(
-          mainAxisAlignment: .center,
-          children: [
-            const SizedBox(height: 40),
-            // profile photo
-            Stack(
-              children: [
-                CircleAvatar(
-                  radius: 48,
-                  backgroundColor: Theme.of(
-                    context,
-                  ).colorScheme.primary.withValues(alpha: 0.15),
-                  backgroundImage: user.profileImage != null
-                      ? NetworkImage(user.profileImage!)
-                      : null,
-                  child: user.profileImage == null
-                      ? Text(
-                          initials,
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w800,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        )
-                      : null,
-                ),
-
-                // Edit Icon
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    width: 28,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.surface,
-                        width: 2,
+        background: Container(
+          color: Theme.of(context).colorScheme.surface,
+          child: Center(
+            child: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // profile photo
+                  Stack(
+                    children: [
+                      CircleAvatar(
+                        radius: 48,
+                        backgroundColor: Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.15),
+                        backgroundImage: user.profileImage != null
+                            ? NetworkImage(user.profileImage!)
+                            : null,
+                        child: user.profileImage == null
+                            ? Text(
+                                initials,
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w800,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              )
+                            : null,
                       ),
-                    ),
-                    child: Icon(
-                      CupertinoIcons.pencil,
-                      color: Theme.of(context).colorScheme.surface,
-                      size: 13,
+
+                      // Edit Icon
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          width: 28,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Theme.of(context).colorScheme.surface,
+                              width: 2,
+                            ),
+                          ),
+                          child: Icon(
+                            CupertinoIcons.pencil,
+                            color: Theme.of(context).colorScheme.surface,
+                            size: 13,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 4),
+                  Text(
+                    roleLable,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: context.appColors.muted,
                     ),
                   ),
-                ),
-              ],
-            ),
 
-            const SizedBox(height: 16),
-            Text(
-              user.name.isEmpty ? 'User' : user.name,
-              style: const TextStyle(fontSize: 22, fontWeight: .w600),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              roleLable,
-              style: TextStyle(fontSize: 14, color: context.appColors.muted),
-            ),
-
-            const SizedBox(height: 16),
-            OutlinedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 10,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                side: BorderSide(color: context.appColors.border),
-              ),
-              child: const Text(
-                'Edit Profile',
-                style: TextStyle(fontWeight: FontWeight.w700),
+                  const SizedBox(height: 16),
+                  OutlinedButton(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 10,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      side: BorderSide(color: context.appColors.border),
+                    ),
+                    child: const Text(
+                      'Edit Profile',
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -336,6 +347,20 @@ class _MenuItem extends StatelessWidget {
 class _DarkModeToggle extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Switch(value: false, onChanged: (value) {});
+    final themeMode = ref.watch(themeProvider);
+    final isDark =
+        themeMode == ThemeMode.dark ||
+        (themeMode == ThemeMode.system &&
+            WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+                Brightness.dark);
+
+    return Switch(
+      value: isDark,
+      onChanged: (value) {
+        ref
+            .read(themeProvider.notifier)
+            .setThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+      },
+    );
   }
 }

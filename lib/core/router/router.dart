@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -277,14 +278,15 @@ final routerProvider = Provider<GoRouter>((ref) {
     initialLocation: '/onboarding',
     debugLogDiagnostics: kDebugMode,
     redirect: (context, state) {
-      final role = notifier.role;
+      final isLoggedIn = notifier.isAuthenticated;
+      final role = notifier.role ?? UserRole.guest; // default while loading
       final location = state.matchedLocation;
       final isOnAuth = location.startsWith('/auth');
       final isOnCompleteProfile = location == '/complete-profile';
       final isOnOnboarding = location == '/onboarding';
 
-      // not logged in -> got to auth
-      if (role == null) {
+      // ── 1. Not logged in ──
+      if (!isLoggedIn) {
         if (notifier.onboardingComplete == false && !isOnOnboarding) {
           return '/onboarding';
         }
@@ -294,12 +296,14 @@ final routerProvider = Provider<GoRouter>((ref) {
         return isOnAuth || isOnOnboarding ? null : '/auth';
       }
 
-      if (notifier.needsProfile && !isOnCompleteProfile && !isOnAuth) {
+      // ── 2. Logged in, needs profile completion ──
+      if (notifier.needsProfile && !isOnCompleteProfile) {
         return '/complete-profile';
       }
 
-      // logged in but on auth screen => redirect to home
-      if (isOnAuth || isOnCompleteProfile) {
+      // ── 3. Logged in, on auth or done with complete-profile ──
+      if (isOnAuth || isOnOnboarding ||
+          (isOnCompleteProfile && !notifier.needsProfile)) {
         return switch (role) {
           UserRole.guest => '/guest/explore',
           UserRole.tenant => '/tenant/home',
@@ -308,22 +312,15 @@ final routerProvider = Provider<GoRouter>((ref) {
         };
       }
 
-      // Guest→Tenant upgrade mid-session (happens after payment webhook)
+      // ── 4. Role-based guards ──
       if (role == UserRole.tenant && location.startsWith('/guest')) {
         return '/tenant/home';
       }
-      // // Tenant downgrade (lease expired) → back to guest
-      // if (role == UserRole.guest && location.startsWith('/tenant')) {
-      //   return '/guest/explore';
-      // }
-      // Staff on wrong shell
-
       if (role == UserRole.staff &&
           !location.startsWith('/staff') &&
           !location.startsWith('/auth')) {
         return '/staff/tasks';
       }
-      // Admin on wrong shell
       if (role == UserRole.admin &&
           !location.startsWith('/admin') &&
           !location.startsWith('/auth')) {
@@ -344,19 +341,27 @@ class RouterNotifier extends Notifier<void> implements ChangeNotifier {
   UserRole? _role;
   bool _needsProfile = false;
   bool? _onboardingComplete;
+  bool _isAuthenticated = false;
 
   UserRole? get role => _role;
   bool get needsProfile => _needsProfile;
   bool? get onboardingComplete => _onboardingComplete;
+  bool get isAuthenticated => _isAuthenticated;
 
   @override
   void build() {
-    // Initial values
-    _role = ref.watch(userRoleProvider).value;
-    _needsProfile = ref.watch(needsProfileCompletionProvider);
-    _onboardingComplete = ref.watch(onboardingControllerProvider).value;
+    // ── Grab initial values using read (NOT watch) to prevent rebuilds ──
+    _isAuthenticated = ref.read(authStateProvider).value != null;
+    _role = ref.read(userRoleProvider).value;
+    _needsProfile = ref.read(needsProfileCompletionProvider);
+    _onboardingComplete = ref.read(onboardingControllerProvider).value;
 
-    // Listen for changes to notify GoRouter
+    // ── Fire notifyListeners on every state change ──
+    ref.listen<AsyncValue<User?>>(authStateProvider, (_, next) {
+      _isAuthenticated = next.value != null;
+      notifyListeners();
+    });
+
     ref.listen<AsyncValue<UserRole?>>(userRoleProvider, (_, next) {
       _role = next.value;
       notifyListeners();

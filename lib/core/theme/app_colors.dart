@@ -16,7 +16,7 @@ class AppColorsLight {
 	static const warningLight = Color(0xFFFFFBEB);
 
 	// Neutrals
-	static const background = Color(0xFFF8FAFC); // app background
+	static const background = Color(0xFFF1F5F9); // app background
 	static const surface = Color(0xFFFFFFFF); // cards, modals
 	static const dark = Color(0xFF0F172A); // primary text
 	static const muted = Color(0xFF64748B); // secondary text

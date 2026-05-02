@@ -55,9 +55,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           onPressed: () => context.pop(),
           icon: const Icon(Icons.chevron_left_rounded, size: 32),
         ),
-        centerTitle: false,
+        centerTitle: true,
         title: const Text(
-          'Log in',
+          'Login',
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
         backgroundColor: Colors.transparent,
@@ -162,7 +162,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
             child: PrimaryButton(
-              text: 'Log in',
+              text: 'Login',
               isLoading: authState.isLoading,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {

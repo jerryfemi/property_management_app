@@ -40,21 +40,18 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     // Listen for Authentication Errors
-    ref.listen<AsyncValue<void>>(
-      authControllerProvider,
-      (previous, next) {
-        if (next is AsyncError) {
-          final error = next.error;
-          String message = 'An unexpected error occurred. Please try again.';
+    ref.listen<AsyncValue<void>>(authControllerProvider, (previous, next) {
+      if (next is AsyncError) {
+        final error = next.error;
+        String message = 'An unexpected error occurred. Please try again.';
 
-          if (error is FirebaseAuthException) {
-            message = error.formattedMessage;
-          }
-
-          AppErrorSheet.show(context, message: message);
+        if (error is FirebaseAuthException) {
+          message = error.formattedMessage;
         }
-      },
-    );
+
+        AppErrorSheet.show(context, message: message);
+      }
+    });
 
     final authState = ref.watch(authControllerProvider);
 
@@ -65,7 +62,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
           onPressed: () => context.pop(),
           icon: const Icon(Icons.chevron_left_rounded, size: 32),
         ),
-        centerTitle: false,
+        centerTitle: true,
         title: const Text(
           'Create Account',
           style: TextStyle(fontWeight: FontWeight.w900),
@@ -241,8 +238,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
               onPressed: _agreeToTerms
                   ? () {
                       if (_formKey.currentState!.validate()) {
-                        ref.read(authControllerProvider.notifier).signUpWithEmail(
-                              name: '${firstNameController.text.trim()} ${lastNameController.text.trim()}',
+                        ref
+                            .read(authControllerProvider.notifier)
+                            .signUpWithEmail(
+                              name:
+                                  '${firstNameController.text.trim()} ${lastNameController.text.trim()}',
                               phone: numberController.text.trim(),
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),

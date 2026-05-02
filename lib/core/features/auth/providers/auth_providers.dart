@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -124,6 +125,9 @@ class AuthController extends StateNotifier<AsyncValue<void>> {
       await _userRepo.createUser(user.uid, name: user.displayName, email: user.email);
       state = const AsyncData(null);
     } catch (e, st) {
+      debugPrint('=== GOOGLE SIGN-IN CONTROLLER ERROR ===');
+      debugPrint('Error: $e');
+      debugPrint('StackTrace: $st');
       state = AsyncError(e, st);
     }
   }
@@ -169,10 +173,8 @@ class AuthController extends StateNotifier<AsyncValue<void>> {
   }
 
   Future<void> signOut() async {
-    state = const AsyncLoading();
     try {
       await _auth.signOut();
-      state = const AsyncData(null);
     } catch (e, st) {
       state = AsyncError(e, st);
     }

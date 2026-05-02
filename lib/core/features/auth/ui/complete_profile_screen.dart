@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pro_app/core/features/auth/data/user_model.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 import 'package:pro_app/core/widgets/app_error_sheet.dart';
 import 'package:pro_app/core/widgets/primary_button.dart';
@@ -18,6 +19,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
+  bool _saving = false;
 
   @override
   void initState() {
@@ -44,11 +46,26 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
     final uid = ref.read(authStateProvider).value?.uid;
     if (uid == null) return;
 
+    setState(() => _saving = true);
+
     await ref.read(authControllerProvider.notifier).completeProfile(
           uid: uid,
           name: _nameController.text.trim(),
           phone: _phoneController.text.trim(),
         );
+
+    if (!mounted) return;
+
+    final state = ref.read(authControllerProvider);
+    if (state is AsyncError) {
+      setState(() => _saving = false);
+      AppErrorSheet.show(context, message: state.error.toString());
+    } else {
+      // Profile saved — just clear loading state.
+      // The reactive GoRouter will automatically redirect us to the shell 
+      // as soon as the Firestore stream updates needsProfile to false.
+      setState(() => _saving = false);
+    }
   }
 
   @override
@@ -59,8 +76,6 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
         AppErrorSheet.show(context, message: next.error.toString());
       }
     });
-
-    final authState = ref.watch(authControllerProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -173,7 +188,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
               padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
               child: PrimaryButton(
                 text: 'Save & Continue',
-                isLoading: authState.isLoading,
+                isLoading: _saving,
                 onPressed: _submit,
               ),
             ),
