@@ -1,32 +1,35 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pro_app/features/admin/ui/application_review_screen.dart';
-import 'package:pro_app/features/admin/ui/applications_screen.dart';
-import 'package:pro_app/features/admin/ui/dashboard_screen.dart';
-import 'package:pro_app/features/admin/ui/lease_creation_screen.dart';
-import 'package:pro_app/features/admin/ui/properties_screen.dart';
-import 'package:pro_app/features/applications/ui/application_form_screen.dart';
-import 'package:pro_app/features/applications/ui/my_applications_screen.dart';
-import 'package:pro_app/features/auth/data/user_model.dart';
-import 'package:pro_app/features/auth/providers/auth_providers.dart';
-import 'package:pro_app/features/auth/ui/auth_landing_screen.dart';
-import 'package:pro_app/features/auth/ui/onboarding_screen.dart';
-import 'package:pro_app/features/auth/ui/login_screen.dart';
-import 'package:pro_app/features/auth/ui/profile_screen.dart';
-import 'package:pro_app/features/auth/ui/saved_screen.dart';
-import 'package:pro_app/features/auth/ui/signup_screen.dart';
-import 'package:pro_app/features/auth/ui/complete_profile_screen.dart';
-import 'package:pro_app/features/maintenance/ui/maintenance_screen.dart';
-import 'package:pro_app/features/maintenance/ui/new_ticket_screen.dart';
-import 'package:pro_app/features/notifications/ui/notification_screen.dart';
-import 'package:pro_app/features/payments/ui/payments_screen.dart';
-import 'package:pro_app/features/properties/ui/marketplace_screen.dart';
-import 'package:pro_app/features/properties/ui/property_detail_screen.dart';
-import 'package:pro_app/features/staff/ui/tasks_screen.dart';
-import 'package:pro_app/features/staff/ui/ticket_detail_screen.dart';
-import 'package:pro_app/features/tenant/ui/tenant_home_screen.dart';
-import 'package:pro_app/features/units/ui/unit_detail_screen.dart';
+import 'package:pro_app/core/features/admin/ui/application_review_screen.dart';
+import 'package:pro_app/core/features/admin/ui/applications_screen.dart';
+import 'package:pro_app/core/features/admin/ui/dashboard_screen.dart';
+import 'package:pro_app/core/features/admin/ui/lease_creation_screen.dart';
+import 'package:pro_app/core/features/admin/ui/properties_screen.dart';
+import 'package:pro_app/core/features/applications/ui/application_form_screen.dart';
+import 'package:pro_app/core/features/applications/ui/my_applications_screen.dart';
+import 'package:pro_app/core/features/auth/data/user_model.dart';
+import 'package:pro_app/core/features/auth/providers/auth_providers.dart';
+import 'package:pro_app/core/features/auth/ui/auth_landing_screen.dart';
+import 'package:pro_app/core/features/auth/ui/onboarding_screen.dart';
+import 'package:pro_app/core/features/auth/ui/login_screen.dart';
+import 'package:pro_app/core/features/auth/ui/profile_screen.dart';
+import 'package:pro_app/core/features/auth/ui/saved_screen.dart';
+import 'package:pro_app/core/features/auth/ui/signup_screen.dart';
+import 'package:pro_app/core/features/auth/ui/complete_profile_screen.dart';
+import 'package:pro_app/core/features/auth/ui/splash_gate.dart';
+import 'package:pro_app/core/features/maintenance/ui/maintenance_screen.dart';
+import 'package:pro_app/core/features/maintenance/ui/new_ticket_screen.dart';
+import 'package:pro_app/core/features/notifications/ui/notification_screen.dart';
+import 'package:pro_app/core/features/payments/ui/payments_screen.dart';
+import 'package:pro_app/core/features/properties/ui/screens/marketplace_screen.dart';
+import 'package:pro_app/core/features/properties/ui/screens/property_detail_screen.dart';
+import 'package:pro_app/core/features/staff/ui/tasks_screen.dart';
+import 'package:pro_app/core/features/staff/ui/ticket_detail_screen.dart';
+import 'package:pro_app/core/features/tenant/ui/tenant_home_screen.dart';
+import 'package:pro_app/core/features/units/ui/unit_detail_screen.dart';
 import 'package:pro_app/navigation/admin_shell.dart';
 import 'package:pro_app/navigation/guest_shell.dart';
 import 'package:pro_app/navigation/staff_shell.dart';
@@ -35,9 +38,19 @@ import 'package:pro_app/core/router/onboarding_provider.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final notifier = ref.watch(routerNotifierProvider.notifier);
+
   return GoRouter(
+    initialLocation: '/',
+    debugLogDiagnostics: kDebugMode,
+    refreshListenable: notifier,
+
     routes: [
-      // auth
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const SplashGate(),
+      ),
+
+      // ── Auth ─────────────────────────────────────────────────────────────
       GoRoute(
         path: '/onboarding',
         builder: (context, state) => const OnboardingScreen(),
@@ -46,24 +59,28 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/auth',
         builder: (context, state) => const AuthLandingScreen(),
       ),
-      GoRoute(path: '/auth/login', builder: (context, state) => LoginScreen()),
-      GoRoute(path: '/auth/signup', builder: (context, state) => SignupScreen()),
+      GoRoute(
+        path: '/auth/login',
+        builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: '/auth/signup',
+        builder: (context, state) => const SignupScreen(),
+      ),
       GoRoute(
         path: '/complete-profile',
         builder: (context, state) => const CompleteProfileScreen(),
       ),
 
-      // shell route for Guest
+      // ── Guest Shell ───────────────────────────────────────────────────────
       StatefulShellRoute.indexedStack(
-        builder: (context, state, shell) => GuestShell(shell: shell,),
+        builder: (context, state, shell) => GuestShell(shell: shell),
         branches: [
-          // explore tab
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/guest/explore',
                 builder: (context, state) => const MarketplaceScreen(),
-                // routes under the explore screen
                 routes: [
                   GoRoute(
                     path: 'property/:propertyId',
@@ -79,7 +96,8 @@ final routerProvider = Provider<GoRouter>((ref) {
                         routes: [
                           GoRoute(
                             path: 'apply',
-                            builder: (context, state) => ApplicationFormScreen(
+                            builder: (context, state) =>
+                                ApplicationFormScreen(
                               unitId: state.pathParameters['unitId']!,
                             ),
                           ),
@@ -91,8 +109,6 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-
-          // saved tab
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -101,8 +117,6 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-
-          // apllications tab
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -111,8 +125,6 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-
-          // profile tab
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -124,34 +136,31 @@ final routerProvider = Provider<GoRouter>((ref) {
         ],
       ),
 
-      // shell route for tenant
+      // ── Tenant Shell ──────────────────────────────────────────────────────
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => TenantShell(shell: shell),
         branches: [
-          // Tab 0 — Home
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/tenant/home',
-                builder: (_, _) => const TenantHomeScreen(),
+                builder: (_, __) => const TenantHomeScreen(),
               ),
             ],
           ),
-          // Tab 1 — Payments
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/tenant/payments',
-                builder: (_, _) => const PaymentsScreen(),
+                builder: (_, __) => const PaymentsScreen(),
               ),
             ],
           ),
-          // Tab 2 — Maintenance
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/tenant/maintenance',
-                builder: (_, _) => const MaintenanceScreen(),
+                builder: (_, __) => const MaintenanceScreen(),
                 routes: [
                   GoRoute(
                     path: 'new',
@@ -161,37 +170,34 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/tenant/notifications',
-                builder: (_, _) => const NotificationScreen(),
+                builder: (_, __) => const NotificationScreen(),
               ),
             ],
           ),
-          // Tab 4 — Profile
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/tenant/profile',
-                builder: (_,_) => const ProfileScreen(),
+                builder: (_, __) => const ProfileScreen(),
               ),
             ],
           ),
         ],
       ),
 
-      // shell routr for staff
+      // ── Staff Shell ───────────────────────────────────────────────────────
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => StaffShell(shell: shell),
         branches: [
-          // Tab 0 — Tasks (assigned tickets)
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/staff/tasks',
-                builder: (_, _) => const TasksScreen(),
+                builder: (_, __) => const TasksScreen(),
                 routes: [
                   GoRoute(
                     path: 'ticket/:ticketId',
@@ -203,46 +209,42 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-          // Tab 1 — Profile
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/staff/profile',
-                builder: (_, _) => const ProfileScreen(),
+                builder: (_, __) => const ProfileScreen(),
               ),
             ],
           ),
         ],
       ),
 
-      // shell route for admin
+      // ── Admin Shell ───────────────────────────────────────────────────────
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => AdminShell(shell: shell),
         branches: [
-          // Tab 0 — Dashboard
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/admin/dashboard',
-                builder: (_, _) => const AdminDashboardScreen(),
+                builder: (_, __) => const AdminDashboardScreen(),
               ),
             ],
           ),
-          // Tab 1 — Properties
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/admin/properties',
-                builder: (_, _) => const AdminPropertiesScreen(),
+                builder: (_, __) => const AdminPropertiesScreen(),
               ),
             ],
           ),
-          // Tab 2 — Applications
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/admin/applications',
-                builder: (_, _) => const AdminApplicationsScreen(),
+                builder: (_, __) => const AdminApplicationsScreen(),
                 routes: [
                   GoRoute(
                     path: ':appId/review',
@@ -260,12 +262,11 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-          // Tab 3 — Notifications
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: '/admin/notifications',
-                builder: (_, _) => const NotificationScreen(),
+                builder: (_, __) => const NotificationScreen(),
               ),
             ],
           ),
@@ -273,69 +274,76 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
     ],
 
-    refreshListenable: notifier,
-    initialLocation: '/onboarding',
-    debugLogDiagnostics: kDebugMode,
+    // ── Redirect logic ──────────────────────────────────────────────────────
     redirect: (context, state) {
-      final role = notifier.role;
       final location = state.matchedLocation;
+
+      // ── GATE: Block all redirects until both async values are loaded ──
+      // onboardingComplete is null only while SharedPreferences is reading.
+      // isAuthenticated relies on Firebase authStateChanges — initially null.
+      // We stay on '/' (SplashGate) until both are known.
+      if (notifier.onboardingComplete == null ||
+          notifier.authStateKnown == false) {
+        // Stay on splash gate while loading. Don't redirect away from it yet.
+        return location == '/' ? null : '/';
+      }
+
+      final isLoggedIn = notifier.isAuthenticated;
+      final role = notifier.role ?? UserRole.guest;
       final isOnAuth = location.startsWith('/auth');
       final isOnCompleteProfile = location == '/complete-profile';
       final isOnOnboarding = location == '/onboarding';
+      final isOnSplash = location == '/';
 
-      // not logged in -> got to auth
-      if (role == null) {
-        if (notifier.onboardingComplete == false && !isOnOnboarding) {
-          return '/onboarding';
+      // ── 1. Not logged in ──────────────────────────────────────────────────
+      if (!isLoggedIn) {
+        if (notifier.onboardingComplete == false) {
+          return isOnOnboarding ? null : '/onboarding';
         }
-        if (notifier.onboardingComplete == true && isOnOnboarding) {
-          return '/auth';
-        }
-        return isOnAuth || isOnOnboarding ? null : '/auth';
+        // Onboarding done, push to auth unless already there
+        return isOnAuth ? null : '/auth';
       }
 
-      if (notifier.needsProfile && !isOnCompleteProfile && !isOnAuth) {
+      // ── 2. Logged in, needs profile completion ────────────────────────────
+      if (notifier.needsProfile && !isOnCompleteProfile) {
         return '/complete-profile';
       }
 
-      // logged in but on auth screen => redirect to home
-      if (isOnAuth || isOnCompleteProfile) {
+      // ── 3. Logged in, profile complete — leave auth/onboarding/splash ─────
+      if (isOnAuth || isOnOnboarding || isOnSplash ||
+          (isOnCompleteProfile && !notifier.needsProfile)) {
         return switch (role) {
-          UserRole.guest => '/guest/explore',
+          UserRole.guest  => '/guest/explore',
           UserRole.tenant => '/tenant/home',
-          UserRole.staff => '/staff/tasks',
-          UserRole.admin => '/admin/dashboard',
+          UserRole.staff  => '/staff/tasks',
+          UserRole.admin  => '/admin/dashboard',
         };
       }
 
-      // Guest→Tenant upgrade mid-session (happens after payment webhook)
+      // ── 4. Mid-session role upgrades ──────────────────────────────────────
       if (role == UserRole.tenant && location.startsWith('/guest')) {
         return '/tenant/home';
       }
-      // // Tenant downgrade (lease expired) → back to guest
-      // if (role == UserRole.guest && location.startsWith('/tenant')) {
-      //   return '/guest/explore';
-      // }
-      // Staff on wrong shell
-
       if (role == UserRole.staff &&
           !location.startsWith('/staff') &&
           !location.startsWith('/auth')) {
         return '/staff/tasks';
       }
-      // Admin on wrong shell
       if (role == UserRole.admin &&
           !location.startsWith('/admin') &&
           !location.startsWith('/auth')) {
         return '/admin/dashboard';
       }
 
-      return null;
+      return null; // Already in the right place
     },
   );
 });
 
-// router notifier
+// ---------------------------------------------------------------------------
+// RouterNotifier
+// ---------------------------------------------------------------------------
+
 final routerNotifierProvider = NotifierProvider<RouterNotifier, void>(
   RouterNotifier.new,
 );
@@ -344,39 +352,75 @@ class RouterNotifier extends Notifier<void> implements ChangeNotifier {
   UserRole? _role;
   bool _needsProfile = false;
   bool? _onboardingComplete;
+  bool _isAuthenticated = false;
+
+  // authStateKnown is false only for the very first frame before Firebase
+  // has emitted its first authStateChanges event. We use this as part of
+  // the loading gate in redirect so we never redirect until we are certain.
+  bool _authStateKnown = false;
 
   UserRole? get role => _role;
   bool get needsProfile => _needsProfile;
   bool? get onboardingComplete => _onboardingComplete;
+  bool get isAuthenticated => _isAuthenticated;
+  bool get authStateKnown => _authStateKnown;
 
   @override
   void build() {
-    ref.listen<AsyncValue<UserRole?>>(userRoleProvider, (_, next) {
-      _role = next.value;
-      notifyListeners();
+    // ── Onboarding ───────────────────────────────────────────────────────────
+    // Read the current value without subscribing so we get whatever is cached.
+    // The listener below handles all future changes.
+    final onboardingAsync = ref.read(onboardingControllerProvider);
+    if (!onboardingAsync.isLoading) {
+      _onboardingComplete = onboardingAsync.value;
+    }
+    ref.listen<AsyncValue<bool>>(onboardingControllerProvider, (_, next) {
+      if (!next.isLoading) {
+        _onboardingComplete = next.value;
+        notifyListeners();
+      }
     });
 
+    // ── Auth state ────────────────────────────────────────────────────────────
+    // We use listen (not read) so we always get the very first emission.
+    ref.listen<AsyncValue<User?>>(authStateProvider, (_, next) {
+      if (!next.isLoading) {
+        _authStateKnown = true;
+        _isAuthenticated = next.value != null;
+        notifyListeners();
+      }
+    });
+
+    // ── User role ─────────────────────────────────────────────────────────────
+    ref.listen<AsyncValue<UserRole?>>(userRoleProvider, (_, next) {
+      if (!next.isLoading) {
+        _role = next.value;
+        notifyListeners();
+      }
+    });
+
+    // ── Profile completion ────────────────────────────────────────────────────
     ref.listen<bool>(needsProfileCompletionProvider, (_, next) {
       _needsProfile = next;
       notifyListeners();
     });
-
-    ref.listen<AsyncValue<bool>>(onboardingControllerProvider, (_, next) {
-      _onboardingComplete = next.value;
-      notifyListeners();
-    });
   }
 
+  // ── ChangeNotifier plumbing ───────────────────────────────────────────────
   final List<VoidCallback> _listeners = [];
+
   @override
   void addListener(VoidCallback l) => _listeners.add(l);
+
   @override
   void removeListener(VoidCallback l) => _listeners.remove(l);
+
   @override
   bool get hasListeners => _listeners.isNotEmpty;
+
   @override
   void notifyListeners() {
-    for (final l in _listeners) {
+    for (final l in List.of(_listeners)) {
       l();
     }
   }
