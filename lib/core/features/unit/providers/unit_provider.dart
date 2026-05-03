@@ -20,10 +20,16 @@ final unitsForPropertyProvider = StreamProvider.autoDispose
 // all units for property provider.
 final availableUnitsProvider = StreamProvider.autoDispose
     .family<List<UnitModel>, String>((ref, propertyId) {
-      return ref
-          .watch(unitRepositoryProvider)
-          .availableUnitsForProperty(propertyId);
-    });
+  // --- MOCK IMPLEMENTATION ---
+  return Stream.value(
+    dummyUnits.where((u) => u.propertyId == propertyId).toList(),
+  );
+
+  // --- REAL IMPLEMENTATION ---
+  // return ref
+  //     .watch(unitRepositoryProvider)
+  //     .availableUnitsForProperty(propertyId);
+});
 
 // units grouped units provider
 final groupedUnitsProvider = Provider.autoDispose
@@ -135,3 +141,43 @@ class UnitManagementNotifier
     }
   }
 }
+
+// --- DUMMY DATA FOR TESTING ---
+final dummyUnits = [
+  UnitModel(
+    id: 'u1_1',
+    propertyId: 'prop_1',
+    unitNumber: 'A101',
+    bedrooms: 2,
+    bathrooms: 2,
+    baseRent: 2500000,
+    amenities: ['AC', 'Balcony'],
+    unitStatus: UnitStatus.available,
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  ),
+  UnitModel(
+    id: 'u1_2',
+    propertyId: 'prop_1',
+    unitNumber: 'A102',
+    bedrooms: 3,
+    bathrooms: 3,
+    baseRent: 3500000,
+    amenities: ['AC', 'Walk-in Closet'],
+    unitStatus: UnitStatus.available,
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  ),
+  UnitModel(
+    id: 'u2_1',
+    propertyId: 'prop_2',
+    unitNumber: 'S-1',
+    bedrooms: 0,
+    bathrooms: 1,
+    baseRent: 450000,
+    amenities: ['Fast Wifi', 'Water'],
+    unitStatus: UnitStatus.available,
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  ),
+];

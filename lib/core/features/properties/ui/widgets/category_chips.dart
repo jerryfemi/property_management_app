@@ -30,7 +30,7 @@ class CategoryChips extends ConsumerWidget {
       child: Row(
         children: categories.map((category) {
           final isSelected = selectedCategory == category;
-          
+
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ChoiceChip(
