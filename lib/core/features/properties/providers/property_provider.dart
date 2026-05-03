@@ -17,7 +17,7 @@ final marketPlaceProvider = StreamProvider.autoDispose<List<PropertyModel>>((
 
   // --- MOCK IMPLEMENTATION ---
   return Stream.fromFuture(
-    Future.delayed(const Duration(seconds: 6), () => dummyProperties),
+    Future.delayed(const Duration(seconds: 4), () => dummyProperties),
   );
 });
 

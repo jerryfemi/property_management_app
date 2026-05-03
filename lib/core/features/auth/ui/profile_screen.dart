@@ -99,7 +99,7 @@ class ProfileScreen extends ConsumerWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
                   child: PrimaryButton(
-                    text: 'Log out',
+                    text: 'Sign out',
                     onPressed: () =>
                         ref.read(authControllerProvider.notifier).signOut(),
                   ),

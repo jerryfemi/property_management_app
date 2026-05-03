@@ -14,8 +14,7 @@ class MarketplaceScreen extends ConsumerWidget {
     final propertiesAsync = ref.watch(marketPlaceProvider);
 
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
+        body: CustomScrollView(
           slivers: [
             // 1. Collapsing Header & Pinned Search/Chips
             const MarketplaceSliverAppBar(),
@@ -53,7 +52,6 @@ class MarketplaceScreen extends ConsumerWidget {
             ),
           ],
         ),
-      ),
     );
   }
 }

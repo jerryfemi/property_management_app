@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pro_app/core/features/auth/data/user_model.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 import 'package:pro_app/core/widgets/app_error_sheet.dart';
 import 'package:pro_app/core/widgets/primary_button.dart';
