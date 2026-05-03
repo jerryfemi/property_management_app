@@ -10,10 +10,10 @@ class MarketplaceHeader extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final appColors = context.appColors;
-    
+
     // Watch the current user provider
     final userAsyncValue = ref.watch(currentUserProvider);
-    
+
     // Extract initials from user name, default to 'GU' (Guest User) if not available
     String getInitials() {
       final user = userAsyncValue.value;

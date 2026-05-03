@@ -9,7 +9,9 @@ final propertyRepositoryProvider = Provider<PropertyRepository>((ref) {
 });
 
 // marketplaceProvider -- to display available properties(isPublished and available)
-final marketPlaceProvider = StreamProvider.autoDispose<List<PropertyModel>>((ref) {
+final marketPlaceProvider = StreamProvider.autoDispose<List<PropertyModel>>((
+  ref,
+) {
   // --- REAL IMPLEMENTATION ---
   // return ref.watch(propertyRepositoryProvider).watchPublished();
 
@@ -20,14 +22,25 @@ final marketPlaceProvider = StreamProvider.autoDispose<List<PropertyModel>>((ref
 });
 
 // allPropertiesProvider
-final allPropertiesProvider = StreamProvider.autoDispose<List<PropertyModel>>((ref) {
+final allPropertiesProvider = StreamProvider.autoDispose<List<PropertyModel>>((
+  ref,
+) {
   return ref.watch(propertyRepositoryProvider).watchAll();
 });
 
 //propertyDetail provider
 final propertyDetailProvider = FutureProvider.autoDispose
-    .family<PropertyModel?, String>((ref, propertyId) {
-      return ref.watch(propertyRepositoryProvider).getProperty(propertyId);
+    .family<PropertyModel?, String>((ref, propertyId) async {
+      // --- MOCK IMPLEMENTATION ---
+      await Future.delayed(const Duration(milliseconds: 500));
+      try {
+        return dummyProperties.firstWhere((p) => p.id == propertyId);
+      } catch (_) {
+        return null;
+      }
+
+      // --- REAL IMPLEMENTATION ---
+      // return ref.watch(propertyRepositoryProvider).getProperty(propertyId);
     });
 
 // --- DUMMY DATA FOR TESTING ---
@@ -35,14 +48,18 @@ final dummyProperties = [
   PropertyModel(
     id: 'prop_1',
     title: 'Luxury 3-Bed Lekki Apartment',
-    description: 'A stunning modern apartment with ocean views and top-tier security.',
+    description:
+        'A stunning modern apartment with ocean views and top-tier security.',
     address: 'Plot 12, Admiralty Way',
     city: 'Lekki Phase 1',
     state: 'Lagos',
     propertyType: PropertyType.apartment,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Swimming Pool', 'Gym', '24/7 Power'],
-    imageUrls: ['https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1000',
+      'https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 10,
@@ -60,7 +77,9 @@ final dummyProperties = [
     propertyType: PropertyType.selfCon,
     rentPeriod: RentPeriod.monthly,
     amenities: ['Workspace', 'Security'],
-    imageUrls: ['https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1000',
+    ],
     isFurnished: false,
     isPublished: true,
     totalUnits: 20,
@@ -78,7 +97,9 @@ final dummyProperties = [
     propertyType: PropertyType.house,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Garden', 'Parking', 'CCTV'],
-    imageUrls: ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 1,
@@ -96,7 +117,9 @@ final dummyProperties = [
     propertyType: PropertyType.shortLet,
     rentPeriod: RentPeriod.nightly,
     amenities: ['Infinity Pool', 'Concierge', 'High-Speed Wifi'],
-    imageUrls: ['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 2,
@@ -114,7 +137,9 @@ final dummyProperties = [
     propertyType: PropertyType.commercial,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Underground Parking', 'Meeting Rooms', 'Backup Generator'],
-    imageUrls: ['https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000',
+    ],
     isFurnished: false,
     isPublished: true,
     totalUnits: 1,
@@ -132,7 +157,9 @@ final dummyProperties = [
     propertyType: PropertyType.house,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Private Jetty', 'Cinema Room', 'Wine Cellar'],
-    imageUrls: ['https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 1,
@@ -150,7 +177,9 @@ final dummyProperties = [
     propertyType: PropertyType.apartment,
     rentPeriod: RentPeriod.monthly,
     amenities: ['Prepaid Meter', 'Water Supply'],
-    imageUrls: ['https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1000',
+    ],
     isFurnished: false,
     isPublished: true,
     totalUnits: 12,
@@ -168,7 +197,9 @@ final dummyProperties = [
     propertyType: PropertyType.house,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Uniformed Security', 'Good Road Network'],
-    imageUrls: ['https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=1000',
+    ],
     isFurnished: false,
     isPublished: true,
     totalUnits: 4,
@@ -179,14 +210,17 @@ final dummyProperties = [
   PropertyModel(
     id: 'prop_9',
     title: 'Surulere 2-Bed Flat',
-    description: 'Centrally located apartment with easy access to the Island and Mainland.',
+    description:
+        'Centrally located apartment with easy access to the Island and Mainland.',
     address: '32 Ogunlana Drive',
     city: 'Surulere',
     state: 'Lagos',
     propertyType: PropertyType.apartment,
     rentPeriod: RentPeriod.monthly,
     amenities: ['Borehole', 'Fenced Gate'],
-    imageUrls: ['https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1000',
+    ],
     isFurnished: false,
     isPublished: true,
     totalUnits: 8,
@@ -204,7 +238,9 @@ final dummyProperties = [
     propertyType: PropertyType.house,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Street Lights', 'Waste Management', 'Security Patrol'],
-    imageUrls: ['https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 1,
@@ -222,7 +258,9 @@ final dummyProperties = [
     propertyType: PropertyType.house,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Fitted Kitchen', 'Car Port'],
-    imageUrls: ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1000',
+    ],
     isFurnished: false,
     isPublished: true,
     totalUnits: 6,
@@ -240,7 +278,9 @@ final dummyProperties = [
     propertyType: PropertyType.shortLet,
     rentPeriod: RentPeriod.nightly,
     amenities: ['Room Service', 'Bar', 'Laundry'],
-    imageUrls: ['https://images.unsplash.com/photo-1590392847226-d90c4033870e?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1590392847226-d90c4033870e?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 15,
@@ -258,7 +298,9 @@ final dummyProperties = [
     propertyType: PropertyType.commercial,
     rentPeriod: RentPeriod.monthly,
     amenities: ['AC', 'Internet', 'Receptionist'],
-    imageUrls: ['https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 50,
@@ -276,7 +318,9 @@ final dummyProperties = [
     propertyType: PropertyType.house,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Large Compound', 'Water Tank'],
-    imageUrls: ['https://images.unsplash.com/photo-1464146072230-91cabc968266?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1464146072230-91cabc968266?q=80&w=1000',
+    ],
     isFurnished: false,
     isPublished: true,
     totalUnits: 1,
@@ -294,7 +338,9 @@ final dummyProperties = [
     propertyType: PropertyType.house,
     rentPeriod: RentPeriod.nightly,
     amenities: ['Water View', 'Beach Access'],
-    imageUrls: ['https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 1,
@@ -312,7 +358,9 @@ final dummyProperties = [
     propertyType: PropertyType.house,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Security Gate', 'Inverter'],
-    imageUrls: ['https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 2,
@@ -330,7 +378,9 @@ final dummyProperties = [
     propertyType: PropertyType.apartment,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Tennis Court', 'Pool', 'Elevator'],
-    imageUrls: ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 4,
@@ -348,7 +398,9 @@ final dummyProperties = [
     propertyType: PropertyType.house,
     rentPeriod: RentPeriod.yearly,
     amenities: ['Smart Locks', 'Solar Panels'],
-    imageUrls: ['https://images.unsplash.com/photo-1558036117-15d82a90b9b1?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?q=80&w=1000',
+    ],
     isFurnished: false,
     isPublished: true,
     totalUnits: 1,
@@ -366,7 +418,9 @@ final dummyProperties = [
     propertyType: PropertyType.apartment,
     rentPeriod: RentPeriod.monthly,
     amenities: ['AC', 'Modern Lighting'],
-    imageUrls: ['https://images.unsplash.com/photo-1560448204-61dc36dc98c8?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1560448204-61dc36dc98c8?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 5,
@@ -384,7 +438,9 @@ final dummyProperties = [
     propertyType: PropertyType.shortLet,
     rentPeriod: RentPeriod.nightly,
     amenities: ['Organic Garden', 'Solar Power'],
-    imageUrls: ['https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=1000'],
+    imageUrls: [
+      'https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=1000',
+    ],
     isFurnished: true,
     isPublished: true,
     totalUnits: 10,

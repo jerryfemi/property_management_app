@@ -19,7 +19,8 @@ class MarketplaceSliverAppBar extends StatelessWidget {
       toolbarHeight: 0.0,
       pinned: true,
       backgroundColor: theme.scaffoldBackgroundColor,
-      surfaceTintColor: Colors.transparent, // Prevents material 3 color shifting
+      surfaceTintColor:
+          Colors.transparent, // Prevents material 3 color shifting
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           color: theme.scaffoldBackgroundColor,
@@ -69,18 +70,18 @@ class MarketplaceSliverAppBar extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
-                        child: Icon(Icons.tune, color: theme.colorScheme.onSurface),
+                        child: Icon(
+                          Icons.tune,
+                          color: theme.colorScheme.onSurface,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              
+
               // Category Chips
-              const SizedBox(
-                height: 60,
-                child: CategoryChips(),
-              ),
+              const SizedBox(height: 60, child: CategoryChips()),
             ],
           ),
         ),

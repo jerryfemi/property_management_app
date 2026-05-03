@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pro_app/core/features/properties/providers/property_provider.dart';
 import 'package:pro_app/core/features/properties/ui/widgets/marketplace_sliver_app_bar.dart';
 import 'package:pro_app/core/features/properties/ui/widgets/property_card.dart';
-import 'package:pro_app/core/theme/app_theme.dart';
 import 'package:pro_app/core/widgets/loading_spinner.dart';
-import 'package:pro_app/core/features/properties/ui/property_detail_screen.dart';
 
 class MarketplaceScreen extends ConsumerWidget {
   const MarketplaceScreen({super.key});
@@ -38,8 +37,7 @@ class MarketplaceScreen extends ConsumerWidget {
                       return PropertyCard(
                         property: property,
                         onTap: () {
-                          // TODO: Use GoRouter when ready, for now we can just push or leave empty if detail screen isn't ready
-                          // Navigator.push(context, MaterialPageRoute(builder: (_) => const PropertyDetailScreen()));
+                          context.push('/guest/explore/property/${property.id}');
                         },
                       );
                     }, childCount: properties.length),

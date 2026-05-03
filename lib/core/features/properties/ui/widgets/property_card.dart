@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pro_app/core/features/properties/data/property_model.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 import 'package:pro_app/core/widgets/status_badge.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class PropertyCard extends StatefulWidget {
   final PropertyModel property;
@@ -57,10 +58,12 @@ class _PropertyCardState extends State<PropertyCard> {
                       height: 200,
                       width: double.infinity,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        height: 200,
-                        color: appColors.muted.withValues(alpha: 0.1),
-                        child: const Center(child: CircularProgressIndicator()),
+                      placeholder: (context, url) => Skeletonizer(
+                        child: Container(
+                          height: 200,
+                          width: double.infinity,
+                          color: Colors.grey.shade300,
+                        ),
                       ),
                       errorWidget: (context, url, error) => Container(
                         height: 200,
