@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pro_app/core/features/properties/providers/location_provider.dart';
+import 'package:pro_app/core/features/properties/ui/widgets/location_picker_sheet.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 import 'package:pro_app/core/features/auth/providers/auth_providers.dart';
 
@@ -13,6 +16,7 @@ class MarketplaceHeader extends ConsumerWidget {
 
     // Watch the current user provider
     final userAsyncValue = ref.watch(currentUserProvider);
+    final selectedLocation = ref.watch(selectedLocationProvider);
 
     // Extract initials from user name, default to 'GU' (Guest User) if not available
     String getInitials() {
@@ -34,41 +38,58 @@ class MarketplaceHeader extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Location Section
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Location',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: appColors.muted,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  Text(
-                    'Lagos, Nigeria',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+          GestureDetector(
+            onTap: () => LocationPickerSheet.show(context),
+            behavior: HitTestBehavior.opaque,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 4),
+
+                // label row
+                Row(
+                  children: [
+                    Icon(
+                      Icons.location_on_rounded,
+                      size: 13,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
-                  ),
-                  const SizedBox(width: 4),
-                  Icon(
-                    Icons.keyboard_arrow_down,
-                    color: theme.colorScheme.primary,
-                    size: 20,
-                  ),
-                ],
-              ),
-            ],
+                    const SizedBox(width: 4),
+                    Text(
+                      'Location',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: appColors.muted,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                // city name
+                Row(
+                  mainAxisSize: .min,
+                  children: [
+                    Text(
+                      selectedLocation?.displayName ?? 'All Locations',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleMedium?.copyWith(fontWeight: .w800),
+                    ),
+                    const SizedBox(width: 2),
+                    Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 22,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
 
           // Avatar Section
           GestureDetector(
-            onTap: () {
-              // Navigate to profile
-            },
+            onTap: () => context.go('guest/profile'),
             child: CircleAvatar(
               radius: 20,
               backgroundColor: theme.colorScheme.primary,
