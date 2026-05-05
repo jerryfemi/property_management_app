@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pro_app/core/features/properties/data/property_model.dart';
 import 'package:pro_app/core/features/properties/providers/location_provider.dart';
 import 'package:pro_app/core/features/properties/providers/property_provider.dart';
+import 'package:pro_app/core/features/properties/providers/property_filter_providers.dart';
 import 'package:pro_app/core/features/properties/ui/widgets/category_chips.dart';
 import 'package:pro_app/core/features/properties/ui/widgets/marketplace_sliver_app_bar.dart';
 import 'package:pro_app/core/features/properties/ui/widgets/property_card.dart';
@@ -19,56 +20,66 @@ class MarketplaceScreen extends ConsumerWidget {
 
     final selectedLocation = ref.watch(selectedLocationProvider);
     final selectedCategory = ref.watch(selectedCategoryProvider);
+    final filters = ref.watch(propertyFiltersProvider);
 
     return Scaffold(
-      body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          // 1. Collapsing Header & Pinned Search/Chips
-          const MarketplaceSliverAppBar(),
-          // 3. Property Feed
-          propertiesAsync.when(
-            data: (properties) {
-              final filtered = _applyFilters(
-                properties,
-                category: selectedCategory,
-                location: selectedLocation,
-              );
-              if (filtered.isEmpty) {
-                return SliverFillRemaining(
-                  child: _EmptyState(
-                    category: selectedCategory,
-                    locationName: selectedLocation?.displayName,
+      body: SafeArea(
+        child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
+          slivers: [
+            // 1. Collapsing Header & Pinned Search/Chips
+            const MarketplaceSliverAppBar(),
+            // 3. Property Feed
+            propertiesAsync.when(
+              data: (properties) {
+                final filtered = _applyFilters(
+                  properties,
+                  category: selectedCategory,
+                  location: selectedLocation,
+                  filters: filters,
+                );
+                if (filtered.isEmpty) {
+                  return SliverFillRemaining(
+                    child: _EmptyState(
+                      category: selectedCategory,
+                      locationName: selectedLocation?.displayName,
+                    ),
+                  );
+                }
+
+                return SliverPadding(
+                  padding: const EdgeInsets.only(bottom: 24),
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      final filtered = _applyFilters(
+                        properties,
+                        category: selectedCategory,
+                        location: selectedLocation,
+                        filters: filters,
+                      );
+                      final filter = filtered[index];
+                      return PropertyCard(
+                        property: filter,
+                        onTap: () {
+                          context.push('/guest/explore/property/${filter.id}');
+                        },
+                      );
+                    }, childCount: filtered.length),
                   ),
                 );
-              }
-
-              return SliverPadding(
-                padding: const EdgeInsets.only(bottom: 24),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    final property = properties[index];
-                    return PropertyCard(
-                      property: property,
-                      onTap: () {
-                        context.push('/guest/explore/property/${property.id}');
-                      },
-                    );
-                  }, childCount: properties.length),
+              },
+              loading: () => const SliverFillRemaining(
+                child: Center(child: BrandedLoadingSpinner()),
+              ),
+              error: (error, stack) => SliverFillRemaining(
+                child: _ErrorState(
+                  error: error.toString(),
+                  onRetry: () => ref.refresh(marketPlaceProvider),
                 ),
-              );
-            },
-            loading: () => const SliverFillRemaining(
-              child: Center(child: BrandedLoadingSpinner()),
-            ),
-            error: (error, stack) => SliverFillRemaining(
-              child: _ErrorState(
-                error: error.toString(),
-                onRetry: () => ref.refresh(marketPlaceProvider),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -77,6 +88,7 @@ class MarketplaceScreen extends ConsumerWidget {
     List<PropertyModel> all, {
     LocationOption? location,
     required String category,
+    required PropertyFilterState filters,
   }) {
     var result = all;
 
@@ -112,8 +124,159 @@ class MarketplaceScreen extends ConsumerWidget {
       }).toList();
     }
 
+    // Search query filter
+    if (filters.searchQuery.isNotEmpty) {
+      final q = filters.searchQuery.toLowerCase();
+      result = result.where((p) {
+        return p.title.toLowerCase().contains(q) ||
+            p.city.toLowerCase().contains(q) ||
+            p.state.toLowerCase().contains(q) ||
+            p.address.toLowerCase().contains(q);
+      }).toList();
+    }
+
+    // Property type filter
+    if (filters.propertyTypes.isNotEmpty) {
+      final allowed = filters.propertyTypes
+          .map(_mapPropertyTypeLabel)
+          .whereType<PropertyType>()
+          .toSet();
+      result = result
+          .where((p) => allowed.isEmpty || allowed.contains(p.propertyType))
+          .toList();
+    }
+
+    // Amenities filter (best-effort match)
+    if (filters.amenities.isNotEmpty) {
+      final wanted = filters.amenities.map((a) => a.toLowerCase()).toSet();
+      result = result.where((p) {
+        final available = p.amenities.map((a) => a.toLowerCase()).toSet();
+        return available.intersection(wanted).isNotEmpty;
+      }).toList();
+    }
+
+    // Bedrooms filter (best-effort match)
+    if (filters.bedrooms != 'Any') {
+      final minBeds = _parseMinCount(filters.bedrooms);
+      if (minBeds != null) {
+        result = result.where((p) {
+          final count = _extractCount(
+            '${p.title} ${p.description}',
+            RegExp(r'(\d+)\s*(bed|bedroom)', caseSensitive: false),
+          );
+          return count == null || count >= minBeds;
+        }).toList();
+      }
+    }
+
+    // Bathrooms filter (best-effort match)
+    if (filters.bathrooms != 'Any') {
+      final minBaths = _parseMinCount(filters.bathrooms);
+      if (minBaths != null) {
+        result = result.where((p) {
+          final count = _extractCount(
+            '${p.title} ${p.description}',
+            RegExp(r'(\d+)\s*(bath|bathroom)', caseSensitive: false),
+          );
+          return count == null || count >= minBaths;
+        }).toList();
+      }
+    }
+
+    // Area filter (best-effort match)
+    result = result.where((p) {
+      final areaSqm = _extractAreaSqm('${p.title} ${p.description}');
+      if (areaSqm == null) {
+        return true;
+      }
+      return areaSqm >= filters.areaRange.start &&
+          areaSqm <= filters.areaRange.end;
+    }).toList();
+
+    // Price filter (best-effort match)
+    result = result.where((p) {
+      final price = _extractPrice('${p.title} ${p.description}');
+      if (price == null) {
+        return true;
+      }
+      return price >= filters.priceRange.start &&
+          price <= filters.priceRange.end;
+    }).toList();
+
     return result;
   }
+}
+
+PropertyType? _mapPropertyTypeLabel(String label) {
+  switch (label) {
+    case 'Apartment':
+      return PropertyType.apartment;
+    case 'Shortlet':
+      return PropertyType.shortLet;
+    case 'Commercial':
+      return PropertyType.commercial;
+    case 'Self Contain':
+      return PropertyType.selfCon;
+    default:
+      return null;
+  }
+}
+
+int? _parseMinCount(String label) {
+  if (label == 'Any') {
+    return null;
+  }
+  if (label.endsWith('+')) {
+    return int.tryParse(label.replaceAll('+', ''));
+  }
+  return int.tryParse(label);
+}
+
+int? _extractCount(String text, RegExp pattern) {
+  final match = pattern.firstMatch(text);
+  if (match == null) {
+    return null;
+  }
+  return int.tryParse(match.group(1) ?? '');
+}
+
+double? _extractAreaSqm(String text) {
+  final match = RegExp(
+    r'(\d+(?:\.\d+)?)\s*(sqm|sq m|m2|m²|sqft|sq ft)',
+    caseSensitive: false,
+  ).firstMatch(text);
+  if (match == null) {
+    return null;
+  }
+  final value = double.tryParse(match.group(1) ?? '');
+  if (value == null) {
+    return null;
+  }
+  final unit = (match.group(2) ?? '').toLowerCase();
+  if (unit.contains('sqft') || unit.contains('sq ft')) {
+    return value * 0.092903;
+  }
+  return value;
+}
+
+double? _extractPrice(String text) {
+  final match = RegExp(
+    r'₦\s*([\d,.]+)(m|million)?',
+    caseSensitive: false,
+  ).firstMatch(text);
+  if (match == null) {
+    return null;
+  }
+  final raw = (match.group(1) ?? '').replaceAll(',', '');
+  final value = double.tryParse(raw);
+  if (value == null) {
+    return null;
+  }
+  final suffix = (match.group(2) ?? '').toLowerCase();
+  if (suffix == 'm' || suffix == 'million') {
+    return value * 1000000;
+  }
+  return value;
 }
 
 // ── Empty state ───────────────────────────────────────────────────────────────
@@ -177,7 +340,7 @@ class _ErrorState extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final appColors = context.appColors;
-
+    debugPrint(error);
     return Padding(
       padding: const EdgeInsets.all(40),
       child: Column(

@@ -28,7 +28,7 @@ class LocationPickerSheet extends ConsumerWidget {
     return Container(
       height: sheetHeight,
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: .vertical(top: .circular(28)),
       ),
       child: Column(
@@ -53,8 +53,8 @@ class LocationPickerSheet extends ConsumerWidget {
             child: Row(
               children: [
                 Text(
-                  'Choose, Location',
-                  style: TextStyle(fontSize: 30, fontWeight: .w800),
+                  'Choose Location',
+                  style: TextStyle(fontSize: 20, fontWeight: .w800),
                 ),
                 const Spacer(),
                 IconButton(
@@ -80,7 +80,6 @@ class LocationPickerSheet extends ConsumerWidget {
 
           // all locations option
           _AllLocationsTile(
-            
             isSelected: selectedLocation == null,
             onTap: () {
               ref.read(selectedLocationProvider.notifier).state = null;

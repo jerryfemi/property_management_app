@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+
 import 'package:pro_app/core/theme/app_theme.dart';
 
 // Local provider to track the selected category
@@ -43,17 +44,22 @@ class CategoryChips extends ConsumerWidget {
               },
               showCheckmark: false,
               selectedColor: colorScheme.primary,
-              backgroundColor: Colors.transparent,
+              backgroundColor: appColors.muted.withValues(alpha: 0.2),
               labelStyle: theme.textTheme.bodyMedium?.copyWith(
-                color: isSelected ? colorScheme.onPrimary : appColors.muted,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                color: isSelected ? Colors.white : appColors.muted,
+                fontWeight: FontWeight.w600,
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
                 side: BorderSide(
-                  color: isSelected ? colorScheme.primary : appColors.muted,
+                  color: isSelected
+                      ? colorScheme.primary.withValues(alpha: 0.35)
+                      : appColors.muted.withValues(alpha: 0.15),
                 ),
               ),
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              visualDensity: VisualDensity.compact,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             ),
           );
         }).toList(),

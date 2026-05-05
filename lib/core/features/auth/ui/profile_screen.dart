@@ -8,6 +8,7 @@ import 'package:pro_app/core/features/auth/providers/auth_providers.dart';
 import 'package:pro_app/core/theme/app_colors.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 import 'package:pro_app/core/theme/theme_provider.dart';
+import 'package:pro_app/core/widgets/loading_spinner.dart';
 import 'package:pro_app/core/widgets/primary_button.dart';
 import 'package:pro_app/core/widgets/section_label.dart';
 
@@ -23,7 +24,9 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       body: userAsync.when(
         error: (error, stackTrace) => const Center(child: Text('Error $e')),
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const Center(
+          child: BrandedLoadingSpinner(icon: CupertinoIcons.person_fill),
+        ),
         data: (user) {
           if (user == null) {
             return const Center(child: Text('No User data'));
@@ -105,7 +108,10 @@ class ProfileScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              SliverFillRemaining(),
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: SizedBox(height: 50),
+              ),
             ],
           );
         },
@@ -125,27 +131,21 @@ class _AppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final initials = _initials(user.name);
     final roleLable = _roleLabel(role, user);
+    final surfaceColor = Theme.of(context).colorScheme.surface;
+    final pageColor = Theme.of(context).scaffoldBackgroundColor;
     return SliverAppBar(
       expandedHeight: 280,
       pinned: true,
-      backgroundColor: Theme.of(context).colorScheme.surface,
       surfaceTintColor: Colors.transparent,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(32)),
-      ),
+      backgroundColor: pageColor,
+      scrolledUnderElevation: 0,
       clipBehavior: Clip.antiAlias,
       flexibleSpace: FlexibleSpaceBar(
-        title: Text(
-          user.name.isEmpty ? 'User' : user.name,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onSurface,
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        centerTitle: true,
         background: Container(
-          color: Theme.of(context).colorScheme.surface,
+          decoration: BoxDecoration(
+            color: surfaceColor,
+            borderRadius: .vertical(bottom: .circular(35)),
+          ),
           child: Center(
             child: SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
@@ -200,7 +200,17 @@ class _AppBar extends StatelessWidget {
                     ],
                   ),
 
+                  const SizedBox(height: 10),
+                  Text(
+                    user.name.isEmpty ? 'User' : user.name,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                   const SizedBox(height: 4),
+                  // role lable
                   Text(
                     roleLable,
                     style: TextStyle(
