@@ -33,19 +33,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     // Listen for Authentication Errors
-    ref.listen<AsyncValue<void>>(authControllerProvider, (previous, next) {
-      if (next is AsyncError) {
-        final error = next.error;
-        String message = 'An unexpected error occurred. Please try again.';
+    // ref.listen<AsyncValue<void>>(authControllerProvider, (previous, next) {
+    //   if (next is AsyncError) {
+    //     final error = next.error;
+    //     String message = 'An unexpected error occurred. Please try again.';
 
-        if (error is FirebaseAuthException) {
-          message = error.formattedMessage;
-        }
-        debugPrint(error.toString());
+    //     if (error is FirebaseAuthException) {
+    //       message = error.formattedMessage;
+    //     }
+    //     debugPrint(error.toString());
 
-        AppErrorSheet.show(context, message: message);
-      }
-    });
+    //     AppErrorSheet.show(context, message: message);
+    //   }
+    // });
 
     final authState = ref.watch(authControllerProvider);
 
@@ -113,7 +113,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(height: 12),
+                     SizedBox(height: 12,),
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
