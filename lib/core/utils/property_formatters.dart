@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pro_app/core/features/auth/providers/auth_providers.dart';
 import 'package:pro_app/core/features/properties/data/property_model.dart';
 
 class PropertyFormatters {
@@ -41,4 +43,18 @@ class PropertyFormatters {
         return 'Per Week';
     }
   }
+
+
+  static  String getInitials(WidgetRef ref) {
+    final userAsyncValue = ref.watch(currentUserProvider);
+      final user = userAsyncValue.value;
+      if (user != null && user.name.isNotEmpty) {
+        final names = user.name.trim().split(' ');
+        if (names.length > 1) {
+          return '${names[0][0]}${names[1][0]}'.toUpperCase();
+        }
+        return user.name.substring(0, 1).toUpperCase();
+      }
+      return 'GU';
+    }
 }

@@ -44,3 +44,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 PROPAPP_CONTEXT.md
+serviceAccountKey.json
+scripts/serviceAccountKey.json
+.gitignore
+.gitignore

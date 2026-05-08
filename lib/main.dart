@@ -22,7 +22,7 @@ void main() async {
   runApp(
     ProviderScope(
       child: DevicePreview(
-        enabled: false,
+        enabled: kDebugMode,
         builder: (context) => const MyApp(),
       ),
     ),

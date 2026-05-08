@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class BrandedLoadingSpinner extends StatefulWidget {
   final double size;
@@ -33,7 +32,7 @@ class _BrandedLoadingSpinnerState extends State<BrandedLoadingSpinner>
     // 1. Initialize the controller to spin continuously
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2), // Speed of the full rotation
+      duration: 1500.ms, // Speed of the full rotation
     )..repeat(); // repeat() makes it loop infinitely
   }
 
@@ -52,6 +51,7 @@ class _BrandedLoadingSpinnerState extends State<BrandedLoadingSpinner>
     // Calculate the inner space exactly to remove any gap
     final double iconContainerSize = widget.size - (strokeWidth * 2);
     final double iconSize = iconContainerSize * 0.6;
+    final double minScale = (18 / widget.size).clamp(0.8, 1.0);
 
     return SizedBox(
       width: widget.size,
@@ -78,22 +78,33 @@ class _BrandedLoadingSpinnerState extends State<BrandedLoadingSpinner>
 
           // 2. The Static Central Brand Icon
           Container(
-            width: iconContainerSize,
-            height: iconContainerSize,
-            decoration: BoxDecoration(
-              color: widget.iconBackgroundColor,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: widget.iconBackgroundColor.withValues(alpha: 0.3),
-                  blurRadius: 10,
-                  spreadRadius: 2,
-                  offset: const Offset(0, 2),
+                width: iconContainerSize,
+                height: iconContainerSize,
+                decoration: BoxDecoration(
+                  color: widget.iconBackgroundColor,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: widget.iconBackgroundColor.withValues(alpha: 0.3),
+                      blurRadius: 10,
+                      spreadRadius: 2,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Icon(widget.icon, color: widget.iconColor, size: iconSize),
-          ),
+                child: Icon(
+                  widget.icon,
+                  color: widget.iconColor,
+                  size: iconSize,
+                ),
+              )
+              .animate(onPlay: (controller) => controller.repeat(reverse: true))
+              .scale(
+                begin: Offset(minScale, minScale),
+                end: const Offset(1, 1),
+                curve: Curves.easeInOut,
+                duration: 500.ms,
+              ),
         ],
       ),
     );
