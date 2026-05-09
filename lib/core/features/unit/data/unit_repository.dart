@@ -19,7 +19,7 @@ class UnitRepository {
   Stream<List<UnitModel>> availableUnitsForProperty(String propertyId) =>
       _collection
           .where('property_id', isEqualTo: propertyId)
-          .where('unit_status', isEqualTo: UnitStatus.available)
+          .where('unit_status', isEqualTo: UnitStatus.available.name)
           .snapshots()
           .map(
             (snapshots) => snapshots.docs.map(UnitModel.fromFirestore).toList(),

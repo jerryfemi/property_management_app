@@ -20,15 +20,11 @@ final unitsForPropertyProvider = StreamProvider.autoDispose
 // all units for property provider.
 final availableUnitsProvider = StreamProvider.autoDispose
     .family<List<UnitModel>, String>((ref, propertyId) {
-  // --- MOCK IMPLEMENTATION ---
-  return Stream.value(
-    dummyUnits.where((u) => u.propertyId == propertyId).toList(),
-  );
+ 
 
-  // --- REAL IMPLEMENTATION ---
-  // return ref
-  //     .watch(unitRepositoryProvider)
-  //     .availableUnitsForProperty(propertyId);
+  return ref
+      .watch(unitRepositoryProvider)
+      .availableUnitsForProperty(propertyId);
 });
 
 // units grouped units provider
