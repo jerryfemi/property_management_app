@@ -56,7 +56,7 @@ final applicationFormProvider =
 
 class ApplicationFormNotifier extends AsyncNotifier<void> {
   @override
-  Future<void> build() async {}
+  void build() {}
 
   Future<void> submit({
     required String unitId,
