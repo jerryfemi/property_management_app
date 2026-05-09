@@ -200,7 +200,7 @@ class _UnitSelectionView extends ConsumerWidget {
                     mainAxisSize: .min,
                     children: [
                       Text(
-                        PropertyFormatters.formatPrice(unit.baseRent),
+                        PropertyFormatters.formatPrice(selectedUnit.baseRent),
                         style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: .bold,
                         ),
@@ -217,7 +217,13 @@ class _UnitSelectionView extends ConsumerWidget {
                 ],
               ),
               SizedBox(height: 14),
-              PrimaryButton(text: 'Apply Now', onPressed: () {}),
+              PrimaryButton(
+                text: 'Apply Now', 
+                onPressed: () => context.push(
+                  '/guest/explore/property/${selectedUnit.propertyId}/unit/${selectedUnit.id}/apply',
+                  extra: selectedUnit,
+                ),
+              ),
             ],
           );
         },
