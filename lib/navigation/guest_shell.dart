@@ -3,6 +3,7 @@ import 'package:cupertino_native/cupertino_native.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Added for SystemUiOverlayStyle
 import 'package:go_router/go_router.dart';
 
 class GuestShell extends StatelessWidget {
@@ -11,13 +12,20 @@ class GuestShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final useCupertino = !kIsWeb && Platform.isIOS;
 
-    return Scaffold(
-      body: shell,
-      bottomNavigationBar: useCupertino
-          ? _buildCupertinoBar()
-          : _buildMaterialBar(),
+    // Use the overlay style defined in our theme
+    final systemStyle = theme.appBarTheme.systemOverlayStyle ??
+        const SystemUiOverlayStyle();
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: systemStyle,
+      child: Scaffold(
+        body: shell,
+        bottomNavigationBar:
+            useCupertino ? _buildCupertinoBar() : _buildMaterialBar(),
+      ),
     );
   }
 

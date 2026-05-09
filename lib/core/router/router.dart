@@ -28,6 +28,7 @@ import 'package:pro_app/core/features/properties/ui/screens/property_detail_scre
 import 'package:pro_app/core/features/staff/ui/tasks_screen.dart';
 import 'package:pro_app/core/features/staff/ui/ticket_detail_screen.dart';
 import 'package:pro_app/core/features/tenant/ui/tenant_home_screen.dart';
+import 'package:pro_app/core/features/unit/data/unit_model.dart';
 import 'package:pro_app/core/features/units/ui/unit_detail_screen.dart';
 import 'package:pro_app/navigation/admin_shell.dart';
 import 'package:pro_app/navigation/guest_shell.dart';
@@ -95,10 +96,11 @@ final routerProvider = Provider<GoRouter>((ref) {
                         routes: [
                           GoRoute(
                             path: 'apply',
-                            builder: (context, state) =>
-                                ApplicationFormScreen(
-                              unitId: state.pathParameters['unitId']!,
-                            ),
+                            builder: (context, state) {
+                              return ApplicationFormScreen(
+                                unit: state.extra as UnitModel,
+                              );
+                            },
                           ),
                         ],
                       ),
