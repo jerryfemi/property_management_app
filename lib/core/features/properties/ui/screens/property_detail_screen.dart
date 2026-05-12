@@ -13,7 +13,6 @@ import 'package:pro_app/core/features/properties/ui/widgets/amenities_grid.dart'
 import 'package:pro_app/core/features/properties/ui/widgets/expandable_description.dart';
 import 'package:pro_app/core/features/properties/ui/widgets/unit_types_section.dart';
 
-
 class PropertyDetailScreen extends ConsumerWidget {
   const PropertyDetailScreen({super.key, required this.propertyId});
 
@@ -57,7 +56,6 @@ class PropertyDetailScreen extends ConsumerWidget {
     );
   }
 }
-
 
 class _PropertyDetailView extends ConsumerStatefulWidget {
   const _PropertyDetailView({required this.property});
@@ -231,8 +229,6 @@ class _PropertyDetailViewState extends ConsumerState<_PropertyDetailView> {
 }
 
 // ── Shared small widgets ──────────────────────────────────────────────────────
-
-
 
 class _TypeBadge extends StatelessWidget {
   final PropertyType type;

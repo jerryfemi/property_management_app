@@ -1,21 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pro_app/core/features/properties/data/property_model.dart';
+import 'package:pro_app/core/features/unit/data/unit_model.dart';
+import 'package:pro_app/core/features/unit/providers/unit_provider.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
+import 'package:pro_app/core/utils/property_formatters.dart';
 import 'package:pro_app/core/widgets/status_badge.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class PropertyCard extends StatefulWidget {
+class PropertyCard extends ConsumerStatefulWidget {
   final PropertyModel property;
   final VoidCallback onTap;
 
   const PropertyCard({super.key, required this.property, required this.onTap});
 
   @override
-  State<PropertyCard> createState() => _PropertyCardState();
+  ConsumerState<PropertyCard> createState() => _PropertyCardState();
 }
 
-class _PropertyCardState extends State<PropertyCard> {
+class _PropertyCardState extends ConsumerState<PropertyCard> {
   bool isSaved = false;
 
   @override
@@ -23,6 +27,12 @@ class _PropertyCardState extends State<PropertyCard> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final appColors = context.appColors;
+
+    final unitsAsync = ref.watch(availableUnitsProvider(widget.property.id));
+    final double startingPrice = unitsAsync.maybeWhen(
+      data: (units) => units.minRent,
+      orElse: () => 0.0,
+    );
 
     return GestureDetector(
       onTap: widget.onTap,
@@ -187,7 +197,7 @@ class _PropertyCardState extends State<PropertyCard> {
                         textBaseline: TextBaseline.alphabetic,
                         children: [
                           Text(
-                            '₦2.5M', // Mock price for now based on blueprint
+                            PropertyFormatters.formatPrice(startingPrice), 
                             style: theme.textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: colorScheme
