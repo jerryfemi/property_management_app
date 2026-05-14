@@ -15,9 +15,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PropertyModel {
 
- String get id; String get title; String get description; String get address; String get city; String get state; PropertyType get propertyType; RentPeriod get rentPeriod; List<String> get amenities; List<String> get imageUrls; bool get isFurnished; bool get isPublished; int get totalUnits;// maintained by cloud function
- int get availableUnit;// maintained by cloud function
- DateTime get createdAt; DateTime get updatedAt;
+@HiveField(0) String get id;@HiveField(1) String get title;@HiveField(2) String get description;@HiveField(3) String get address;@HiveField(4) String get city;@HiveField(5) String get state;@HiveField(6) PropertyType get propertyType;@HiveField(7) RentPeriod get rentPeriod;@HiveField(8) List<String> get amenities;@HiveField(9) List<String> get imageUrls;@HiveField(10) bool get isFurnished;@HiveField(11) bool get isPublished;@HiveField(12) int get totalUnits;// maintained by cloud function
+@HiveField(13) int get availableUnit;// maintained by cloud function
+@HiveField(14) DateTime get createdAt;@HiveField(15) DateTime get updatedAt;
 /// Create a copy of PropertyModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -50,7 +50,7 @@ abstract mixin class $PropertyModelCopyWith<$Res>  {
   factory $PropertyModelCopyWith(PropertyModel value, $Res Function(PropertyModel) _then) = _$PropertyModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, String description, String address, String city, String state, PropertyType propertyType, RentPeriod rentPeriod, List<String> amenities, List<String> imageUrls, bool isFurnished, bool isPublished, int totalUnits, int availableUnit, DateTime createdAt, DateTime updatedAt
+@HiveField(0) String id,@HiveField(1) String title,@HiveField(2) String description,@HiveField(3) String address,@HiveField(4) String city,@HiveField(5) String state,@HiveField(6) PropertyType propertyType,@HiveField(7) RentPeriod rentPeriod,@HiveField(8) List<String> amenities,@HiveField(9) List<String> imageUrls,@HiveField(10) bool isFurnished,@HiveField(11) bool isPublished,@HiveField(12) int totalUnits,@HiveField(13) int availableUnit,@HiveField(14) DateTime createdAt,@HiveField(15) DateTime updatedAt
 });
 
 
@@ -170,7 +170,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String description,  String address,  String city,  String state,  PropertyType propertyType,  RentPeriod rentPeriod,  List<String> amenities,  List<String> imageUrls,  bool isFurnished,  bool isPublished,  int totalUnits,  int availableUnit,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@HiveField(0)  String id, @HiveField(1)  String title, @HiveField(2)  String description, @HiveField(3)  String address, @HiveField(4)  String city, @HiveField(5)  String state, @HiveField(6)  PropertyType propertyType, @HiveField(7)  RentPeriod rentPeriod, @HiveField(8)  List<String> amenities, @HiveField(9)  List<String> imageUrls, @HiveField(10)  bool isFurnished, @HiveField(11)  bool isPublished, @HiveField(12)  int totalUnits, @HiveField(13)  int availableUnit, @HiveField(14)  DateTime createdAt, @HiveField(15)  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PropertyModel() when $default != null:
 return $default(_that.id,_that.title,_that.description,_that.address,_that.city,_that.state,_that.propertyType,_that.rentPeriod,_that.amenities,_that.imageUrls,_that.isFurnished,_that.isPublished,_that.totalUnits,_that.availableUnit,_that.createdAt,_that.updatedAt);case _:
@@ -191,7 +191,7 @@ return $default(_that.id,_that.title,_that.description,_that.address,_that.city,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String description,  String address,  String city,  String state,  PropertyType propertyType,  RentPeriod rentPeriod,  List<String> amenities,  List<String> imageUrls,  bool isFurnished,  bool isPublished,  int totalUnits,  int availableUnit,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@HiveField(0)  String id, @HiveField(1)  String title, @HiveField(2)  String description, @HiveField(3)  String address, @HiveField(4)  String city, @HiveField(5)  String state, @HiveField(6)  PropertyType propertyType, @HiveField(7)  RentPeriod rentPeriod, @HiveField(8)  List<String> amenities, @HiveField(9)  List<String> imageUrls, @HiveField(10)  bool isFurnished, @HiveField(11)  bool isPublished, @HiveField(12)  int totalUnits, @HiveField(13)  int availableUnit, @HiveField(14)  DateTime createdAt, @HiveField(15)  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _PropertyModel():
 return $default(_that.id,_that.title,_that.description,_that.address,_that.city,_that.state,_that.propertyType,_that.rentPeriod,_that.amenities,_that.imageUrls,_that.isFurnished,_that.isPublished,_that.totalUnits,_that.availableUnit,_that.createdAt,_that.updatedAt);case _:
@@ -211,7 +211,7 @@ return $default(_that.id,_that.title,_that.description,_that.address,_that.city,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String description,  String address,  String city,  String state,  PropertyType propertyType,  RentPeriod rentPeriod,  List<String> amenities,  List<String> imageUrls,  bool isFurnished,  bool isPublished,  int totalUnits,  int availableUnit,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@HiveField(0)  String id, @HiveField(1)  String title, @HiveField(2)  String description, @HiveField(3)  String address, @HiveField(4)  String city, @HiveField(5)  String state, @HiveField(6)  PropertyType propertyType, @HiveField(7)  RentPeriod rentPeriod, @HiveField(8)  List<String> amenities, @HiveField(9)  List<String> imageUrls, @HiveField(10)  bool isFurnished, @HiveField(11)  bool isPublished, @HiveField(12)  int totalUnits, @HiveField(13)  int availableUnit, @HiveField(14)  DateTime createdAt, @HiveField(15)  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _PropertyModel() when $default != null:
 return $default(_that.id,_that.title,_that.description,_that.address,_that.city,_that.state,_that.propertyType,_that.rentPeriod,_that.amenities,_that.imageUrls,_that.isFurnished,_that.isPublished,_that.totalUnits,_that.availableUnit,_that.createdAt,_that.updatedAt);case _:
@@ -226,39 +226,39 @@ return $default(_that.id,_that.title,_that.description,_that.address,_that.city,
 @JsonSerializable()
 
 class _PropertyModel implements PropertyModel {
-  const _PropertyModel({required this.id, required this.title, required this.description, required this.address, required this.city, required this.state, required this.propertyType, required this.rentPeriod, required final  List<String> amenities, required final  List<String> imageUrls, required this.isFurnished, required this.isPublished, required this.totalUnits, required this.availableUnit, required this.createdAt, required this.updatedAt}): _amenities = amenities,_imageUrls = imageUrls;
+  const _PropertyModel({@HiveField(0) required this.id, @HiveField(1) required this.title, @HiveField(2) required this.description, @HiveField(3) required this.address, @HiveField(4) required this.city, @HiveField(5) required this.state, @HiveField(6) required this.propertyType, @HiveField(7) required this.rentPeriod, @HiveField(8) required final  List<String> amenities, @HiveField(9) required final  List<String> imageUrls, @HiveField(10) required this.isFurnished, @HiveField(11) required this.isPublished, @HiveField(12) required this.totalUnits, @HiveField(13) required this.availableUnit, @HiveField(14) required this.createdAt, @HiveField(15) required this.updatedAt}): _amenities = amenities,_imageUrls = imageUrls;
   factory _PropertyModel.fromJson(Map<String, dynamic> json) => _$PropertyModelFromJson(json);
 
-@override final  String id;
-@override final  String title;
-@override final  String description;
-@override final  String address;
-@override final  String city;
-@override final  String state;
-@override final  PropertyType propertyType;
-@override final  RentPeriod rentPeriod;
+@override@HiveField(0) final  String id;
+@override@HiveField(1) final  String title;
+@override@HiveField(2) final  String description;
+@override@HiveField(3) final  String address;
+@override@HiveField(4) final  String city;
+@override@HiveField(5) final  String state;
+@override@HiveField(6) final  PropertyType propertyType;
+@override@HiveField(7) final  RentPeriod rentPeriod;
  final  List<String> _amenities;
-@override List<String> get amenities {
+@override@HiveField(8) List<String> get amenities {
   if (_amenities is EqualUnmodifiableListView) return _amenities;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_amenities);
 }
 
  final  List<String> _imageUrls;
-@override List<String> get imageUrls {
+@override@HiveField(9) List<String> get imageUrls {
   if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_imageUrls);
 }
 
-@override final  bool isFurnished;
-@override final  bool isPublished;
-@override final  int totalUnits;
+@override@HiveField(10) final  bool isFurnished;
+@override@HiveField(11) final  bool isPublished;
+@override@HiveField(12) final  int totalUnits;
 // maintained by cloud function
-@override final  int availableUnit;
+@override@HiveField(13) final  int availableUnit;
 // maintained by cloud function
-@override final  DateTime createdAt;
-@override final  DateTime updatedAt;
+@override@HiveField(14) final  DateTime createdAt;
+@override@HiveField(15) final  DateTime updatedAt;
 
 /// Create a copy of PropertyModel
 /// with the given fields replaced by the non-null parameter values.
@@ -293,7 +293,7 @@ abstract mixin class _$PropertyModelCopyWith<$Res> implements $PropertyModelCopy
   factory _$PropertyModelCopyWith(_PropertyModel value, $Res Function(_PropertyModel) _then) = __$PropertyModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String title, String description, String address, String city, String state, PropertyType propertyType, RentPeriod rentPeriod, List<String> amenities, List<String> imageUrls, bool isFurnished, bool isPublished, int totalUnits, int availableUnit, DateTime createdAt, DateTime updatedAt
+@HiveField(0) String id,@HiveField(1) String title,@HiveField(2) String description,@HiveField(3) String address,@HiveField(4) String city,@HiveField(5) String state,@HiveField(6) PropertyType propertyType,@HiveField(7) RentPeriod rentPeriod,@HiveField(8) List<String> amenities,@HiveField(9) List<String> imageUrls,@HiveField(10) bool isFurnished,@HiveField(11) bool isPublished,@HiveField(12) int totalUnits,@HiveField(13) int availableUnit,@HiveField(14) DateTime createdAt,@HiveField(15) DateTime updatedAt
 });
 
 
