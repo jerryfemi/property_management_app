@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pro_app/core/features/properties/data/property_model.dart';
+import 'package:pro_app/core/features/properties/providers/bookmark_property_provider.dart';
 import 'package:pro_app/core/features/unit/data/unit_model.dart';
 import 'package:pro_app/core/features/unit/providers/unit_provider.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
@@ -20,8 +22,6 @@ class PropertyCard extends ConsumerStatefulWidget {
 }
 
 class _PropertyCardState extends ConsumerState<PropertyCard> {
-  bool isSaved = false;
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -33,6 +33,13 @@ class _PropertyCardState extends ConsumerState<PropertyCard> {
       data: (units) => units.minRent,
       orElse: () => 0.0,
     );
+
+    final isSaved = ref
+        .watch(savedPropertiesProvider)
+        .maybeWhen(
+          data: (saved) => saved.any((p) => p.id == widget.property.id),
+          orElse: () => false,
+        );
 
     return GestureDetector(
       onTap: widget.onTap,
@@ -99,9 +106,9 @@ class _PropertyCardState extends ConsumerState<PropertyCard> {
                   right: 12,
                   child: GestureDetector(
                     onTap: () {
-                      setState(() {
-                        isSaved = !isSaved;
-                      });
+                      ref
+                          .read(savedPropertiesProvider.notifier)
+                          .toggle(widget.property);
                     },
                     child: Container(
                       padding: const EdgeInsets.all(8),
@@ -110,7 +117,9 @@ class _PropertyCardState extends ConsumerState<PropertyCard> {
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
-                        isSaved ? Icons.bookmark : Icons.bookmark_border,
+                        isSaved
+                            ? CupertinoIcons.bookmark_fill
+                            : CupertinoIcons.bookmark,
                         color: colorScheme.primary,
                         // Primary or muted depending on state
                         size: 20,
@@ -197,7 +206,7 @@ class _PropertyCardState extends ConsumerState<PropertyCard> {
                         textBaseline: TextBaseline.alphabetic,
                         children: [
                           Text(
-                            PropertyFormatters.formatPrice(startingPrice), 
+                            PropertyFormatters.formatPrice(startingPrice),
                             style: theme.textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: colorScheme

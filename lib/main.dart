@@ -3,13 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
+import 'package:pro_app/core/features/properties/data/property_model.dart';
 import 'package:pro_app/core/router/router.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 import 'package:pro_app/firebase_options.dart';
 
 import 'package:pro_app/core/theme/theme_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -19,10 +20,16 @@ void main() async {
   
   await Hive.initFlutter();
   await Hive.openBox('settings');
+  // Register Adapters
+  Hive.registerAdapter(PropertyModelAdapter());
+  Hive.registerAdapter(PropertyTypeAdapter());
+  Hive.registerAdapter(RentPeriodAdapter());
+  
+  await Hive.openBox<PropertyModel>('bookmarks');
   runApp(
     ProviderScope(
       child: DevicePreview(
-        enabled: false,
+        enabled: true,
         builder: (context) => const MyApp(),
       ),
     ),

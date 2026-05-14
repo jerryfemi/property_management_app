@@ -145,7 +145,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/tenant/home',
-                builder: (_, __) => const TenantHomeScreen(),
+                builder: (_, _) => const TenantHomeScreen(),
               ),
             ],
           ),
@@ -153,7 +153,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/tenant/payments',
-                builder: (_, __) => const PaymentsScreen(),
+                builder: (_, _) => const PaymentsScreen(),
               ),
             ],
           ),
@@ -161,7 +161,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/tenant/maintenance',
-                builder: (_, __) => const MaintenanceScreen(),
+                builder: (_, _) => const MaintenanceScreen(),
                 routes: [
                   GoRoute(
                     path: 'new',
@@ -175,7 +175,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/tenant/notifications',
-                builder: (_, __) => const NotificationScreen(),
+                builder: (_, _) => const NotificationScreen(),
               ),
             ],
           ),
@@ -183,7 +183,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/tenant/profile',
-                builder: (_, __) => const ProfileScreen(),
+                builder: (_, _) => const ProfileScreen(),
               ),
             ],
           ),
@@ -198,7 +198,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/staff/tasks',
-                builder: (_, __) => const TasksScreen(),
+                builder: (_, _) => const TasksScreen(),
                 routes: [
                   GoRoute(
                     path: 'ticket/:ticketId',
@@ -214,7 +214,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/staff/profile',
-                builder: (_, __) => const ProfileScreen(),
+                builder: (_, _) => const ProfileScreen(),
               ),
             ],
           ),
@@ -229,7 +229,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/admin/dashboard',
-                builder: (_, __) => const AdminDashboardScreen(),
+                builder: (_, _) => const AdminDashboardScreen(),
               ),
             ],
           ),
@@ -237,7 +237,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/admin/properties',
-                builder: (_, __) => const AdminPropertiesScreen(),
+                builder: (_, _) => const AdminPropertiesScreen(),
               ),
             ],
           ),
@@ -245,7 +245,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/admin/applications',
-                builder: (_, __) => const AdminApplicationsScreen(),
+                builder: (_, _) => const AdminApplicationsScreen(),
                 routes: [
                   GoRoute(
                     path: ':appId/review',
@@ -267,7 +267,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/admin/notifications',
-                builder: (_, __) => const NotificationScreen(),
+                builder: (_, _) => const NotificationScreen(),
               ),
             ],
           ),

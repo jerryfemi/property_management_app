@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,7 +6,6 @@ import 'package:pro_app/core/theme/app_theme.dart';
 import 'package:pro_app/core/widgets/app_error_sheet.dart';
 import 'package:pro_app/core/widgets/app_success_sheet.dart';
 import 'package:pro_app/core/widgets/primary_button.dart';
-import 'package:pro_app/core/features/auth/data/auth_repository.dart';
 import 'package:pro_app/core/features/auth/providers/auth_providers.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
