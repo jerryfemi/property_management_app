@@ -11,27 +11,25 @@ import 'package:pro_app/firebase_options.dart';
 
 import 'package:pro_app/core/theme/theme_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   if (!kIsWeb) {
     await GoogleSignIn.instance.initialize();
   }
-  
+
   await Hive.initFlutter();
   await Hive.openBox('settings');
   // Register Adapters
   Hive.registerAdapter(PropertyModelAdapter());
   Hive.registerAdapter(PropertyTypeAdapter());
   Hive.registerAdapter(RentPeriodAdapter());
-  
+
   await Hive.openBox<PropertyModel>('bookmarks');
   runApp(
     ProviderScope(
-      child: DevicePreview(
-        enabled: true,
-        builder: (context) => const MyApp(),
-      ),
+      child: DevicePreview(enabled: true, builder: (context) => const MyApp()),
     ),
   );
 }
