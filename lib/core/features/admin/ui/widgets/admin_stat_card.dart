@@ -13,8 +13,10 @@ class AdminStatCard extends StatelessWidget {
     final theme = Theme.of(context);
     final appColors = context.appColors;
 
+    final isMobile = MediaQuery.of(context).size.width < 600;
+
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(isMobile ? 10 : 24),
       decoration: BoxDecoration(
         color: appColors.surface,
         borderRadius: BorderRadius.circular(20),
@@ -29,7 +31,7 @@ class AdminStatCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: .center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,7 +39,7 @@ class AdminStatCard extends StatelessWidget {
             children: [
               // Icon Container
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: model.color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -64,13 +66,13 @@ class AdminStatCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: isMobile ? 4 : 8),
           // Statistics Value
           Text(
             model.value,
             style: theme.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.w900,
-              fontSize: 28,
+              fontSize: isMobile ? 20 : 28,
               letterSpacing: -0.5,
               color: theme.textTheme.bodyLarge?.color,
             ),
@@ -92,8 +94,9 @@ class _TrendBadge extends StatelessWidget {
     final color = isPositive
         ? Theme.of(context).colorScheme.secondary
         : Theme.of(context).colorScheme.error;
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
@@ -130,7 +133,7 @@ class _StatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),

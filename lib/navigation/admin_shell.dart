@@ -80,30 +80,30 @@ class AdminShell extends ConsumerWidget {
       },
       destinations: [
         const NavigationDestination(
-          icon: Icon(Icons.dashboard_outlined),
-          selectedIcon: Icon(Icons.dashboard),
+          icon: Icon(CupertinoIcons.square_grid_2x2),
+          selectedIcon: Icon(CupertinoIcons.square_grid_2x2_fill),
           label: 'Dashboard',
         ),
         const NavigationDestination(
-          icon: Icon(Icons.apartment_outlined),
-          selectedIcon: Icon(Icons.apartment),
+          icon: Icon(CupertinoIcons.building_2_fill),
+          selectedIcon: Icon(CupertinoIcons.building_2_fill),
           label: 'Properties',
         ),
         const NavigationDestination(
-          icon: Icon(Icons.description_outlined),
-          selectedIcon: Icon(Icons.description),
+          icon: Icon(CupertinoIcons.doc_text),
+          selectedIcon: Icon(CupertinoIcons.doc_text_fill),
           label: 'Applications',
         ),
         NavigationDestination(
           icon: Badge(
             isLabelVisible: unreadCount > 0,
             label: Text('$unreadCount'),
-            child: const Icon(Icons.notifications_outlined),
+            child: const Icon(CupertinoIcons.bell),
           ),
           selectedIcon: Badge(
             isLabelVisible: unreadCount > 0,
             label: Text('$unreadCount'),
-            child: const Icon(Icons.notifications),
+            child: const Icon(CupertinoIcons.bell_fill),
           ),
           label: 'Alerts',
         ),
