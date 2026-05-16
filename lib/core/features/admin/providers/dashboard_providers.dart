@@ -4,6 +4,7 @@ import 'package:pro_app/core/features/admin/models/dashboard_stat_model.dart';
 import 'package:pro_app/core/features/maintenance/providers/ticket_provider.dart';
 import 'package:pro_app/core/features/payments/providers/payments_provider.dart';
 import 'package:pro_app/core/features/properties/providers/property_provider.dart';
+import 'package:pro_app/core/features/unit/providers/unit_provider.dart';
 
 final dashboardStatsProvider = Provider<List<DashboardStatModel>>((ref) {
   // 1. Watch source providers
@@ -17,7 +18,28 @@ final dashboardStatsProvider = Provider<List<DashboardStatModel>>((ref) {
       paymentsAsync.value?.fold<double>(0, (sum, p) => sum + p.amountPaid) ??
       0.0;
   final activeTickets = ticketsAsync.value?.length ?? 0;
-  const occupancyRate = 94; // Placeholder for now
+
+  final totalUnits = propertiesAsync.maybeWhen(
+    orElse: () => 0,
+    data: (properties) {
+      var sum = 0;
+      for (final property in properties) {
+        sum += property.totalUnits;
+      }
+      return sum;
+    },
+  );
+
+  final occupiedAsync = ref.watch(occupiedUnisProvider);
+
+  final totalOccupiedUnits = occupiedAsync.maybeWhen(
+    orElse: () => 0,
+    data: (units) => units.length,
+  );
+
+  final occupancyRate = totalUnits == 0
+      ? 0.0
+      : (totalOccupiedUnits / totalUnits) * 100;
 
   // 3. Return the mapped list
   return [

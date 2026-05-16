@@ -37,6 +37,19 @@ class UnitRepository {
     return doc.exists ? UnitModel.fromFirestore(doc) : null;
   }
 
+  // get occupied units
+  Stream<List<UnitModel>> occupied() => _collection
+      .where('unit_status', isEqualTo: UnitStatus.occupied.name)
+      .snapshots()
+      .map((snapshot) => snapshot.docs.map(UnitModel.fromFirestore).toList());
+
+  // watch all units 
+  Stream<List<UnitModel>> allUnits() => _collection
+      .orderBy('created_at', descending: false)
+      .snapshots()
+      .map((snapshot) => snapshot.docs.map(UnitModel.fromFirestore).toList());
+
+
   Future<void> updateStatus(String unitId, UnitStatus status) =>
       _collection.doc(unitId).update({
         'unit_status': status.name,

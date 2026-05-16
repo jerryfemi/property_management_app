@@ -20,12 +20,10 @@ final unitsForPropertyProvider = StreamProvider.autoDispose
 // all units for property provider.
 final availableUnitsProvider = StreamProvider.autoDispose
     .family<List<UnitModel>, String>((ref, propertyId) {
- 
-
-  return ref
-      .watch(unitRepositoryProvider)
-      .availableUnitsForProperty(propertyId);
-});
+      return ref
+          .watch(unitRepositoryProvider)
+          .availableUnitsForProperty(propertyId);
+    });
 
 // units grouped units provider
 final groupedUnitsProvider = Provider.autoDispose
@@ -42,8 +40,12 @@ final watchUnitProvider = StreamProvider.autoDispose.family<UnitModel?, String>(
   },
 );
 
+// occupied units provider
+final occupiedUnisProvider = StreamProvider.autoDispose<List<UnitModel>>(
+  (ref) => ref.watch(unitRepositoryProvider).occupied(),
+);
 
-// 
+//
 final unitManagementProvider = StateNotifierProvider.autoDispose
     .family<UnitManagementNotifier, AsyncValue<List<UnitModel>>, String>((
       ref,
@@ -52,7 +54,6 @@ final unitManagementProvider = StateNotifierProvider.autoDispose
       final repo = ref.read(unitRepositoryProvider);
       return UnitManagementNotifier(repo: repo, propertyId: propertyId);
     });
-
 
 class UnitManagementNotifier
     extends StateNotifier<AsyncValue<List<UnitModel>>> {
