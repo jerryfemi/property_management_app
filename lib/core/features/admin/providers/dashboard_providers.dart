@@ -74,12 +74,6 @@ final dashboardStatsProvider = Provider<List<DashboardStatModel>>((ref) {
       color: const Color(0xFFF59E0B), // Warning/Orange
       badgeText: '3 Pending',
     ),
-    DashboardStatModel(
-      title: 'Active Tickets',
-      value: '$activeTickets',
-      icon: CupertinoIcons.doc_text_fill,
-      color: const Color(0xFFF59E0B), // Warning/Orange
-      badgeText: '3 Pending',
-    ),
+   
   ];
 });

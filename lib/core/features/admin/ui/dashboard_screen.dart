@@ -11,7 +11,7 @@ class AdminDashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appColors = context.appColors;
     final stats = ref.watch(dashboardStatsProvider);
-    final isMobile = MediaQuery.of(context).size.width < 600;
+    final isMobile = MediaQuery.of(context).size.width < 900;
 
     return Scaffold(
       appBar: isMobile
@@ -32,24 +32,24 @@ class AdminDashboardScreen extends ConsumerWidget {
           children: [
             const SizedBox(height: 24),
 
-            // --- Stats Section ---
-            if (isMobile)
-              // Horizontal Swiper for Mobile (More compact & no overflow)
-              SizedBox(
-                height: 150,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  itemCount: stats.length,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: 12),
-                  itemBuilder: (context, index) => SizedBox(
-                    width: 180,
-                    child: AdminStatCard(model: stats[index]),
-                  ),
-                ),
-              )
-            else
+            // // --- Stats Section ---
+            // if (isMobile)
+            //   // Horizontal Swiper for Mobile (More compact & no overflow)
+            //   SizedBox(
+            //     height: 150,
+            //     child: ListView.separated(
+            //       scrollDirection: Axis.horizontal,
+            //       padding: const EdgeInsets.symmetric(horizontal: 20),
+            //       itemCount: stats.length,
+            //       separatorBuilder: (context, index) =>
+            //           const SizedBox(width: 12),
+            //       itemBuilder: (context, index) => SizedBox(
+            //         width: 180,
+            //         child: AdminStatCard(model: stats[index]),
+            //       ),
+            //     ),
+            //   )
+            // else
               // Adaptive Grid for Tablet/Desktop
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
