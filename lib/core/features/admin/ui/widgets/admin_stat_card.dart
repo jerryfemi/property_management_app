@@ -13,7 +13,7 @@ class AdminStatCard extends StatelessWidget {
     final theme = Theme.of(context);
     final appColors = context.appColors;
 
-    final isMobile = MediaQuery.of(context).size.width < 600;
+    final isMobile = MediaQuery.of(context).size.width < 900;
 
     return Container(
       padding: EdgeInsets.all(isMobile ? 10 : 24),

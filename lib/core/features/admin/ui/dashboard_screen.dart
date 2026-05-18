@@ -32,7 +32,7 @@ class AdminDashboardScreen extends ConsumerWidget {
           children: [
             const SizedBox(height: 24),
 
-            // // --- Stats Section ---
+            // --- Stats Section ---
             // if (isMobile)
             //   // Horizontal Swiper for Mobile (More compact & no overflow)
             //   SizedBox(
@@ -56,11 +56,11 @@ class AdminDashboardScreen extends ConsumerWidget {
                 child: GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  gridDelegate:  SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 300,
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 20,
-                    mainAxisExtent: 180,
+                    mainAxisExtent: isMobile? 150: 180,     
                   ),
                   itemCount: stats.length,
                   itemBuilder: (context, index) =>
