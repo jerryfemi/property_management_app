@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Web Tenant Detail - PropTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#1B4FD8', accent: '#10B981', background: '#F8FAFC', surface: '#FFFFFF', dark: '#0F172A', muted: '#64748B', danger: '#EF4444', warning: '#F59E0B' }, fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-8">
+    <div
+        class="max-w-[1440px] w-full min-h-[900px] bg-background rounded-3xl shadow-2xl flex overflow-hidden border border-gray-200">
+        <!-- Sidebar (Simplified for context) -->
+        <div class="w-64 bg-dark text-white flex flex-col shrink-0">
+            <div class="p-6 flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold tracking-tight">PropTech</span>
+            </div>
+            <nav class="flex-1 px-4 space-y-2">
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 bg-primary text-white rounded-xl font-medium transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                        </path>
+                    </svg>
+                    Tenants
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col min-w-0 bg-background">
+            <header class="h-20 bg-surface border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
+                <div class="flex items-center gap-3">
+                    <button
+                        class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors">
+                        <svg class="w-5 h-5 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="flex items-center gap-3">
+                        <img src="https://ui-avatars.com/api/?name=Kemi+Olayinka&background=1B4FD8&color=fff"
+                            class="w-10 h-10 rounded-full" alt="Tenant">
+                        <div>
+                            <h1 class="text-2xl font-bold text-dark">Kemi Olayinka</h1>
+                            <p class="text-sm text-muted">Unit 2A • Lekki Gardens Estate</p>
+                        </div>
+                    </div>
+                    <span class="ml-4 px-2.5 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full">Active</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button
+                        class="px-4 py-2 border border-gray-200 text-dark font-medium rounded-lg hover:bg-gray-50 transition-colors">Message</button>
+                    <button
+                        class="px-4 py-2 bg-warning text-white font-medium rounded-lg hover:bg-warning/90 transition-colors">Send
+                        Reminder</button>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-8">
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="col-span-2 space-y-6">
+                        <div class="bg-surface rounded-2xl shadow-sm border border-gray-100 p-6">
+                            <h2 class="text-lg font-bold text-dark mb-4">Lease Details</h2>
+                            <div class="grid grid-cols-3 gap-4 text-sm">
+                                <div>
+                                    <p class="text-muted">Lease Start</p>
+                                    <p class="font-semibold text-dark">Mar 12, 2026</p>
+                                </div>
+                                <div>
+                                    <p class="text-muted">Lease End</p>
+                                    <p class="font-semibold text-dark">Mar 11, 2027</p>
+                                </div>
+                                <div>
+                                    <p class="text-muted">Rent</p>
+                                    <p class="font-semibold text-dark">₦2,500,000 / yr</p>
+                                </div>
+                                <div>
+                                    <p class="text-muted">Payment Status</p>
+                                    <p class="font-semibold text-accent">Cleared</p>
+                                </div>
+                                <div>
+                                    <p class="text-muted">Deposit</p>
+                                    <p class="font-semibold text-dark">₦250,000</p>
+                                </div>
+                                <div>
+                                    <p class="text-muted">Renewal</p>
+                                    <p class="font-semibold text-warning">Due in 45 days</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-surface rounded-2xl shadow-sm border border-gray-100 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="text-lg font-bold text-dark">Payment History</h2>
+                                <button class="text-primary text-sm font-bold hover:underline">View All</button>
+                            </div>
+                            <div class="overflow-hidden border border-gray-200 rounded-xl">
+                                <table class="w-full text-left border-collapse">
+                                    <thead
+                                        class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wider text-muted font-bold">
+                                        <tr>
+                                            <th class="p-3">Date</th>
+                                            <th class="p-3">Amount</th>
+                                            <th class="p-3">Method</th>
+                                            <th class="p-3 text-right">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-100 text-sm">
+                                        <tr class="hover:bg-gray-50 transition-colors">
+                                            <td class="p-3">Mar 12, 2026</td>
+                                            <td class="p-3 font-semibold text-dark">₦2,500,000</td>
+                                            <td class="p-3 text-muted">Bank Transfer</td>
+                                            <td class="p-3 text-right"><span
+                                                    class="px-2 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full">Cleared</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 transition-colors">
+                                            <td class="p-3">Mar 12, 2025</td>
+                                            <td class="p-3 font-semibold text-dark">₦2,300,000</td>
+                                            <td class="p-3 text-muted">Card</td>
+                                            <td class="p-3 text-right"><span
+                                                    class="px-2 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full">Cleared</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="bg-surface rounded-2xl shadow-sm border border-gray-100 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="text-lg font-bold text-dark">Maintenance Tickets</h2>
+                                <button class="text-primary text-sm font-bold hover:underline">View All</button>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="p-4 border border-gray-200 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="font-semibold text-dark">Leaking Kitchen Sink</p>
+                                        <p class="text-sm text-muted">Opened 4 days ago</p>
+                                    </div>
+                                    <span
+                                        class="px-2.5 py-1 bg-warning/10 text-warning text-xs font-bold rounded-full">In
+                                        Progress</span>
+                                </div>
+                                <div class="p-4 border border-gray-200 rounded-xl flex items-center justify-between">
+                                    <div>
+                                        <p class="font-semibold text-dark">Living Room AC Service</p>
+                                        <p class="text-sm text-muted">Resolved last month</p>
+                                    </div>
+                                    <span
+                                        class="px-2.5 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full">Resolved</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-span-1 space-y-6">
+                        <div class="bg-surface rounded-2xl shadow-sm border border-gray-100 p-6">
+                            <h2 class="text-lg font-bold text-dark mb-4">Contact</h2>
+                            <div class="space-y-3 text-sm">
+                                <div>
+                                    <p class="text-muted">Phone</p>
+                                    <p class="font-semibold text-dark">+234 812 555 0192</p>
+                                </div>
+                                <div>
+                                    <p class="text-muted">Email</p>
+                                    <p class="font-semibold text-dark">kemi.o@example.com</p>
+                                </div>
+                                <div>
+                                    <p class="text-muted">Emergency Contact</p>
+                                    <p class="font-semibold text-dark">Olayinka A. (Brother)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-surface rounded-2xl shadow-sm border border-gray-100 p-6">
+                            <h2 class="text-lg font-bold text-dark mb-4">Property</h2>
+                            <div class="space-y-3 text-sm">
+                                <div>
+                                    <p class="text-muted">Property</p>
+                                    <p class="font-semibold text-dark">Lekki Gardens Estate</p>
+                                </div>
+                                <div>
+                                    <p class="text-muted">Unit</p>
+                                    <p class="font-semibold text-dark">2A (2 Bed, 2 Bath)</p>
+                                </div>
+                                <div>
+                                    <p class="text-muted">Address</p>
+                                    <p class="font-semibold text-dark">Lekki Phase 1, Lagos</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-surface rounded-2xl shadow-sm border border-gray-100 p-6">
+                            <h2 class="text-lg font-bold text-dark mb-4">Notes</h2>
+                            <div class="text-sm text-muted">Prefers payment reminders by WhatsApp. Maintenance access
+                                after 10 AM.</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

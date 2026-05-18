@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Master Admin Web - Properties</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#1B4FD8', accent: '#10B981', background: '#F8FAFC', surface: '#FFFFFF', dark: '#0F172A', muted: '#64748B', danger: '#EF4444', warning: '#F59E0B' }, fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            margin: 0;
+            background: #E5E7EB;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .canvas {
+            padding: 80px;
+            display: flex;
+            gap: 80px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .frame-shell {
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvas">
+        <div class="frame-shell">
+            <div
+                class="max-w-[1440px] w-full min-h-[900px] bg-background rounded-3xl shadow-2xl flex overflow-hidden border border-gray-200">
+                <!-- Sidebar -->
+                <div class="w-64 bg-dark text-white flex flex-col shrink-0">
+                    <div class="p-6 flex items-center gap-3 mb-6">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight">PropTech</span>
+                    </div>
+                    <nav class="flex-1 px-4 space-y-2">
+                        <a href="#"
+                            class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl font-medium transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                                </path>
+                            </svg>
+                            Dashboard
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-3 px-4 py-3 bg-primary text-white rounded-xl font-medium transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                            Properties
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl font-medium transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                </path>
+                            </svg>
+                            Tenants
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl font-medium transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                            Applications
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl font-medium transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            Financials
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Main Content -->
+                <div class="flex-1 flex flex-col min-w-0 bg-background">
+                    <header
+                        class="h-20 bg-surface border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
+                        <h1 class="text-2xl font-bold text-dark">Properties</h1>
+                        <div class="flex items-center gap-4">
+                            <div class="relative">
+                                <svg class="w-5 h-5 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                                <input type="text"
+                                    class="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm w-64"
+                                    placeholder="Search properties...">
+                            </div>
+                            <button
+                                class="bg-primary text-white font-medium py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors shadow-sm flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4">
+                                    </path>
+                                </svg>
+                                Add Property
+                            </button>
+                        </div>
+                    </header>
+
+                    <main class="flex-1 overflow-y-auto p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex gap-2">
+                                <button class="px-4 py-2 bg-dark text-white rounded-lg font-medium text-sm">All</button>
+                                <button
+                                    class="px-4 py-2 bg-surface border border-gray-200 text-dark rounded-lg font-medium text-sm hover:bg-gray-50">Vacant</button>
+                                <button
+                                    class="px-4 py-2 bg-surface border border-gray-200 text-dark rounded-lg font-medium text-sm hover:bg-gray-50">Fully
+                                    Occupied</button>
+                                <button
+                                    class="px-4 py-2 bg-surface border border-gray-200 text-dark rounded-lg font-medium text-sm hover:bg-gray-50">Maintenance</button>
+                            </div>
+                            <div class="text-sm text-muted">12 properties</div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-6">
+                            <div
+                                class="bg-surface rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-primary transition-colors">
+                                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Property" class="w-full h-40 object-cover">
+                                <div class="p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-dark">Lekki Gardens Estate</h3>
+                                            <p class="text-sm text-muted">Lekki Phase 1, Lagos</p>
+                                        </div>
+                                        <span
+                                            class="px-2 py-1 bg-danger/10 text-danger text-xs font-bold rounded-full">2
+                                            Vacant</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-muted">30 Units</span>
+                                        <span class="text-dark font-semibold">₦3.5M avg</span>
+                                    </div>
+                                    <button
+                                        class="mt-4 w-full bg-gray-50 border border-gray-200 text-dark font-medium py-2 rounded-lg hover:bg-white">View
+                                        Units</button>
+                                </div>
+                            </div>
+
+                            <div
+                                class="bg-surface rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-primary transition-colors">
+                                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Property" class="w-full h-40 object-cover">
+                                <div class="p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-dark">Victoria Island Heights</h3>
+                                            <p class="text-sm text-muted">Victoria Island, Lagos</p>
+                                        </div>
+                                        <span
+                                            class="px-2 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full">Fully
+                                            Occupied</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-muted">15 Units</span>
+                                        <span class="text-dark font-semibold">₦4.2M avg</span>
+                                    </div>
+                                    <button
+                                        class="mt-4 w-full bg-gray-50 border border-gray-200 text-dark font-medium py-2 rounded-lg hover:bg-white">View
+                                        Units</button>
+                                </div>
+                            </div>
+
+                            <div
+                                class="bg-surface rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-primary transition-colors">
+                                <div class="w-full h-40 bg-gray-100 flex items-center justify-center">
+                                    <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-dark">Ikoyi Luxury Villas</h3>
+                                            <p class="text-sm text-muted">Ikoyi, Lagos</p>
+                                        </div>
+                                        <span
+                                            class="px-2 py-1 bg-warning/10 text-warning text-xs font-bold rounded-full">1
+                                            Maintenance</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-muted">5 Units</span>
+                                        <span class="text-dark font-semibold">₦6.0M avg</span>
+                                    </div>
+                                    <button
+                                        class="mt-4 w-full bg-gray-50 border border-gray-200 text-dark font-medium py-2 rounded-lg hover:bg-white">View
+                                        Units</button>
+                                </div>
+                            </div>
+
+                            <div
+                                class="bg-surface rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-primary transition-colors">
+                                <img src="https://images.unsplash.com/photo-1502005097973-6a7082348e28?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Property" class="w-full h-40 object-cover">
+                                <div class="p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-dark">Yaba Court Residency</h3>
+                                            <p class="text-sm text-muted">Yaba, Lagos</p>
+                                        </div>
+                                        <span
+                                            class="px-2 py-1 bg-danger/10 text-danger text-xs font-bold rounded-full">4
+                                            Vacant</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-muted">22 Units</span>
+                                        <span class="text-dark font-semibold">₦2.3M avg</span>
+                                    </div>
+                                    <button
+                                        class="mt-4 w-full bg-gray-50 border border-gray-200 text-dark font-medium py-2 rounded-lg hover:bg-white">View
+                                        Units</button>
+                                </div>
+                            </div>
+
+                            <div
+                                class="bg-surface rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-primary transition-colors">
+                                <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Property" class="w-full h-40 object-cover">
+                                <div class="p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-dark">Ajah Shoreline</h3>
+                                            <p class="text-sm text-muted">Ajah, Lagos</p>
+                                        </div>
+                                        <span
+                                            class="px-2 py-1 bg-warning/10 text-warning text-xs font-bold rounded-full">2
+                                            Vacant</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-muted">12 Units</span>
+                                        <span class="text-dark font-semibold">₦1.8M avg</span>
+                                    </div>
+                                    <button
+                                        class="mt-4 w-full bg-gray-50 border border-gray-200 text-dark font-medium py-2 rounded-lg hover:bg-white">View
+                                        Units</button>
+                                </div>
+                            </div>
+
+                            <div
+                                class="bg-surface rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-primary transition-colors">
+                                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Property" class="w-full h-40 object-cover">
+                                <div class="p-5">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-dark">Surulere Prime Flats</h3>
+                                            <p class="text-sm text-muted">Surulere, Lagos</p>
+                                        </div>
+                                        <span
+                                            class="px-2 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full">Fully
+                                            Occupied</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-muted">18 Units</span>
+                                        <span class="text-dark font-semibold">₦2.0M avg</span>
+                                    </div>
+                                    <button
+                                        class="mt-4 w-full bg-gray-50 border border-gray-200 text-dark font-medium py-2 rounded-lg hover:bg-white">View
+                                        Units</button>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <div class="frame-shell">
+            <div
+                class="max-w-[1440px] w-full min-h-[900px] bg-background rounded-3xl shadow-2xl flex overflow-hidden border border-gray-200">
+                <!-- Sidebar (Simplified for context) -->
+                <div class="w-64 bg-dark text-white flex flex-col shrink-0">
+                    <div class="p-6 flex items-center gap-3 mb-6">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight">PropTech</span>
+                    </div>
+                    <nav class="flex-1 px-4 space-y-2">
+                        <a href="#"
+                            class="flex items-center gap-3 px-4 py-3 bg-primary text-white rounded-xl font-medium transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                            Properties
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Main Content -->
+                <div class="flex-1 flex flex-col min-w-0 bg-background relative">
+                    <!-- Header -->
+                    <header
+                        class="h-20 bg-surface border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
+                        <div class="flex items-center gap-3">
+                            <button
+                                class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors">
+                                <svg class="w-5 h-5 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7">
+                                    </path>
+                                </svg>
+                            </button>
+                            <h1 class="text-2xl font-bold text-dark">Lekki Gardens Estate</h1>
+                            <span
+                                class="px-2.5 py-1 bg-gray-100 text-dark text-xs font-bold rounded-lg border border-gray-200">30
+                                Units</span>
+                        </div>
+                        <button
+                            class="bg-dark text-white font-medium py-2 px-4 rounded-lg hover:bg-black transition-colors shadow-sm flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Bulk Add Units
+                        </button>
+                    </header>
+
+                    <main class="flex-1 overflow-y-auto p-8">
+                        <!-- Filters & Actions -->
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="flex gap-2">
+                                <button class="px-4 py-2 bg-dark text-white rounded-lg font-medium text-sm">All
+                                    Units</button>
+                                <button
+                                    class="px-4 py-2 bg-surface border border-gray-200 text-dark rounded-lg font-medium text-sm hover:bg-gray-50">Occupied</button>
+                                <button
+                                    class="px-4 py-2 bg-surface border border-gray-200 text-dark rounded-lg font-medium text-sm hover:bg-gray-50">Vacant</button>
+                                <button
+                                    class="px-4 py-2 bg-surface border border-gray-200 text-dark rounded-lg font-medium text-sm hover:bg-gray-50">Maintenance</button>
+                            </div>
+                            <div class="relative w-64">
+                                <svg class="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                                <input type="text"
+                                    class="w-full pl-9 pr-4 py-2 bg-surface border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm"
+                                    placeholder="Search by unit or tenant...">
+                            </div>
+                        </div>
+
+                        <!-- Data Table -->
+                        <div class="bg-surface rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr
+                                        class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wider text-muted font-bold">
+                                        <th class="p-4 w-16 text-center"><input type="checkbox"
+                                                class="rounded border-gray-300 text-primary focus:ring-primary"></th>
+                                        <th class="p-4">Unit</th>
+                                        <th class="p-4">Type</th>
+                                        <th class="p-4">Base Rent / Yr</th>
+                                        <th class="p-4">Status</th>
+                                        <th class="p-4">Current Tenant</th>
+                                        <th class="p-4 text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 text-sm">
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="p-4 text-center"><input type="checkbox"
+                                                class="rounded border-gray-300 text-primary focus:ring-primary"></td>
+                                        <td class="p-4 font-bold text-dark">1A</td>
+                                        <td class="p-4 text-muted">2 Bed, 2 Bath</td>
+                                        <td class="p-4 font-medium text-dark">₦3,500,000</td>
+                                        <td class="p-4"><span
+                                                class="px-2.5 py-1 bg-accent/10 text-accent font-bold text-xs rounded-full">Occupied</span>
+                                        </td>
+                                        <td class="p-4 flex items-center gap-2">
+                                            <img src="https://ui-avatars.com/api/?name=David+O"
+                                                class="w-6 h-6 rounded-full" alt="Tenant">
+                                            <span class="font-medium text-dark">David O.</span>
+                                        </td>
+                                        <td class="p-4 text-right">
+                                            <button class="text-primary hover:text-primary/80 font-medium">Edit</button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="p-4 text-center"><input type="checkbox"
+                                                class="rounded border-gray-300 text-primary focus:ring-primary"></td>
+                                        <td class="p-4 font-bold text-dark">1B</td>
+                                        <td class="p-4 text-muted">1 Bed, 1 Bath</td>
+                                        <td class="p-4 font-medium text-dark">₦2,500,000</td>
+                                        <td class="p-4"><span
+                                                class="px-2.5 py-1 bg-gray-100 text-dark font-bold text-xs rounded-full border border-gray-200">Vacant</span>
+                                        </td>
+                                        <td class="p-4 text-muted italic">None</td>
+                                        <td class="p-4 text-right">
+                                            <button class="text-primary hover:text-primary/80 font-medium">Edit</button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="p-4 text-center"><input type="checkbox"
+                                                class="rounded border-gray-300 text-primary focus:ring-primary"></td>
+                                        <td class="p-4 font-bold text-dark">2A</td>
+                                        <td class="p-4 text-muted">1 Bed, 1 Bath</td>
+                                        <td class="p-4 font-medium text-dark">₦2,500,000</td>
+                                        <td class="p-4"><span
+                                                class="px-2.5 py-1 bg-warning/10 text-warning font-bold text-xs rounded-full">Reserved</span>
+                                        </td>
+                                        <td class="p-4 flex items-center gap-2">
+                                            <span
+                                                class="text-warning text-xs font-bold border border-warning/20 px-2 py-0.5 rounded">Pending
+                                                App</span>
+                                        </td>
+                                        <td class="p-4 text-right">
+                                            <button class="text-primary hover:text-primary/80 font-medium">Edit</button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="p-4 text-center"><input type="checkbox"
+                                                class="rounded border-gray-300 text-primary focus:ring-primary"></td>
+                                        <td class="p-4 font-bold text-dark">2B</td>
+                                        <td class="p-4 text-muted">2 Bed, 2 Bath</td>
+                                        <td class="p-4 font-medium text-dark">₦3,500,000</td>
+                                        <td class="p-4"><span
+                                                class="px-2.5 py-1 bg-danger/10 text-danger font-bold text-xs rounded-full">Maintenance</span>
+                                        </td>
+                                        <td class="p-4 text-muted italic">Under Repair</td>
+                                        <td class="p-4 text-right">
+                                            <button class="text-primary hover:text-primary/80 font-medium">Edit</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div
+                                class="p-4 border-t border-gray-200 flex justify-between items-center text-sm text-muted">
+                                <span>Showing 1 to 4 of 30 units</span>
+                                <div class="flex gap-1">
+                                    <button
+                                        class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-50"
+                                        disabled>Prev</button>
+                                    <button class="px-3 py-1 bg-primary text-white rounded">1</button>
+                                    <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50">2</button>
+                                    <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50">3</button>
+                                    <button
+                                        class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

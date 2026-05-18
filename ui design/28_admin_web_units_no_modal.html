@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Web Units - PropTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#1B4FD8', accent: '#10B981', background: '#F8FAFC', surface: '#FFFFFF', dark: '#0F172A', muted: '#64748B', danger: '#EF4444', warning: '#F59E0B' }, fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-8">
+    <div
+        class="max-w-[1440px] w-full min-h-[900px] bg-background rounded-3xl shadow-2xl flex overflow-hidden border border-gray-200">
+        <!-- Sidebar (Simplified for context) -->
+        <div class="w-64 bg-dark text-white flex flex-col shrink-0">
+            <div class="p-6 flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold tracking-tight">PropTech</span>
+            </div>
+            <nav class="flex-1 px-4 space-y-2">
+                <!-- Active state on Properties -->
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 bg-primary text-white rounded-xl font-medium transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                        </path>
+                    </svg>
+                    Properties
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col min-w-0 bg-background relative">
+            <!-- Header -->
+            <header class="h-20 bg-surface border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
+                <div class="flex items-center gap-3">
+                    <button
+                        class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors">
+                        <svg class="w-5 h-5 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <h1 class="text-2xl font-bold text-dark">Lekki Gardens Estate</h1>
+                    <span
+                        class="px-2.5 py-1 bg-gray-100 text-dark text-xs font-bold rounded-lg border border-gray-200">30
+                        Units</span>
+                </div>
+                <button
+                    class="bg-dark text-white font-medium py-2 px-4 rounded-lg hover:bg-black transition-colors shadow-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Bulk Add Units
+                </button>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-8">
+                <!-- Filters & Actions -->
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex gap-2">
+                        <button class="px-4 py-2 bg-dark text-white rounded-lg font-medium text-sm">All Units</button>
+                        <button
+                            class="px-4 py-2 bg-surface border border-gray-200 text-dark rounded-lg font-medium text-sm hover:bg-gray-50">Occupied</button>
+                        <button
+                            class="px-4 py-2 bg-surface border border-gray-200 text-dark rounded-lg font-medium text-sm hover:bg-gray-50">Vacant</button>
+                        <button
+                            class="px-4 py-2 bg-surface border border-gray-200 text-dark rounded-lg font-medium text-sm hover:bg-gray-50">Maintenance</button>
+                    </div>
+                    <div class="relative w-64">
+                        <svg class="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text"
+                            class="w-full pl-9 pr-4 py-2 bg-surface border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm"
+                            placeholder="Search by unit or tenant...">
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div class="bg-surface rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wider text-muted font-bold">
+                                <th class="p-4 w-16 text-center"><input type="checkbox"
+                                        class="rounded border-gray-300 text-primary focus:ring-primary"></th>
+                                <th class="p-4">Unit</th>
+                                <th class="p-4">Type</th>
+                                <th class="p-4">Base Rent / Yr</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4">Current Tenant</th>
+                                <th class="p-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-sm">
+                            <!-- Row 1: Occupied -->
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="p-4 text-center"><input type="checkbox"
+                                        class="rounded border-gray-300 text-primary focus:ring-primary"></td>
+                                <td class="p-4 font-bold text-dark">1A</td>
+                                <td class="p-4 text-muted">2 Bed, 2 Bath</td>
+                                <td class="p-4 font-medium text-dark">₦3,500,000</td>
+                                <td class="p-4"><span
+                                        class="px-2.5 py-1 bg-accent/10 text-accent font-bold text-xs rounded-full">Occupied</span>
+                                </td>
+                                <td class="p-4 flex items-center gap-2">
+                                    <img src="https://ui-avatars.com/api/?name=David+O" class="w-6 h-6 rounded-full"
+                                        alt="Tenant">
+                                    <span class="font-medium text-dark">David O.</span>
+                                </td>
+                                <td class="p-4 text-right">
+                                    <button class="text-primary hover:text-primary/80 font-medium">Edit</button>
+                                </td>
+                            </tr>
+
+                            <!-- Row 2: Vacant -->
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="p-4 text-center"><input type="checkbox"
+                                        class="rounded border-gray-300 text-primary focus:ring-primary"></td>
+                                <td class="p-4 font-bold text-dark">1B</td>
+                                <td class="p-4 text-muted">1 Bed, 1 Bath</td>
+                                <td class="p-4 font-medium text-dark">₦2,500,000</td>
+                                <td class="p-4"><span
+                                        class="px-2.5 py-1 bg-gray-100 text-dark font-bold text-xs rounded-full border border-gray-200">Vacant</span>
+                                </td>
+                                <td class="p-4 text-muted italic">None</td>
+                                <td class="p-4 text-right">
+                                    <button class="text-primary hover:text-primary/80 font-medium">Edit</button>
+                                </td>
+                            </tr>
+
+                            <!-- Row 3: Reserved (Pending App) -->
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="p-4 text-center"><input type="checkbox"
+                                        class="rounded border-gray-300 text-primary focus:ring-primary"></td>
+                                <td class="p-4 font-bold text-dark">2A</td>
+                                <td class="p-4 text-muted">1 Bed, 1 Bath</td>
+                                <td class="p-4 font-medium text-dark">₦2,500,000</td>
+                                <td class="p-4"><span
+                                        class="px-2.5 py-1 bg-warning/10 text-warning font-bold text-xs rounded-full">Reserved</span>
+                                </td>
+                                <td class="p-4 flex items-center gap-2">
+                                    <span
+                                        class="text-warning text-xs font-bold border border-warning/20 px-2 py-0.5 rounded">Pending
+                                        App</span>
+                                </td>
+                                <td class="p-4 text-right">
+                                    <button class="text-primary hover:text-primary/80 font-medium">Edit</button>
+                                </td>
+                            </tr>
+
+                            <!-- Row 4: Maintenance -->
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="p-4 text-center"><input type="checkbox"
+                                        class="rounded border-gray-300 text-primary focus:ring-primary"></td>
+                                <td class="p-4 font-bold text-dark">2B</td>
+                                <td class="p-4 text-muted">2 Bed, 2 Bath</td>
+                                <td class="p-4 font-medium text-dark">₦3,500,000</td>
+                                <td class="p-4"><span
+                                        class="px-2.5 py-1 bg-danger/10 text-danger font-bold text-xs rounded-full">Maintenance</span>
+                                </td>
+                                <td class="p-4 text-muted italic">Under Repair</td>
+                                <td class="p-4 text-right">
+                                    <button class="text-primary hover:text-primary/80 font-medium">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="p-4 border-t border-gray-200 flex justify-between items-center text-sm text-muted">
+                        <span>Showing 1 to 4 of 30 units</span>
+                        <div class="flex gap-1">
+                            <button
+                                class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 disabled:opacity-50"
+                                disabled>Prev</button>
+                            <button class="px-3 py-1 bg-primary text-white rounded">1</button>
+                            <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50">2</button>
+                            <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50">3</button>
+                            <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
