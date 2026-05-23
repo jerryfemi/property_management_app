@@ -8,26 +8,39 @@ import 'package:pro_app/core/theme/app_theme.dart';
 final selectedCategoryProvider = StateProvider<String>((ref) => 'All');
 
 class CategoryChips extends ConsumerWidget {
-  const CategoryChips({super.key});
+  const CategoryChips({
+    super.key,
+    required this.categories,
+    required this.selectedProvider,
+    this.borderRadius,
+    this.selectedColor,
+    this.padding,
+  });
 
-  final List<String> categories = const [
-    'All',
-    'Shortlet',
-    '1 Bed',
-    '2 Bed',
-    'Commercial',
-  ];
+  final List<String> categories;
+
+  final StateProvider<String> selectedProvider;
+
+  final double? borderRadius;
+
+  final Color? selectedColor;
+
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedCategory = ref.watch(selectedCategoryProvider);
+    final selectedCategory = ref.watch(selectedProvider);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final appColors = context.appColors;
 
+    final radius = borderRadius ?? 20;
+    final selColor = selectedColor ?? colorScheme.primary;
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding:
+          padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: categories.map((category) {
           final isSelected = selectedCategory == category;
@@ -35,26 +48,32 @@ class CategoryChips extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ChoiceChip(
-              label: Text(category),
+              label: Text(
+                category,
+                style: theme.textTheme.labelMedium?.copyWith(
+                  fontWeight: .bold,
+                  color: isSelected ? Colors.white : null,
+                ),
+              ),
               selected: isSelected,
               onSelected: (selected) {
                 if (selected) {
-                  ref.read(selectedCategoryProvider.notifier).state = category;
+                  ref.read(selectedProvider.notifier).state = category;
                 }
               },
               showCheckmark: false,
-              selectedColor: colorScheme.primary,
-              backgroundColor: appColors.muted.withValues(alpha: 0.2),
+              selectedColor: selColor,
+              backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.6),
               labelStyle: theme.textTheme.bodyMedium?.copyWith(
                 color: isSelected ? Colors.white : appColors.muted,
                 fontWeight: FontWeight.w600,
               ),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(radius.toDouble()),
                 side: BorderSide(
                   color: isSelected
-                      ? colorScheme.primary.withValues(alpha: 0.35)
-                      : appColors.muted.withValues(alpha: 0.15),
+                      ? selColor.withValues(alpha: 0.35)
+                      : appColors.muted.withValues(alpha: 0.08),
                 ),
               ),
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

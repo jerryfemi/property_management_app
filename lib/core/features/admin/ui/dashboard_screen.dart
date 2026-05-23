@@ -60,7 +60,7 @@ class AdminDashboardScreen extends ConsumerWidget {
                     maxCrossAxisExtent: 300,
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 20,
-                    mainAxisExtent: isMobile? 150: 180,     
+                    mainAxisExtent: isMobile? 150: 180,
                   ),
                   itemCount: stats.length,
                   itemBuilder: (context, index) =>
