@@ -45,6 +45,11 @@ final occupiedUnisProvider = StreamProvider.autoDispose<List<UnitModel>>(
   (ref) => ref.watch(unitRepositoryProvider).occupied(),
 );
 
+// all units provider (admin — used for property-level filtering by unit status)
+final allUnitsProvider = StreamProvider.autoDispose<List<UnitModel>>(
+  (ref) => ref.watch(unitRepositoryProvider).allUnits(),
+);
+
 //
 final unitManagementProvider = StateNotifierProvider.autoDispose
     .family<UnitManagementNotifier, AsyncValue<List<UnitModel>>, String>((

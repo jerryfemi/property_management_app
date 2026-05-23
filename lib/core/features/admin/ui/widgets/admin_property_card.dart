@@ -1,23 +1,33 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pro_app/core/features/properties/data/property_model.dart';
+import 'package:pro_app/core/features/unit/data/unit_model.dart';
+import 'package:pro_app/core/features/admin/providers/dashboard_providers.dart';
 import 'package:pro_app/core/theme/app_theme.dart';
 import 'package:pro_app/core/utils/property_formatters.dart';
 import 'package:pro_app/core/widgets/status_badge.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class AdminPropertyCard extends StatelessWidget {
+class AdminPropertyCard extends ConsumerWidget {
   final PropertyModel property;
   final VoidCallback onTap;
-  const AdminPropertyCard({super.key, required this.onTap, required this.property});
+  const AdminPropertyCard({
+    super.key,
+    required this.onTap,
+    required this.property,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final appColors = context.appColors;
+    final units = ref.watch(adminUnitsByPropertyProvider)[property.id] ?? [];
+    final startingPrice = units.minRent;
+    final totalUnits = units.length;
 
-    return  GestureDetector(
-      onTap:onTap,
+    return GestureDetector(
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
@@ -35,55 +45,40 @@ class AdminPropertyCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image Section
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(16),
-                  ),
-                  child: Hero(
-                    tag: 'property_image_${property.id}',
-                    child: CachedNetworkImage(
-                      imageUrl: property.imageUrls.isNotEmpty
-                          ? property.imageUrls.first
-                          : 'https://via.placeholder.com/400x200?text=No+Image',
-                      height: 200,
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(16),
+              ),
+              child: Hero(
+                tag: 'property_image_${property.id}',
+                child: CachedNetworkImage(
+                  imageUrl: property.imageUrls.isNotEmpty
+                      ? property.imageUrls.first
+                      : 'https://via.placeholder.com/400x200?text=No+Image',
+                  height: 150,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Skeletonizer(
+                    child: Container(
+                      height: 150,
                       width: double.infinity,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Skeletonizer(
-                        child: Container(
-                          height: 200,
-                          width: double.infinity,
-                          color: Colors.grey.shade300,
-                        ),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        height: 200,
-                        color: appColors.muted.withValues(alpha: 0.1),
-                        child: const Icon(Icons.error),
-                      ),
+                      color: Colors.grey.shade300,
                     ),
                   ),
-                ),
-
-                // Top Left Badge
-                Positioned(
-                  top: 12,
-                  left: 12,
-                  child: StatusBadge(
-                    text: '${property.availableUnit} Units Available',
+                  errorWidget: (context, url, error) => Container(
+                    height: 150,
+                    color: appColors.muted.withValues(alpha: 0.1),
+                    child: const Icon(Icons.error),
                   ),
                 ),
-
-            
-              ],
+              ),
             ),
 
             // Details Section
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Title and Rating
                   Row(
@@ -92,7 +87,7 @@ class AdminPropertyCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           property.title,
-                          style: theme.textTheme.titleMedium?.copyWith(
+                          style: theme.textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                           maxLines: 1,
@@ -100,21 +95,16 @@ class AdminPropertyCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Row(
-                        children: [
-                          Icon(Icons.star, color: appColors.warning, size: 16),
-                          const SizedBox(width: 4),
-                          Text(
-                            '4.8', // Mock rating for now
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+
+                      StatusBadge(
+                        text: 'dummy',
+                        textColor: theme.colorScheme.error,
+                        backgroundColor: theme.colorScheme.error.withValues(
+                          alpha: 0.1,
+                        ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
 
                   // Location
                   Row(
@@ -128,7 +118,7 @@ class AdminPropertyCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           '${property.city}, ${property.state}',
-                          style: theme.textTheme.bodyMedium?.copyWith(
+                          style: theme.textTheme.labelMedium?.copyWith(
                             color: appColors.muted,
                           ),
                           maxLines: 1,
@@ -137,41 +127,54 @@ class AdminPropertyCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 14),
 
-                  // Price
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  // units and price
+                  Row(
+                    mainAxisAlignment: .spaceBetween,
                     children: [
+                      // unit count
                       Text(
-                        'Starting from',
-                        style: theme.textTheme.bodySmall?.copyWith(
+                        '$totalUnits ${totalUnits > 1 ? 'Units' : 'Unit'} ',
+                        style: theme.textTheme.labelMedium?.copyWith(
                           color: appColors.muted,
                         ),
                       ),
-                      const SizedBox(height: 2),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: [
-                          Text(
-                            PropertyFormatters.formatPrice(startingPrice),
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color:theme.colorScheme
-                                  .primary, // Used primary color for prominent price
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '/${property.rentPeriod.name.substring(0, 2)}', // e.g. /ye or /mo
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: appColors.muted,
-                            ),
-                          ),
-                        ],
+
+                      // price
+                      Text(
+                        '${PropertyFormatters.formatPrice(startingPrice)} avg',
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          fontWeight: .bold,
+                        ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 14),
+
+                  // view unit button
+                  SizedBox(
+                    width: 250,
+                    child: FilledButton(
+                      onPressed: () {},
+                      style: FilledButton.styleFrom(
+                        backgroundColor: appColors.background,
+                        foregroundColor: theme.colorScheme.onSurface,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: .circular(10),
+                          side: BorderSide(
+                            color: appColors.muted.withValues(alpha: 0.05),
+                          ),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Text(
+                        'View Units',
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          fontWeight: .bold,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -179,6 +182,6 @@ class AdminPropertyCard extends StatelessWidget {
           ],
         ),
       ),
-    ) ;
+    );
   }
 }
