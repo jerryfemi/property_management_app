@@ -29,7 +29,7 @@ final userRoleProvider = FutureProvider.autoDispose<UserRole?>((ref) async {
   if (user == null) return null;
 
   // Try Auth custom claim first
-  final token = await user.getIdTokenResult(true);
+  final token = await user.getIdTokenResult();
   final claimRole = token.claims?['role'] as String?;
 
   if (claimRole != null && claimRole.isNotEmpty) {

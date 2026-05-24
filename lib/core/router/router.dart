@@ -7,6 +7,10 @@ import 'package:pro_app/core/features/admin/ui/applications_screen.dart';
 import 'package:pro_app/core/features/admin/ui/dashboard_screen.dart';
 import 'package:pro_app/core/features/admin/ui/lease_creation_screen.dart';
 import 'package:pro_app/core/features/admin/ui/properties_screen.dart';
+import 'package:pro_app/core/features/admin/ui/tenants_screen.dart';
+import 'package:pro_app/core/features/admin/ui/financials_screen.dart';
+import 'package:pro_app/core/features/admin/ui/property_detail_screen.dart';
+import 'package:pro_app/core/features/admin/ui/tenant_detail_screen.dart';
 import 'package:pro_app/core/features/applications/ui/application_form_screen.dart';
 import 'package:pro_app/core/features/applications/ui/my_applications_screen.dart';
 import 'package:pro_app/core/features/auth/data/user_model.dart';
@@ -238,6 +242,30 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/admin/properties',
                 builder: (_, _) => const AdminPropertiesScreen(),
+                routes: [
+                  GoRoute(
+                    path: ':propertyId',
+                    builder: (_, s) => AdminPropertyDetailScreen(
+                      propertyId: s.pathParameters['propertyId']!,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/admin/tenants',
+                builder: (_, _) => const AdminTenantsScreen(),
+                routes: [
+                  GoRoute(
+                    path: ':tenantId',
+                    builder: (_, s) => AdminTenantDetailScreen(
+                      tenantId: s.pathParameters['tenantId']!,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -260,6 +288,14 @@ final routerProvider = Provider<GoRouter>((ref) {
                     ),
                   ),
                 ],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/admin/financials',
+                builder: (_, _) => const AdminFinancialsScreen(),
               ),
             ],
           ),

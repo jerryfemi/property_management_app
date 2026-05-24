@@ -119,7 +119,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     height: 56,
                     width: isLast ? 150 : 56,
                     decoration: BoxDecoration(
-                      color: isLast
+                      color: (isLast || isDark)
                           ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).colorScheme.onSurface,
                       borderRadius: BorderRadius.circular(isLast ? 16 : 28),
@@ -140,7 +140,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                             : Icon(
                                 Icons.chevron_right,
                                 key: const ValueKey('chevron'),
-                                color: Theme.of(context).colorScheme.surface,
+                                color: isDark
+                                    ? Colors.white
+                                    : Theme.of(context).colorScheme.surface,
                                 size: 28,
                               ),
                       ),

@@ -158,7 +158,19 @@ class _MarketplaceSliverAppBarState
               ),
 
               // Category Chips
-              const SizedBox(height: 60, child: CategoryChips()),
+               SizedBox(
+                height: 60,
+                child: CategoryChips(
+                  categories: [
+                    'All',
+                    'Shortlet',
+                    '1 Bed',
+                    '2 Bed',
+                    'Commercial',
+                  ],
+                  selectedProvider: selectedCategoryProvider,
+                ),
+              ),
             ],
           ),
         ),

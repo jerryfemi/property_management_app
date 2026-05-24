@@ -22,9 +22,15 @@ final allPropertiesProvider = StreamProvider.autoDispose<List<PropertyModel>>((
   return ref.watch(propertyRepositoryProvider).watchAll();
 });
 
+// total units provider
+// final totalUnisProvider = Provider<int>((ref) {
+//   final propertiesAsyc = ref.watch(allPropertiesProvider);
+
+//   return propertiesAsyc.may
+// },)
+
 //propertyDetail provider
 final propertyDetailProvider = FutureProvider.autoDispose
     .family<PropertyModel?, String>((ref, propertyId) async {
       return ref.watch(propertyRepositoryProvider).getProperty(propertyId);
     });
-    
