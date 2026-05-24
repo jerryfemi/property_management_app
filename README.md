@@ -13,6 +13,7 @@ admin team manages everything.
 ## Table of Contents
 
 - Overview
+- Screenshots
 - User Roles and Core Flows
 - Features
 - Tech Stack
@@ -20,7 +21,6 @@ admin team manages everything.
 - Data Model and Firestore Collections
 - Cloud Functions
 - Project Structure
-- Screenshots
 - Getting Started
 - Firebase Setup
 - Running the App
@@ -37,6 +37,18 @@ PropApp is a property marketplace and property management tool for a single
 agency. It supports mobile and web/tablet layouts and uses Firebase for auth,
 storage, data, and server-side workflows. Payments are verified server-side via
 webhook and never processed directly in the Flutter client.
+
+---
+
+## Screenshots
+
+![Auth Landing](assets/images/auth%20landing.png)
+![Dashboard](assets/images/dashboard.png)
+![Home](assets/images/mobile_dashboard.png)
+![Marketplace](assets/images/marketplace.jpg)
+![Units Detail](assets/images/units_detail.png)
+![Admin Properties](assets/images/admin_properties.png)
+![Filter](assets/images/filter.png)
 
 ---
 
@@ -188,18 +200,6 @@ lib/
 functions/
 	src/
 ```
-
----
-
-## Screenshots
-
-![Auth Landing](assets/images/auth%20landing.png)
-![Dashboard](assets/images/dashboard.png)
-![Home](assets/images/home.png)
-![Marketplace](assets/images/marketplace.jpg)
-![Units Detail](assets/images/units_detail.png)
-![Admin Properties](assets/images/admin_properties.png)
-![Filter](assets/images/filter.png)
 
 ---
 
