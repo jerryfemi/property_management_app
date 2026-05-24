@@ -73,7 +73,7 @@ class AdminPropertiesScreen extends ConsumerWidget {
                     final property = properties[index];
                     return AdminPropertyCard(
                       onTap: () =>
-                          context.go('/admin/properties/${property.id}'),
+                          context.push('/admin/properties/${property.id}'),
                       property: property,
                       key: ValueKey(property.id),
                     );

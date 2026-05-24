@@ -17,7 +17,7 @@ class AdminDashboardScreen extends ConsumerWidget {
       appBar: isMobile
           ? AppBar(
               title: Text(
-                'Property Portfolio',
+                'Dashboard',
                 style: Theme.of(
                   context,
                 ).textTheme.titleLarge?.copyWith(fontWeight: .bold),
@@ -50,23 +50,23 @@ class AdminDashboardScreen extends ConsumerWidget {
             //     ),
             //   )
             // else
-              // Adaptive Grid for Tablet/Desktop
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate:  SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 300,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    mainAxisExtent: isMobile? 150: 180,
-                  ),
-                  itemCount: stats.length,
-                  itemBuilder: (context, index) =>
-                      AdminStatCard(model: stats[index]),
+            // Adaptive Grid for Tablet/Desktop
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 32),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 300,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  mainAxisExtent: isMobile ? 150 : 180,
                 ),
+                itemCount: stats.length,
+                itemBuilder: (context, index) =>
+                    AdminStatCard(model: stats[index]),
               ),
+            ),
 
             const SizedBox(height: 40),
 
