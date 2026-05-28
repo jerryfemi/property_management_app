@@ -139,12 +139,41 @@ final filteredAdminPropertiesProvider =
 // Extracted grouped units so AdminPropertyCard can read it synchronously
 final adminUnitsByPropertyProvider =
     Provider.autoDispose<Map<String, List<UnitModel>>>((ref) {
-  final unitsAsync = ref.watch(allUnitsProvider);
-  final units = unitsAsync.value ?? [];
+      final unitsAsync = ref.watch(allUnitsProvider);
+      final units = unitsAsync.value ?? [];
 
-  final unitsByProperty = <String, List<UnitModel>>{};
-  for (final unit in units) {
-    unitsByProperty.putIfAbsent(unit.propertyId, () => []).add(unit);
-  }
-  return unitsByProperty;
-});
+      final unitsByProperty = <String, List<UnitModel>>{};
+      for (final unit in units) {
+        unitsByProperty.putIfAbsent(unit.propertyId, () => []).add(unit);
+      }
+      return unitsByProperty;
+    });
+
+// provider for unit filter
+final selectedUnitProvider = StateProvider<String>((ref) => 'All');
+
+// filtered units for property provider
+final filteredUnitsForPropertyProvider = Provider.autoDispose
+    .family<AsyncValue<List<UnitModel>>, String>((ref, propertyId) {
+      final filter = ref.watch(selectedUnitProvider);
+      final unitAsync = ref.watch(unitsForPropertyProvider(propertyId));
+
+      // filter method
+      final units = unitAsync.value!;
+      if (filter == 'all') {
+        return AsyncData(units);
+      }
+
+      // filtered units
+      final filtered = units.where((unit) {
+        return switch (filter) {
+          'Ocuupied' => unit.unitStatus == UnitStatus.occupied,
+          'Vacant' => unit.unitStatus == UnitStatus.available,
+          'Maintenance' => unit.unitStatus == UnitStatus.maintenance,
+          'Reserved' => unit.unitStatus == UnitStatus.reserved,
+
+          _ => true,
+        };
+      }).toList();
+      return AsyncData(filtered);
+    });
