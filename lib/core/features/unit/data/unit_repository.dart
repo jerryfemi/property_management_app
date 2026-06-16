@@ -105,4 +105,8 @@ class UnitRepository {
     // Cloud Function onUnitStatusChange fires after commit
     // and updates available_units + total_units on the property
   }
+
+  // get tenants unit.
+  // compare where current tenant id = user id.
+  // watch user id where the role is tenant
 }
