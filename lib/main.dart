@@ -29,7 +29,10 @@ void main() async {
   await Hive.openBox<PropertyModel>('bookmarks');
   runApp(
     ProviderScope(
-      child: DevicePreview(enabled: true, builder: (context) => const MyApp()),
+      child: DevicePreview(
+        enabled: kDebugMode,
+        builder: (context) => const MyApp(),
+      ),
     ),
   );
 }

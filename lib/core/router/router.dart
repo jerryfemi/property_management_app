@@ -39,6 +39,7 @@ import 'package:pro_app/navigation/guest_shell.dart';
 import 'package:pro_app/navigation/staff_shell.dart';
 import 'package:pro_app/navigation/tenant_shell.dart';
 import 'package:pro_app/core/router/onboarding_provider.dart';
+import 'package:pro_app/search_bar.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final notifier = ref.watch(routerNotifierProvider.notifier);
@@ -51,7 +52,7 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const SplashGate(),
+        builder: (context, state) => const TestScreen(),
       ),
 
       // ── Auth ─────────────────────────────────────────────────────────────
@@ -313,6 +314,8 @@ final routerProvider = Provider<GoRouter>((ref) {
 
     // ── Redirect logic ──────────────────────────────────────────────────────
     redirect: (context, state) {
+      if (state.matchedLocation == '/') return null; // Bypass for testing TestScreen
+
       final location = state.matchedLocation;
 
       // ── GATE: Block all redirects until both async values are loaded ──
