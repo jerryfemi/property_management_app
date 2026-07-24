@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 class AnimatedSearchBar extends StatefulWidget {
   final void Function(String)? onChanged;
+
   const AnimatedSearchBar({super.key, required this.onChanged});
 
   @override
@@ -18,29 +19,23 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(() {
-      // Auto-collapse if it loses focus and is empty
-      if (!_focusNode.hasFocus && _controller.text.isEmpty && _expanded) {
-        toggle();
-      }
-    });
+    _focusNode.addListener(_onFocusChange);
   }
 
-  // toggle
-  void toggle() {
+  void _onFocusChange() {
     setState(() {
-      _expanded = !_expanded;
+      _expanded = _focusNode.hasFocus;
     });
-
-    if (_expanded) {
-      _focusNode.requestFocus();
-    } else {
-      _focusNode.unfocus();
+    // When focus is lost, clear the search and collapse
+    if (!_expanded) {
+      _controller.clear();
+      widget.onChanged?.call('');
     }
   }
 
   @override
   void dispose() {
+    _focusNode.removeListener(_onFocusChange);
     _focusNode.dispose();
     _controller.dispose();
     super.dispose();
@@ -48,66 +43,31 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final kWidth = MediaQuery.of(context).size.width - 40;
+    final screenWidth = MediaQuery.of(context).size.width - 40;
+
     return AnimatedContainer(
-      width: _expanded ? kWidth : 56,
-      curve: Curves.easeInOut,
-      height: 52,
+      width: _expanded ? screenWidth : 44,
       duration: 300.ms,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.circular(_expanded ? 16 : 28),
-      ),
-      child: AnimatedSwitcher(
-        duration: 300.ms,
-        transitionBuilder: (child, animation) => FadeTransition(
-          opacity: animation,
-          child: ScaleTransition(scale: animation, child: child),
-        ),
-        child: _expanded
-            ? SizedBox(
-                key: ValueKey('expanded'),
-                width: kWidth,
-                child: Row(
-                  children: [
-                    // searchField
-                    Expanded(
-                      child: CupertinoSearchTextField(
-                        onChanged: widget.onChanged,
-                        focusNode: _focusNode,
-                        controller: _controller,
-                        suffixMode: OverlayVisibilityMode.never,
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    // Close button — always visible when expanded
-                    CupertinoButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        _controller.clear();
-                        widget.onChanged?.call('');
-                        toggle();
-                      },
-                      minimumSize: Size(32, 32),
-                      child: Icon(
-                        CupertinoIcons.xmark_circle_fill,
-                        color: Colors.white.withValues(alpha: 0.6),
-                        size: 20,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            : CupertinoButton(
-                key: ValueKey('Closed'),
-                padding: EdgeInsets.zero,
-                onPressed: toggle,
-                child: const Icon(
-                  CupertinoIcons.search,
-                  color: Colors.white,
-                  size: 22,
-                ),
-              ),
+      curve: Curves.easeInOutCubic,
+      child: CupertinoSearchTextField(
+        controller: _controller,
+        focusNode: _focusNode,
+        onChanged: widget.onChanged,
+        placeholder: _expanded ? 'Search...' : '',
+        style: const TextStyle(fontSize: 16),
+        prefixIcon: const Icon(CupertinoIcons.search, size: 18),
+        // equal padding on both sides to center the 18px icon in a 44px circle
+        prefixInsets: const EdgeInsets.only(left: 13),
+        suffixInsets: const EdgeInsets.only(right: 13),
+        borderRadius: BorderRadius.circular(22),
+        suffixMode: _expanded
+            ? OverlayVisibilityMode.always
+            : OverlayVisibilityMode.never,
+        onSuffixTap: () {
+          _controller.clear();
+          widget.onChanged?.call('');
+          _focusNode.unfocus();
+        },
       ),
     );
   }
@@ -136,128 +96,96 @@ class _TestScreenState extends State<TestScreen> {
   // Determine contrasting text color for readability on any background
   Color _contrastText(Color bg) {
     final luminance = bg.computeLuminance();
-    return luminance > 0.45 ? const Color(0xFF1A1A2E) : Colors.white;
+    return luminance > 0.45 ? const Color(0xFF0F172A) : Colors.white;
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'Color Palette',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 0.5,
+      appBar: AppBar(centerTitle: true, title: const Text('Color Palette')),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: AnimatedSearchBar(onChanged: _search),
+            ),
           ),
-        ),
-      ),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF0F0C29), // deep indigo
-                Color(0xFF302B63), // purple
-                Color(0xFF24243E), // dark slate
+          const SizedBox(height: 12),
+          // Color count badge
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    '${filteredColors.length} colors',
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          child: SafeArea(
-            child: Column(
-              children: [
-                const SizedBox(height: 8),
-                // Search row
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      AnimatedSearchBar(onChanged: (value) => _search(value)),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                // Color count badge
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF3A3660),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          '${filteredColors.length} colors',
+          const SizedBox(height: 12),
+          // Grid
+          Expanded(
+            child: GridView.builder(
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                mainAxisExtent: 120,
+              ),
+              itemCount: filteredColors.length,
+              itemBuilder: (context, index) {
+                final color = filteredColors[index];
+                final textColor = _contrastText(color.color);
+                return Material(
+                  color: color.color,
+                  elevation: 2,
+                  child: InkWell(
+                    onTap: () {},
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          color.hex,
                           style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.7),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
+                            color: textColor,
+                            fontSize: 15,
+                            letterSpacing: 0.8,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 12),
-                // Grid
-                Expanded(
-                  child: GridView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 200,
-                          mainAxisExtent: 140,
+                        const SizedBox(height: 4),
+                        Text(
+                          color.name,
+                          style: TextStyle(
+                            color: textColor.withValues(alpha: 0.75),
+                            fontSize: 13,
+                          ),
                         ),
-                    itemBuilder: (context, index) {
-                      final color = filteredColors[index];
-                      final textColor = _contrastText(color.color);
-                      return Container(
-                        decoration: BoxDecoration(color: color.color),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              color.hex,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: textColor,
-                                fontSize: 15,
-                                letterSpacing: 0.8,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              color.name,
-                              style: TextStyle(
-                                color: textColor.withValues(alpha: 0.8),
-                                fontSize: 13,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    itemCount: filteredColors.length,
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                );
+              },
             ),
           ),
-        ),
+        ],
       ),
     );
   }
